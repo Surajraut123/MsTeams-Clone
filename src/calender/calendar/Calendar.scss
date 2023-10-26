@@ -1,0 +1,178 @@
+.mycalender{
+    height: 89%;
+
+    .fc-media-screen{
+        height: 100%;
+    }
+
+    .fc-scrollgrid-section-body{
+        .fc-scrollgrid-sync-table{
+            display: none;
+        }
+    }
+
+    .fc-scrollgrid-section{
+        .fc-timegrid-divider{
+            display: none;
+        } 
+    }
+
+    .fc{
+        .fc-header-toolbar {
+            margin: 6px 9px 6px 23px;
+
+            .fc-toolbar-chunk{
+
+                .fc-toolbar-title{
+                    font-size: 15px;
+                    font-family: sans-serif;
+                }
+                .fc-toolbar-title:hover{
+                    color: #4845c9;
+                    cursor: pointer;
+                }
+
+                .fc-today-button{
+                    background: none;
+                    color: black;
+                    padding: 0;
+                    border: none;
+                    font-size: 15px;
+                    font-family: sans-serif;
+                }
+                .fc-today-button:hover{
+                    color: #4845c9;
+                    cursor: pointer;
+                }
+
+                .fc-prev-button{
+                    border: none;
+                    background: none;
+                    padding: 0;
+
+                    .fc-icon{
+                        color: #8b8b8b;
+                    }
+
+                    .fc-icon:hover{
+                        color: #4845c9;
+                    }
+                }
+                .fc-next-button{
+                    border: none;
+                    background: none;
+                    padding: 0;
+
+                    .fc-icon{
+                        color: #8b8b8b
+                    }
+                    .fc-icon:hover{
+                        color: #4845c9;
+                    }
+                }
+            }
+        }
+        .fc-timegrid-body{
+            width: 100% !important;
+
+            .fc-timegrid-slots{
+                width: 100%;
+
+                table{
+                    width: 100% !important;
+                }
+            }
+        }
+        .fc-timegrid-slot{
+            height: 2.5em;
+        }
+        .fc-timegrid-slot-label-frame{
+            color: #595959
+        }
+        //fc-timegrid-slot fc-timegrid-slot-lane fc-timegrid-slot-minor
+        // .fc-timegrid-slot-lane:hover{
+        //     background-color: #fcfcfc;
+        // }
+
+        .fc-day-today{
+            background-color: white;
+        }
+
+        .fc-col-header{
+            height: 3.5rem;
+        }
+
+        .fc-scrollgrid-sync-inner{
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+
+            .fc-col-header-cell-cushion{
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+                margin-left: 12px;
+
+                p{
+                    font-size: 13px;
+                    color: #707070;
+                    font-family: sans-serif;
+                }
+                span{
+                    font-size: 25px;
+                    font-weight: 400;
+                    color: #707070;
+                    font-family: system-ui;
+                }
+            }
+        }
+
+        .fc-timegrid-now-indicator-line{
+            border-width: 2px 0px 0px;
+        }
+
+        //Scroll bar css
+
+        .fc-scroller-harness{
+            background-color: #4745c900;
+            .fc-scroller::-webkit-scrollbar {
+                width: 7px;
+                background-color: #ffffff00;
+            }   
+
+            .fc-scroller::-webkit-scrollbar-thumb {
+                background-color: #cbcecf;
+                border-radius: 20px;
+                background-clip: content-box;
+              }
+        }
+
+        //Calendar Type css
+        .fc-toolbar-chunk {
+            display: flex;
+            gap: 15px;
+
+            div{
+                display: flex;
+                gap: 8px;
+                color: #424242;
+                font-size: 15px;
+                cursor: pointer;
+
+                p{
+                    font-family: sans-serif;
+                }
+            }
+
+            div:hover{
+                color: #4845c9;
+            }
+        }
+    }
+    .no-search input{
+        display: none;
+    }
+
+    
+}

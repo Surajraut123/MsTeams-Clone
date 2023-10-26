@@ -1,0 +1,108 @@
+.navbar {
+    .nav-content{
+        height: 50px;
+        background-color: #414790;;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+
+        .searchBar {
+            width: 41%;
+            position: absolute;
+            left: 29%;
+            display: flex;
+
+        }
+        .searchBar input[type = text] {
+            width: 100%;
+            border-radius: 5px;
+            padding: 9px;
+            border: none;
+            outline: none;
+            background-color: #d6d7e5;
+        }
+
+        .searchBar input::placeholder {
+            color: #414790;
+        }
+
+        .navigation {
+            display: flex;
+            position: absolute;
+            left: 12px;
+
+            .leftArrow {
+                font-size: 22px;
+                margin-right: 10px;
+                color: #e9f3fb;;
+            }
+            .leftArrow :hover { 
+                cursor: pointer;
+            }
+
+            .rightArrow {
+                font-size: 22px;
+                margin-right: 10px;
+                color: #e9f3fb;;
+            }
+
+            .rightArrow :hover { 
+                cursor: pointer;
+            }
+        }
+
+        .profile{
+            display: flex;
+            /* height: 100%; */
+            align-items: center;
+            position: absolute;
+            right: 0px;
+
+            .info{
+                font-size: 16px;
+                color: white;
+                margin-right: 20px;
+                cursor: pointer;
+            }
+
+            .profile-section{
+                background-color: #22d3d3;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 16px;
+                padding: 6px 9px 6px 9px;
+                margin-right: 15px;
+                color: white;
+            }
+
+            .operator{
+                font-size: 22px;
+                color: white;
+                display: flex;
+
+                #icons{
+                    padding: 14px;
+                    display: flex;
+                    align-items: center;
+                }
+
+                #icons:hover{
+                    background-color: #363989;
+                    cursor: pointer;
+                }
+
+                #cross-icon {
+                    padding: 14px;
+                    display: flex;
+                    align-items: center;
+                }
+
+                #cross-icon:hover {
+                    background-color: red;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

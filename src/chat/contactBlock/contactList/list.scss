@@ -1,0 +1,52 @@
+.teamMates{
+    background-color: white;
+    margin: 3px;
+    border-radius: 5px;
+    .user{
+        display: flex;
+        padding: 5px;
+
+        .user-profile{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 12px;
+            margin-right: 8px;
+
+            span{
+                font-size: 14px;
+                background-color: pink;
+                font-weight: 600;
+                border-radius: 50%;
+                padding: 6px;
+                color: #6a0101;
+            }
+        }
+
+        .user-details{
+            width: 100%;
+            margin-right: 10px;
+
+            .name-date{
+                display: flex;
+                justify-content: space-between;
+
+                p{
+                    font-size: 13px;
+                }
+            }
+
+            .latest-message{
+                font-size: 13px;
+            }
+        }
+
+        .user-actions{
+            display: none;
+        }
+    }
+}
+
+.teamMates:hover{
+    cursor: pointer;
+}
