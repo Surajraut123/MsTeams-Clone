@@ -6,6 +6,11 @@
     justify-items: center;
     align-items: center;
 
+    a{
+        width: 98%;
+        text-decoration: none;
+    }
+
     .activity{
         display: flex;
         flex-direction: column;
