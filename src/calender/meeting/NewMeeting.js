@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowRight, faBars, faCalendarDays, faClock, faLocationDot, faPen, faRepeat, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { Editor } from '@tinymce/tinymce-react';
 import './newmeeting.scss';
-function NewMeeting() {
+function NewMeeting(props) {
 
     const editorRef = useRef(null);
     const handleFocus = () => {
@@ -24,8 +24,28 @@ function NewMeeting() {
             });
         }   
     }
+    const handleSaveButton = () =>{
+        props.saveCalendarNavbar(false);
+    }
+    const handleCloseButton = () =>{
+        props.closeCalendarNavbar(false);
+    }
+
+    const meetingSlot = new Date(props.scheduleMeeting);
+    const startDate = meetingSlot.getDate();
+    const meetingDay = meetingSlot.getDay();
+    const year = meetingSlot.getFullYear();
+    const endDate = meetingSlot.getDate();
+    const startTime = meetingSlot.getHours();
+    const month = meetingSlot.getMonth();
+
+    console.log(startDate," ", meetingDay," ", year," ", endDate," ", startTime, " ", month)
+
+    const meetingDate = `${year}-${month+1}-0${startDate}`;
+    console.log(meetingDate)
+
   return (
-    <div className="newMeeting">
+    <div className={props.meetingStatus ? "newMeeting" :"hiddenMeeting"}>
         <div className="newMeetingNavbar">
             <div className="headingContent">
                 <div className="heading">
@@ -33,13 +53,13 @@ function NewMeeting() {
                     <h1>New meeting</h1>
                 </div>
                 <div className="save-close-buttons">
-                    <button className='save'>Save</button>
-                    <button className='close'>Close</button>
+                    <button className='save' onClick={handleSaveButton}>Save</button>
+                    <button className='close' onClick={handleCloseButton}>Close</button>
                 </div>
             </div>
             <hr style={{borderTop : '1px solid #ffffff00'}}/>
             <div className="timeZone">
-                <label for="timeZones">Time Zone: </label>
+                <label forName="timeZones">Time Zone: </label>
                 <select id="timeZones">
                     <option value="-12">(UTC-12:00) International Date Line West</option>
                     <option value="-12">(UTC-05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
@@ -89,7 +109,7 @@ function NewMeeting() {
                     <div className="content">
                         <FontAwesomeIcon id="meetingIcon" icon={faClock} />
                         <div className="time">
-                            <input type="date" id="dateInput" name="startDate"/>
+                        <input type="date" id="dateInput" name="startDate" value={meetingDate} />
                             <select name="cars" id="timeSelect" >
                                 <option value="12:00 AM">12:00 AM</option>
                                 <option value="12:30 AM">12:30 AM</option>
@@ -141,7 +161,7 @@ function NewMeeting() {
                                 <option value="11:30 PM">11:30 PM</option>
                             </select>
                             <FontAwesomeIcon icon={faArrowRight} id='rightArrow'/>
-                            <input type="date" id="dateInput" name="lastdate"/>
+                            <input type="date" id="dateInput" name="lastdate" value={meetingDate}/>
                             <select name="cars" id="timeSelect">
                                 <option value="12:00 AM">12:00 AM</option>
                                 <option value="12:30 AM">12:30 AM</option>

@@ -3,7 +3,7 @@ import FullCalendar from '@fullcalendar/react'
 import interactionPlugin from "@fullcalendar/interaction" // needed for dayClick
 import timegridplugin from '@fullcalendar/timegrid'
 import "./Calendar.scss"
-function Calender() {
+function Calender({getNewMeetingStatus}) {
 
   let tempMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   let perMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -83,7 +83,7 @@ function Calender() {
 
   const getDayName = (name) => {
     const index = tmpWeek.indexOf(name.slice(0, 3));
-    console.log("index : " + index + " day : " + perWeek[index])
+    // console.log("index : " + index + " day : " + perWeek[index])
     return perWeek[index];
   }
   const getDayDate = (name) => {
@@ -115,7 +115,8 @@ function Calender() {
   })
   
   const handleDateClick = (arg) => { 
-    alert(arg.dateStr)
+    // alert(arg.dateStr)
+    getNewMeetingStatus(true, arg);
   }
   
   return (
