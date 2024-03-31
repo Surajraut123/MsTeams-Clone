@@ -1,0 +1,162 @@
+.hiddenMeeting{
+    display: none;
+}
+
+.newMeeting{
+    width: 100%;
+    background-color: #f5f5f5;
+    box-shadow: 2px 0px 12px 0px #b7b7b7;
+    .headingContent{
+        display: flex;
+        padding: 12px 0px 12px 0px;
+
+        .heading{
+            display: flex;
+            margin-left: 35px;
+            gap: 13px;
+            align-items: center;
+
+            #cicon{
+                background-color: #4845c9;
+                padding: 9px;
+                font-size: 15px;
+                border-radius: 5px;
+                color: white;
+            }
+
+            h1{
+                font-size: 19px;
+                font-family: sans-serif;
+            }
+        }
+
+        .save-close-buttons{
+            position: absolute;
+            right: 20px;
+            gap: 5px;
+            display: flex;
+
+            .save{
+                background-color: #4845c9;
+                color: white;
+                padding: 7px 12px;
+                border-radius: 5px;
+                border: 1px solid #0000001f;
+                cursor: pointer;
+                font-family: sans-serif;
+            }
+
+            .close{
+                background-color: white;
+                color: #0d0c18;
+                padding: 7px 12px;
+                border-radius: 5px;
+                border: 1px solid #0000001f;
+                cursor: pointer;
+                font-family: sans-serif;
+            }
+        }
+    }
+
+    .timeZone{
+        margin-left: 35px;
+        select {
+            width: 280px;
+            margin: 7px;
+            border: none;
+            background: rgba(240, 248, 255, 0);
+            outline: none;
+            margin-left: 0px;
+
+            option {
+                background-color: #d7d7d73b;
+                border: none;
+            } 
+          
+        }  
+    }
+
+    .timeZone:hover {
+        color: #4845c9;
+        cursor: pointer;
+    }
+
+    .setMeetingForm{
+        .meetingForm{
+            width: 100%;
+
+            form{
+                margin-left: 30px;
+                width: 60%;
+
+                .content{
+                    display: flex;
+                    margin: 10px 0px;
+
+                    #meetingIcon{
+                        padding: 9px;
+                        padding-right: 17px;
+                        font-size: 15px;
+                        color: #5f5f5f;
+                    }
+
+                    input{
+                        width: 100%;
+                        padding: 10px 5px;
+                        font-size: 12px;
+                        background-color: white;
+                        border: none;
+                        outline: none;
+                        border-radius: 5px;
+                        border-bottom: 2px solid rgba(0, 0, 0, 0);
+                    }
+
+                    #duration{
+                        padding: 5px;
+                        border: none;
+                        border-radius: 5px;
+                        outline: none;
+                        color: #68727b;
+                    }
+
+                    .tox-tinymce{
+                        height: 270px !important;
+                        width: 100%;
+
+                        .tox-statusbar{
+                            display: none;
+                        }
+                    }
+
+
+                    .time{
+                        display: flex;
+
+                        #dateInput{
+                            background-color: #ffffff;
+                            padding: 0px;
+                            padding-left: 7px;
+                            margin-right: 20px;
+                            font-size: 14px;
+                            font-family: monospace;
+                            color: #323539;
+                        }
+
+                        #timeSelect{
+                            background-color: #ffffff;
+                            border: none;
+                            outline: none;
+                            border-radius: 5px;
+                            margin-right: 20px;
+                        }
+
+                        #rightArrow{
+                            margin-top: 12px;
+                            margin-right: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

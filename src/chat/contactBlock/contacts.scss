@@ -1,0 +1,115 @@
+.userContact {
+    width: 25%;
+    background-color: #f0f0f0;
+    box-shadow: 2px 0px 12px 0px #b7b7b7;
+
+    .header{
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: flex-start;
+        height: 10%;
+        border-bottom: 1px solid #e3e3e3;
+
+        h1{
+            font-size: 21px;
+            font-family: sans-serif;
+            margin-left: 19px;
+        }
+
+        .chatIcons{
+            position: absolute;
+            right: 2px;
+            display: flex;
+
+            .icons{
+                padding: 2px;
+
+            }
+            #filter{
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-right: 10px;
+                cursor: pointer;
+
+                hr{
+                    border: 1px solid #808380;
+                    margin-bottom: 3px;
+                }
+            }
+    
+            #meeting {
+                font-size: 14px;
+                background-color: white;
+                border-radius: 50%;
+                padding: 8px;
+                border: 1px solid #b3b3b3;
+                color: #696d70;
+                margin: 2px 8px 0px 8px;
+                cursor: pointer;
+            }
+            #meeting:hover{
+                background-color: #ebebeb;
+            }
+            #new-conv {
+                font-size: 15px;
+                background-color: #4845c9;
+                border-radius: 50%;
+                padding: 10px 10px 0px 10px;
+                color: white;
+                margin-right: 17px;
+                cursor: pointer;
+            }
+            #new-conv:hover{
+                background-color: #414790;
+            }
+            .Selected {
+                display: none;
+            }
+            .icon1{
+                background: none !important;
+                border: none !important;
+            }
+            .icon1{
+                #gear:hover{
+                    color: #4845c9;
+                }
+            }
+
+        }
+        
+    }
+
+    .recent{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 7px 7px 0px 7px;
+
+        #recent-icons{
+            color: #babac1;
+            font-size: 11px;
+            display: block;
+            padding: 5px;
+            width: 12px;
+        }
+
+        span{
+            font-size: 13px;
+            color: #4f4f4f;
+        }
+    }
+
+    .recent:hover{
+        #recent-icons {
+            color: black;
+        }
+        span {
+            color: black;
+        }
+    }
+    
+}
+

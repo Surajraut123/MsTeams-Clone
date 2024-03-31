@@ -1,0 +1,15 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  height: 100vh;
+}
+.userSection {
+  width: 100%;;
+  height: calc(100vh - 50px);
+  position: relative;
+  top: 50px;
+  display: flex;
+}
