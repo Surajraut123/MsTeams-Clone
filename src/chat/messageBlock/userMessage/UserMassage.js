@@ -7,7 +7,7 @@ function UserMassage() {
   return (
     <div className='message'>
       <MessageNavigation/>
-        <Messages/>
+      <Messages/>
       <UserInput/>
     </div>
   )
