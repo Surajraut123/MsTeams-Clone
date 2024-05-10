@@ -21,7 +21,6 @@ function CalendarNavbar() {
   const handleSaveMeeting = (event) =>{
     setMeeting(event);
   }
-  console.log("meeting : ", meeting);
   return (
     <>
       <div className={meeting ? 'hiddenCalendar' : 'calendarNavbar'}>

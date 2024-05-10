@@ -1,3 +1,7 @@
+*{
+    --fc-event-bg-color: #ffffff;
+    --fc-event-border-color: #ffffff;
+}
 .mycalender{
     height: 89%;
 
@@ -167,6 +171,43 @@
 
             div:hover{
                 color: #4845c9;
+            }
+        }
+
+        .fc-event-time{
+            display: none;
+        }
+
+        
+        
+        .fc-v-event .fc-event-title-container {
+            border-left: 4px solid #4e56b5;
+            background-color: #e2e2f6;
+            border-radius: 4px;
+
+            .description {
+                padding: 0px 0px 0px 5px;
+                color: #616093;
+                font-family: system-ui;
+                font-size: 12px;
+                margin-top: -4px;
+            }
+
+        }
+        .fc-v-event .fc-event-title {
+            padding: 5px;
+            color: #2f3056;
+            font-weight: bold;
+            font-family: system-ui;
+            font-size: 12px;
+        }
+        .fc-v-event .highlight{
+            background-color: #464775;
+            .fc-event-title{
+                color: white;
+            }
+            .description {
+                color: white;
             }
         }
     }
