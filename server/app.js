@@ -21,9 +21,7 @@ app.use(cors())
 //Routes
 app.get('/', (req, res) => {
     res.send('Welcome')
-    //With Write method it is must to use end method
-    // res.write('Welcome');
-    // res.end();
+
 })
 
 app.post('/api/register', async (req, res, next) =>{

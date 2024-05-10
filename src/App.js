@@ -15,6 +15,17 @@ import {
 // import Contacts from './chat/contactBlock/Contacts';
 // import NewMeeting from './calender/meeting/NewMeeting';
 
+// const ProtectedRoute = ({ children, auth= false}) =>{
+//   const isLoggedIn = localStorage.getItem('user:token') !== null || false
+//   if(!isLoggedIn && auth)  {
+//     return <Navigate to={'users/signin'}/>
+//   } else if(isLoggedIn && ['/users/signin', '/users/signup'].includes(window.location.pathname)) {
+//     return <Navigate to={'/'}/>
+//   }
+
+//   return children
+// }
+
 function App() {
   return (
     <Router>
