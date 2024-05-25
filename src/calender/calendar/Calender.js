@@ -3,12 +3,14 @@ import FullCalendar from '@fullcalendar/react'
 import interactionPlugin from "@fullcalendar/interaction" // needed for dayClick
 import timegridplugin from '@fullcalendar/timegrid'
 import "./Calendar.scss"
-function Calender({getNewMeetingStatus}) {
+import { INITIAL_EVENTS } from './Calendar-event-utils'
+function Calender({getNewMeetingStatus, setMeetingEvent}) {
 
   let tempMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   let perMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   const[isrender, setrender] = useState(true);
+  const [events, setEvents] = useState(INITIAL_EVENTS);
 
   var todayDate = "";
   const getTodayDate = () => {
@@ -61,6 +63,52 @@ function Calender({getNewMeetingStatus}) {
       
       todayButton.textContent = "Today"
     }
+
+    const event = document.querySelectorAll('.fc-event-title-container');
+    const meetingTitle = document.querySelectorAll('.fc-event-title');
+    const description = document.createElement('div');
+    description.className = 'description';
+    description.textContent = "Microsoft Teams Meeting Suraj Raut";
+
+    meetingTitle.forEach(function(element, index) {
+      if(element.textContent.trim() === "LT Review") {
+        if(event[index]) event[index].appendChild(description);
+      }
+    });
+
+    function checkIntersection(el1, el2) {
+      let rect1 = el1.getBoundingClientRect();
+      let rect2 = el2.getBoundingClientRect();
+      rect1 = {
+          top: rect1.top,
+          bottom: rect1.top + 2, 
+          left: 0, 
+          right: document.documentElement.clientWidth
+      };
+      return !(rect1.bottom < rect2.top ||
+               rect1.top > rect2.bottom ||
+               rect1.right < rect2.left ||  
+               rect1.left > rect2.right);
+    }
+  
+    function updateHighlighting() {
+        const line = document.querySelector('.fc-timegrid-now-indicator-line');
+        if (!line) {
+            console.error("Time indicator line not found!");
+            return;
+        }
+    
+        const containers = document.querySelectorAll('.fc-event-title-container');
+        containers.forEach(container => {
+            if (checkIntersection(line, container)) {
+              container.classList.add('highlight');
+            } else {
+              container.classList.remove('highlight');
+            }
+        });
+    }
+    updateHighlighting();
+    setInterval(updateHighlighting, 60000);
   });
 
   let tmpWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -85,12 +133,10 @@ function Calender({getNewMeetingStatus}) {
 
   const getDayName = (name) => {
     const index = tmpWeek.indexOf(name.slice(0, 3));
-    // console.log("index : " + index + " day : " + perWeek[index])
     return perWeek[index];
   }
   const getDayDate = (name) => {
     const index = name.indexOf("/");
-
     return name.slice(index+1)
   }
 
@@ -117,19 +163,23 @@ function Calender({getNewMeetingStatus}) {
       CalendarType.appendChild(divtag)
     }  
   })
-  
+
   const handleDateClick = (arg) => { 
     // alert(arg.dateStr)
     getNewMeetingStatus(true, arg);
     setrender(false);
   }
-  
+  // console.log(INITIAL_EVENTS);
+  useEffect(() => {
+    setEvents(INITIAL_EVENTS);
+  }, [setMeetingEvent]);
   return (
     <div className='mycalender'>
       <FullCalendar
         plugins={[ timegridplugin, interactionPlugin ]}
         dateClick={handleDateClick}
         initialView="timeGridWeek"
+        initialEvents={setMeetingEvent} 
         weekends={false}
         nowIndicator={true}
       />

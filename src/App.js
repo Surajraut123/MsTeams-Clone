@@ -10,6 +10,7 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import Community from './community/Community';
 
 // import UserMassage from './chat/messageBlock/userMessage/UserMassage';
 // import Contacts from './chat/contactBlock/Contacts';
@@ -36,6 +37,7 @@ function App() {
           {/* <NewMeeting/> */}
           <Routes>
             <Route exact path='/' element={<Chat/>}></Route>
+            <Route exact path='/community' element={<Community/>}></Route>
             <Route exact path='/calendar' element={<CalendarNavbar/>}></Route>
             <Route exact path='/activity' element={<Activity/>}></Route>
           </Routes>  

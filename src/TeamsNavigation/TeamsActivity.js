@@ -21,12 +21,12 @@ function TeamsActivity() {
         </div>
       </Link>
 
-      
+      <Link to="/community">
         <div className={`activity ${selected === 'community' ? 'selected' : ''}`} onClick={()=>combinedEvent(["community", "/community"])}>
           <FontAwesomeIcon id="icons" className="community" icon={faPeopleGroup} />
           <p>Community</p>
         </div>
-
+        </Link>
       <Link to="/" >
         <div className={`activity ${selected === 'chat' ? 'selected' : ''}`} onClick={()=>combinedEvent(["chat", "/chat"])}>
           <FontAwesomeIcon id="icons" className="chat" icon={faCommentDots} />
@@ -40,10 +40,18 @@ function TeamsActivity() {
           <p>Calendar</p>
         </div>
       </Link>  
-        <div className="help">
+      <Link to="/help" >
+        <div className={`activity ${selected === 'help' ? 'selected' : ''}`} onClick={()=>combinedEvent(["help", "/help"])}>
+          <FontAwesomeIcon id="icons" className="calendar" icon={faCircleQuestion} />
+          <p>Help</p>
+        </div>
+      </Link>  
+      {/* <Link to="/help" >
+        <div className="acti">
           <FontAwesomeIcon id='helpIcon' icon={faCircleQuestion} />
           <p>Help</p>
         </div>
+      </Link> */}
     </div>
   )
 }
