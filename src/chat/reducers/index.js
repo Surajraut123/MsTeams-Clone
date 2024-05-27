@@ -5,5 +5,4 @@ import messagesReducer from './setMessages';
 const rootReducer = combineReducers({
     messages: messagesReducer, 
 });
-
 export default rootReducer;

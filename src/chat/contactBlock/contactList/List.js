@@ -5,14 +5,12 @@ import "./list.scss"
 import {fetchMessage} from '../../action/index'
 function List() {
   const myState = useSelector((state) => state.messages)
-  console.log("From list :", myState.messages.length);
   const disPatch = useDispatch();
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState({});
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')))
     useEffect(() =>{
       const loggedinUser = JSON.parse(localStorage.getItem('user:detail'))
-      console.log(loggedinUser)
       const fetchConversations = async() =>{
           const res = await fetch(`http://localhost:8000/api/conversation/${loggedinUser?.id}`, {
               method: 'GET',
@@ -27,6 +25,11 @@ function List() {
       fetchConversations();
   }, [])
 
+  console.log(conversations)
+  const getIcon = () => {
+    const userName = conversations[0].user.fullName.split(" ");
+    return userName[0].charAt(0) + userName[1].charAt(0);
+}
 
   return (
     <div className='teamMates'>
@@ -34,9 +37,9 @@ function List() {
         conversations.length > 0 ?
           conversations.map(({conversationId, user}) => {
             return(
-              <div key={conversationId} className='user' onClick={() => disPatch(fetchMessage(conversationId))}>
+              <div key={conversationId} className='user' onClick={() => disPatch(fetchMessage(conversationId, user.fullName))}>
                 <div className="user-profile">
-                  <span>RS</span>
+                  <span>{getIcon()}</span>
                 </div>
                 <div className="user-details">
                   <div className="name-date">

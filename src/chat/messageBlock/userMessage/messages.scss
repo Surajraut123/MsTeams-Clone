@@ -41,8 +41,9 @@
   }
   
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
     margin-right: 4px;
+    background: rgba(245, 245, 245, 0);
   }
   
   /* Track */
@@ -61,5 +62,5 @@
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
+    background: #9c9c9c; 
   }
