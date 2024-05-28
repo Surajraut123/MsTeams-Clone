@@ -17,7 +17,7 @@ function MessageNavigation() {
     const getIcon = () => {
         const userName = messageReceiverName.split(" ");
         console.log(userName)
-        return userName[0].charAt(0) + userName[1].charAt(0);
+        return userName[0]?.charAt(0) + userName[1]?.charAt(0);
     }
 
   return (

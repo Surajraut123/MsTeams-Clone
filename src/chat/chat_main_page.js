@@ -7,6 +7,7 @@ messageStorage.subscribe(() => console.log(messageStorage.getState()))
 
 function chat_main_page() {
   return (
+
     <div style={{display: 'flex', width: '100%'}}>
       <Provider store={messageStorage}>
         <Contacts/>
