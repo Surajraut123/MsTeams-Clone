@@ -23,8 +23,39 @@
             padding-right: 15px;
             border-radius: 5px;
         }
+
+        @media screen and (max-width: 500px) {
+            input {
+                padding-left: 9px;
+                border-radius: 5px;
+                border: 1px solid #d5d5d5;
+            }
+        }
         .focused-input{
             border-bottom: 2px solid #4845c9;
+        }
+
+        @media screen and (max-width: 500px) {
+            #eicons {
+                font-size: 20px;
+                color: #2424b5;
+            }
+        }
+        @media screen and (min-width: 500px)  {
+            #eicons{
+                display: none;
+            }
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .input-box {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            border: none;
+            border-radius: none;
+            height: 37px;
         }
     }
 
@@ -64,6 +95,25 @@
                 cursor: pointer;
             }
         }
+
+        @media screen and (max-width: 500px) {
+            .my-actions {
+                display: none;
+            }
+        }
+    }
+    @media screen and (max-width: 500px)   {
+        .icons {
+            justify-content: space-between;
+        }
     }
 
+}
+
+@media screen and (max-width: 500px)  {
+    .userInput {
+        width: 100%;
+        padding: 30px 0px;
+        display: flex;
+    }
 }

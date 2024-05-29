@@ -1,0 +1,9 @@
+.chat-main {
+    display: flex;
+    width: 100%;
+}
+@media screen and (max-width: 500px) {
+    .chat-main {
+        height: 100%;
+    }
+}
