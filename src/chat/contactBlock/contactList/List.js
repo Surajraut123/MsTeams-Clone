@@ -10,6 +10,8 @@ function List() {
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState({});
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')))
+
+  const[displayContact, setDisplayContact] = useState(true);
     useEffect(() =>{
       const loggedinUser = JSON.parse(localStorage.getItem('user:detail'))
       console.log(loggedinUser)
@@ -27,33 +29,43 @@ function List() {
       fetchConversations();
   }, [])
 
+  const userMessages = () => {
+    setDisplayContact(false);
+  }
+
 
   return (
     <div className='teamMates'>
-      {
-        conversations.length > 0 ?
-          conversations.map(({conversationId, user}) => {
-            return(
-              <div key={conversationId} className='user' onClick={() => disPatch(fetchMessage(conversationId))}>
+      {/* { */}
+        {/* conversations.length > 0 ?
+          conversations.map(({conversationId, user}) => { */}
+            {/* return( */}
+              <div className='user' onClick={() => {
+                // disPatch(fetchMessage(conversationId))
+                userMessages()
+              }}>
+              {/* <div key={conversationId} className='user' onClick={() => disPatch(fetchMessage(conversationId))}> */}
                 <div className="user-profile">
                   <span>RS</span>
                 </div>
                 <div className="user-details">
                   <div className="name-date">
-                    <h3 className='text-lg'>{user?.fullName}</h3>
+                    <h3 className='text-lg'>Suraj Raut</h3>
+                    {/* <h3 className='text-lg'>{user?.fullName}</h3> */}
                   </div>
                   <div className="latest-message">
                   <p>
-                    {myState.messages.length > 0 && 
-                      myState.messages[myState.messages.length - 1].message}
+                    {/* {myState.messages.length > 0 && 
+                      myState.messages[myState.messages.length - 1].message} */}
+                      Good Morning
                   </p>
 
                   </div>
                 </div>
               </div>
-            )
-          }) : <div className="text-center text-lg font-semibold mt-24"> No Conversations</div>
-      }
+            {/* ) */}
+          {/* }) : <div className="text-center text-lg font-semibold mt-24"> No Conversations</div> */}
+      {/* // } */}
     </div>
   )
 }

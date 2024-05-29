@@ -28,6 +28,8 @@
                 color: white;
             }
 
+            
+
             h1{
                 font-size: 19px;
                 font-family: sans-serif;
@@ -39,6 +41,47 @@
                 font-family: system-ui;
                 font-size: 14px;
                 margin-left: 12px;
+            }
+            @media screen and (max-width: 900px) {
+                #cicon{
+                    padding: 6px;
+                    font-size: 13px;
+                    border-radius: 6px;
+                    color: white;
+                }
+                h1{
+                    font-size: 15px;
+                }
+                a{
+                    font-size: 11px;
+                }
+            }
+            @media screen and (max-width: 650px) {
+                #cicon{
+                    padding: 7px;
+                    font-size: 13px;
+                    border-radius: 6px;
+                    color: white;
+                }
+                h1{
+                    font-size: 14px;
+                }
+                a{
+                    font-size: 9px;
+                    margin-left: 4px;
+                }
+            }
+            @media screen and (max-width: 500px) {
+                
+                a{
+                    font-size: 8px;
+                }
+            }
+        }
+        @media screen and (max-width: 500px) {
+            .cheader{
+                gap: 5px;
+                margin-left: 8px;
             }
         }
 
@@ -79,8 +122,55 @@
             #new-meeting:hover{
                 background-color: #414790;
             }
-
+            @media screen and (max-width: 900px) {
+                #my-meeting {
+                    font-size: 10px;
+                }
+                #new-meeting{
+                    font-size: 10px;
+                }
+            }
+            @media screen and (max-width: 650px) {
+                #my-meeting {
+                    font-size: 7px;
+                    padding: 2px 2px;
+                    border-radius: 3px;
+                }
+                #new-meeting{
+                    font-size: 7px;
+                    padding: 2px 2px;
+                    border-radius: 3px;
+                }
+            }
+            @media screen and (max-width: 400px) {
+                #my-meeting {
+                    font-size: 6px;
+                    padding: 3px 2px;
+                }
+                #new-meeting {
+                    font-size: 6px;
+                    padding: 3px 2px;
+                }
+            }
+            
+            @media screen and (max-width: 650px) {
+                gap: 5px;
+            }
             
         }
+
+        @media screen and (max-width:350px) {
+            height: 4%;
+        }
+    }
+    @media screen and (max-width: 500px) {
+        .section {
+            height: 7%;
+        }
+    }
+}
+@media screen and (max-width: 500px) {
+    .calendarNavbar {
+        height: 92%;
     }
 }

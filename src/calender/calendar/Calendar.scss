@@ -1,3 +1,7 @@
+*{
+    --fc-event-bg-color: #ffffff;
+    --fc-event-border-color: #ffffff;
+}
 .mycalender{
     height: 89%;
 
@@ -21,7 +25,15 @@
         .fc-header-toolbar {
             margin: 6px 9px 6px 23px;
 
+            @media screen and (max-width: 500px) {
+                margin: 6px 8px 8px 8px;
+            }
+
             .fc-toolbar-chunk{
+
+                @media screen and (max-width: 500px) {
+                    gap: 1px;
+                }
 
                 .fc-toolbar-title{
                     font-size: 15px;
@@ -114,6 +126,11 @@
                 text-align: left;
                 margin-left: 12px;
 
+                @media screen and (max-width: 500px) {
+                    margin-left: 4px;
+                    padding: 0px;
+                }
+
                 p{
                     font-size: 13px;
                     color: #707070;
@@ -124,6 +141,14 @@
                     font-weight: 400;
                     color: #707070;
                     font-family: system-ui;
+                }
+                @media screen and (max-width: 500px) {
+                    p{
+                        font-size: 10px;
+                    }
+                    span{
+                        font-size: 20px;
+                    }
                 }
             }
         }
@@ -169,10 +194,53 @@
                 color: #4845c9;
             }
         }
+
+        .fc-event-time{
+            display: none;
+        }
+
+        
+        
+        .fc-v-event .fc-event-title-container {
+            border-left: 4px solid #4e56b5;
+            background-color: #e2e2f6;
+            border-radius: 4px;
+
+            .description {
+                padding: 0px 0px 0px 5px;
+                color: #616093;
+                font-family: system-ui;
+                font-size: 12px;
+                margin-top: -4px;
+            }
+
+        }
+        .fc-v-event .fc-event-title {
+            padding: 5px;
+            color: #2f3056;
+            font-weight: bold;
+            font-family: system-ui;
+            font-size: 12px;
+        }
+        .fc-v-event .highlight{
+            background-color: #464775;
+            .fc-event-title{
+                color: white;
+            }
+            .description {
+                color: white;
+            }
+        }
     }
     .no-search input{
         display: none;
     }
 
     
+}
+
+@media screen and (max-width: 500px) {
+    .mycalender {
+        height: 93%;
+    }
 }

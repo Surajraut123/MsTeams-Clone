@@ -19,6 +19,7 @@ function UserInput() {
     <div className='userInput'>
       <div className="input-box">
         <input type="text" placeholder='Type a message...' onFocus={handleFocus} onBlur={handleBlur} className={inputClassName}/>
+        <FontAwesomeIcon id="eicons" icon={faPaperPlane} />
       </div>
 
       <div className="icons">

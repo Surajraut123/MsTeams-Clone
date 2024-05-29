@@ -113,3 +113,16 @@
     
 }
 
+@media screen and (max-width: 500px) {
+    .userContact {
+        width: 100%;
+        height: 92%;
+    }
+}
+
+// when click on user
+@media screen and (max-width: 500px) {
+    .userContact {
+        display: none;
+    }
+}

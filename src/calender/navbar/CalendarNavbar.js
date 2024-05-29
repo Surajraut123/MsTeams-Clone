@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./calenderNavbar.scss"
 import Calender from "../calendar/Calender"
 import NewMeeting from "../meeting/NewMeeting"
-
+import { INITIAL_EVENTS } from '../calendar/Calendar-event-utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCalendarDays, faHashtag, faPlus, faVideo } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 function CalendarNavbar() {
   const [meeting, setMeeting] = useState(false)
   const [meetingTime, setMeetingTime] = useState(null)
+  const [newMeetingEvent, setNewMeetingEvent] = useState(INITIAL_EVENTS)
   const handleNewMeetingStatus = (event, arg) =>{
     setMeeting(event);
     setMeetingTime(arg.date);
@@ -21,7 +22,12 @@ function CalendarNavbar() {
   const handleSaveMeeting = (event) =>{
     setMeeting(event);
   }
-  console.log("meeting : ", meeting);
+
+  const handleMeetingEvent = (event) => {
+    setNewMeetingEvent(event)
+  }
+  useEffect(() => {
+  }, newMeetingEvent)
   return (
     <>
       <div className={meeting ? 'hiddenCalendar' : 'calendarNavbar'}>
@@ -39,9 +45,9 @@ function CalendarNavbar() {
           </div>
 
         </div>
-          <Calender getNewMeetingStatus={handleNewMeetingStatus}/>
+          <Calender getNewMeetingStatus={handleNewMeetingStatus} setMeetingEvent={newMeetingEvent}/>
       </div>
-      <NewMeeting meetingStatus={meeting} saveCalendarNavbar={handleSaveMeeting} closeCalendarNavbar={handleCloseMeeting} scheduleMeeting={meetingTime}/>
+      <NewMeeting meetingStatus={meeting} saveCalendarNavbar={handleSaveMeeting} closeCalendarNavbar={handleCloseMeeting} scheduleMeeting={meetingTime} setMeetingEvent={handleMeetingEvent}/>
     </>
   )
 }

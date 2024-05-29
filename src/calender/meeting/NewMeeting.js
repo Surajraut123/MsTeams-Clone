@@ -1,10 +1,65 @@
-import React, {useRef } from 'react'
+import React, {useRef, useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowRight, faBars, faCalendarDays, faClock, faLocationDot, faPen, faRepeat, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { Editor } from '@tinymce/tinymce-react';
+import { INITIAL_EVENTS } from '../calendar/Calendar-event-utils'
 import './newmeeting.scss';
 function NewMeeting(props) {
 
+    const[dateTime, setDateTime] = useState({
+        date: '',
+        time: ''
+    });
+
+
+    const meetingSlot = new Date(props.scheduleMeeting);
+    const startDate = meetingSlot.getDate();
+    const meetingDay = meetingSlot.getDay();
+    const year = meetingSlot.getFullYear();
+    const endDate = meetingSlot.getDate();
+    const startTime = meetingSlot.getHours();
+    const startMinute = meetingSlot.getMinutes();
+    const month = meetingSlot.getMonth();
+
+    useEffect(() => {
+        const meetingDate = formatDate(year, month, startDate);
+        const meetingTime = formatTime(startTime, startMinute);
+        setFormData(prevData => ({
+          ...prevData,
+          startDate: meetingDate,
+          startTime: meetingTime,
+          lastDate: meetingDate,
+          lastTime: meetingTime
+        }));
+
+    }, [year, month, startDate, startTime, startMinute]);
+    
+    const [duration, setDuration] = useState('00');
+
+    function formatDate(year, month, day) {
+        const formattedMonth = month + 1 < 10 ? `0${month + 1}` : `${month + 1}`;
+        const formattedDay = day < 10 ? `0${day}` : `${day}`;
+        return `${year}-${formattedMonth}-${formattedDay}`;
+    }
+    function formatTime(hours, minute) {
+        const formattedHours = hours%24 === 0 ? 12 : hours%24;
+        const suffix = hours < 12 ? 'AM' : 'PM';
+        if(!minute) {
+            return `${formattedHours}:00 ${suffix}`;
+        }
+        return `${formattedHours}:${minute} ${suffix}`;
+    }
+
+    const [formData, setFormData] = useState({
+        title: '',
+        attendees: '',
+        startDate: '',
+        startTime: '',
+        lastDate: '',
+        lastTime: '',
+        duration: '',
+        location: ''
+    })
     const editorRef = useRef(null);
     const handleFocus = () => {
         var clicked = document.querySelectorAll(".inputItem")
@@ -24,25 +79,110 @@ function NewMeeting(props) {
             });
         }   
     }
-    const handleSaveButton = () =>{
+    const handleSaveButton = () => {
         props.saveCalendarNavbar(false);
+        let eventid = Number(INITIAL_EVENTS[INITIAL_EVENTS.length - 1].id);
+    
+        const updatedEvents = [
+            ...INITIAL_EVENTS,
+            {
+                id: String(++eventid),
+                title: formData.title,
+                start: formData.startDate + formatNewMeetingTime(formData.startTime),
+                end: formData.lastDate + formatNewMeetingTime(formData.lastTime),
+                color: "",
+            }
+        ];
+    
+        props.setMeetingEvent(updatedEvents);   
+    };
+    
+
+    const formatNewMeetingTime = (timeData) =>{
+        let getTime = timeData.split(":");
+        return  'T'+ (Number(getTime[0]) > 10 ? `${getTime[0]}` : `0${getTime[0]}`) + ':' +(getTime[1].split(' ')[0]) + ':00';
+
     }
     const handleCloseButton = () =>{
         props.closeCalendarNavbar(false);
+
+    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => {
+            const updatedState = {
+                ...prevState,
+                [name]: value
+            };
+            return updatedState;
+        }); 
+    };
+    
+    useEffect(() => {
+        if (formData.startTime && formData.lastTime) {
+            let timeDuration = getDuration(formData.lastTime, formData.startTime);
+            setDuration(timeDuration);
+        }
+    }, [formData]); 
+
+    
+
+    function generateTimeOptions() {
+        const options = [];
+        for (let hour = 0; hour < 24; hour++) {
+            const hourInAmPm = hour % 12 === 0 ? 12 : hour % 12;
+            const suffix = hour < 12 ? 'AM' : 'PM';
+            options.push(
+                <option key={`${hour}:00`} value={`${hourInAmPm}:00 ${suffix}`}>{`${hourInAmPm}:00 ${suffix}`}</option>,
+                <option key={`${hour}:30`} value={`${hourInAmPm}:30 ${suffix}`}>{`${hourInAmPm}:30 ${suffix}`}</option>
+            );
+        }
+        return options;
     }
 
-    const meetingSlot = new Date(props.scheduleMeeting);
-    const startDate = meetingSlot.getDate();
-    const meetingDay = meetingSlot.getDay();
-    const year = meetingSlot.getFullYear();
-    const endDate = meetingSlot.getDate();
-    const startTime = meetingSlot.getHours();
-    const month = meetingSlot.getMonth();
+    const getDuration = (endTime, beginningTime) => {
+        let [endHour, endMin] = endTime.split(":");
+        let [beginHour, beginMin] = beginningTime.split(":");
+        
+        if (endMin.includes("PM")) {
+            endHour = Number(endHour) + 12;
+        }
+        if (beginMin.includes("PM") && beginHour) {
+            beginHour = Number(beginHour) + 12;
+        }
+        
+        endHour = Number(endHour);
+        beginHour = Number(beginHour);
+        endMin = Number(endMin.split(/\s+(AM|PM)/i)[0]);
+        beginMin = Number(beginMin.split(/\s+(AM|PM)/i)[0]);
+        
+        // Calculate differences
+        let deltaHours = endHour - beginHour;
+        let deltaMinutes = endMin - beginMin;
 
-    console.log(startDate," ", meetingDay," ", year," ", endDate," ", startTime, " ", month)
+        if (deltaMinutes < 0) {
+            deltaMinutes += 60;
+            deltaHours -= 1;
+        }
 
-    const meetingDate = `${year}-${month+1}-0${startDate}`;
-    console.log(meetingDate)
+        let duration = "";
+        if (deltaHours > 0) duration += `${deltaHours} hr `;
+        if (deltaMinutes > 0) duration += `${deltaMinutes} min`;
+
+
+        setDateTime(prev => {
+            const updateDate = {
+                ...prev,
+                date: `${formData.startDate} + ${formData.lastDate}`,
+                time: `${formData.startTime} + ${formData.lastTime}`
+            }
+            return updateDate;
+        })
+        return duration.trim(); 
+    };
+
+    
+    
 
   return (
     <div className={props.meetingStatus ? "newMeeting" :"hiddenMeeting"}>
@@ -100,125 +240,35 @@ function NewMeeting(props) {
                 <form action="#" method="post">
                     <div className="content">
                         <FontAwesomeIcon id="meetingIcon" icon={faPen} />
-                        <input type="text"  placeholder='Add Title' className='inputItem' onFocus={handleFocus} onBlur={handleBlur}/>
+                        <input type="text"  placeholder='Add Title' className='inputItem' onFocus={handleFocus} onBlur={handleBlur} value={formData.title} name='title' onChange={handleChange}/>
                     </div>
                     <div className="content">
                         <FontAwesomeIcon id="meetingIcon" icon={faUserPlus} />
-                        <input type="text"  placeholder='Add Required attendees' className='inputItem' onFocus={handleFocus} onBlur={handleBlur}/>
+                        <input type="text"  placeholder='Add Required attendees' className='inputItem' onFocus={handleFocus} onBlur={handleBlur} value={formData.attendees} name='attendees' onChange={handleChange}/>
                     </div>
                     <div className="content">
                         <FontAwesomeIcon id="meetingIcon" icon={faClock} />
                         <div className="time">
-                        <input type="date" id="dateInput" name="startDate" value={meetingDate} />
-                            <select name="cars" id="timeSelect" >
-                                <option value="12:00 AM">12:00 AM</option>
-                                <option value="12:30 AM">12:30 AM</option>
-                                <option value="1:00 AM">1:00 AM</option>
-                                <option value="1:30 AM">1:30 AM</option>
-                                <option value="2:00 AM">2:00 AM</option>
-                                <option value="2:30 AM">2:30 AM</option>
-                                <option value="3:00 AM">3:00 AM</option>
-                                <option value="3:30 AM">3:30 AM</option>
-                                <option value="4:00 AM">4:00 AM</option>
-                                <option value="4:30 AM">4:30 AM</option>
-                                <option value="5:00 AM">5:00 AM</option>
-                                <option value="5:30 AM">5:30 AM</option>
-                                <option value="6:00 AM">6:00 AM</option>
-                                <option value="6:30 AM">6:30 AM</option>
-                                <option value="7:00 AM">7:00 AM</option>
-                                <option value="7:30 AM">7:30 AM</option>
-                                <option value="8:00 AM">8:00 AM</option>
-                                <option value="8:30 AM">8:30 AM</option>
-                                <option value="9:00 AM">9:00 AM</option>
-                                <option value="9:30 AM">9:30 AM</option>
-                                <option value="10:00 AM">10:00 AM</option>
-                                <option value="10:30 AM">10:30 AM</option>
-                                <option value="11:00 AM">11:00 AM</option>
-                                <option value="11:30 AM">11:30 AM</option>
-                                <option value="12:00 PM">12:00 PM</option>
-                                <option value="12:30 PM">12:30 PM</option>
-                                <option value="1:00 PM">1:00 PM</option>
-                                <option value="1:30 PM">1:30 PM</option>
-                                <option value="2:00 PM">2:00 PM</option>
-                                <option value="2:30 PM">2:30 PM</option>
-                                <option value="3:00 PM">3:00 PM</option>
-                                <option value="3:30 PM">3:30 PM</option>
-                                <option value="4:00 PM">4:00 PM</option>
-                                <option value="4:30 PM">4:30 PM</option>
-                                <option value="5:00 PM">5:00 PM</option>
-                                <option value="5:30 PM">5:30 PM</option>
-                                <option value="6:00 PM">6:00 PM</option>
-                                <option value="6:30 PM">6:30 PM</option>
-                                <option value="7:00 PM">7:00 PM</option>
-                                <option value="7:30 PM">7:30 PM</option>
-                                <option value="8:00 PM">8:00 PM</option>
-                                <option value="8:30 PM">8:30 PM</option>
-                                <option value="9:00 PM">9:00 PM</option>
-                                <option value="9:30 PM">9:30 PM</option>
-                                <option value="10:00 PM">10:00 PM</option>
-                                <option value="10:30 PM">10:30 PM</option>
-                                <option value="11:00 PM">11:00 PM</option>
-                                <option value="11:30 PM">11:30 PM</option>
-                            </select>
+                            <div className='start'>
+                                <input type="date" id="dateInput" name="startDate" value={formData.startDate} onChange={handleChange}/>
+                                <select name="startTime" id="timeSelect" value={formData.startTime} onChange={handleChange}>
+                                    {generateTimeOptions()}
+                                </select>
+                            </div>
                             <FontAwesomeIcon icon={faArrowRight} id='rightArrow'/>
-                            <input type="date" id="dateInput" name="lastdate" value={meetingDate}/>
-                            <select name="cars" id="timeSelect">
-                                <option value="12:00 AM">12:00 AM</option>
-                                <option value="12:30 AM">12:30 AM</option>
-                                <option value="1:00 AM">1:00 AM</option>
-                                <option value="1:30 AM">1:30 AM</option>
-                                <option value="2:00 AM">2:00 AM</option>
-                                <option value="2:30 AM">2:30 AM</option>
-                                <option value="3:00 AM">3:00 AM</option>
-                                <option value="3:30 AM">3:30 AM</option>
-                                <option value="4:00 AM">4:00 AM</option>
-                                <option value="4:30 AM">4:30 AM</option>
-                                <option value="5:00 AM">5:00 AM</option>
-                                <option value="5:30 AM">5:30 AM</option>
-                                <option value="6:00 AM">6:00 AM</option>
-                                <option value="6:30 AM">6:30 AM</option>
-                                <option value="7:00 AM">7:00 AM</option>
-                                <option value="7:30 AM">7:30 AM</option>
-                                <option value="8:00 AM">8:00 AM</option>
-                                <option value="8:30 AM">8:30 AM</option>
-                                <option value="9:00 AM">9:00 AM</option>
-                                <option value="9:30 AM">9:30 AM</option>
-                                <option value="10:00 AM">10:00 AM</option>
-                                <option value="10:30 AM">10:30 AM</option>
-                                <option value="11:00 AM">11:00 AM</option>
-                                <option value="11:30 AM">11:30 AM</option>
-                                <option value="12:00 PM">12:00 PM</option>
-                                <option value="12:30 PM">12:30 PM</option>
-                                <option value="1:00 PM">1:00 PM</option>
-                                <option value="1:30 PM">1:30 PM</option>
-                                <option value="2:00 PM">2:00 PM</option>
-                                <option value="2:30 PM">2:30 PM</option>
-                                <option value="3:00 PM">3:00 PM</option>
-                                <option value="3:30 PM">3:30 PM</option>
-                                <option value="4:00 PM">4:00 PM</option>
-                                <option value="4:30 PM">4:30 PM</option>
-                                <option value="5:00 PM">5:00 PM</option>
-                                <option value="5:30 PM">5:30 PM</option>
-                                <option value="6:00 PM">6:00 PM</option>
-                                <option value="6:30 PM">6:30 PM</option>
-                                <option value="7:00 PM">7:00 PM</option>
-                                <option value="7:30 PM">7:30 PM</option>
-                                <option value="8:00 PM">8:00 PM</option>
-                                <option value="8:30 PM">8:30 PM</option>
-                                <option value="9:00 PM">9:00 PM</option>
-                                <option value="9:30 PM">9:30 PM</option>
-                                <option value="10:00 PM">10:00 PM</option>
-                                <option value="10:30 PM">10:30 PM</option>
-                                <option value="11:00 PM">11:00 PM</option>
-                                <option value="11:30 PM">11:30 PM</option>
-                            </select>
-                            <p>total Duration</p>
+                            <div className='end'>
+                                <input type="date" id="dateInput" name="lastDate" value={formData.lastDate} onChange={handleChange}/>
+                                <select name="lastTime" id="timeSelect" value={formData.lastTime} onChange={handleChange}>
+                                    {generateTimeOptions()}
+                                </select>
+                            </div>
+                            <span>{duration} </span>
                         </div>
                         {/* <input type="text"  placeholder='time' className='inputItem' onFocus={handleFocus} onBlur={handleBlur}/> */}
                     </div>
                     <div className="content">
                         <FontAwesomeIcon id="meetingIcon" icon={faRepeat} />
-                        <select name="cars" id="duration" className='inputItem' onFocus={handleFocus} onBlur={handleBlur}>
+                        <select id="duration" className='inputItem' onFocus={handleFocus} onBlur={handleBlur} value={formData.duration} onChange={handleChange} name='duration'>
                             <option value="dnr">Does not repeat</option>
                             <option value="ew">Every weekday (Mon -Fri)</option>
                             <option value="daily">Daily</option>
@@ -231,7 +281,7 @@ function NewMeeting(props) {
                     </div>
                     <div className="content">
                         <FontAwesomeIcon id="meetingIcon" icon={faLocationDot} />
-                        <input type="text"  placeholder='Add location' className='inputItem' onFocus={handleFocus} onBlur={handleBlur}/>
+                        <input type="text"  placeholder='Add location' className='inputItem' onFocus={handleFocus} onBlur={handleBlur} name='location' value={formData.location} onChange={handleChange}/>
                     </div>
                     <div className="content">
                         <FontAwesomeIcon id="meetingIcon" icon={faBars} />

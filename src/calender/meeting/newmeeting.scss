@@ -29,11 +29,16 @@
                 font-family: sans-serif;
             }
         }
+        @media screen and (max-width: 500px) {
+            .heading{
+                margin-left: 11px;
+            }
+        }
 
         .save-close-buttons{
             position: absolute;
             right: 20px;
-            gap: 5px;
+            gap: 5px;   
             display: flex;
 
             .save{
@@ -56,6 +61,11 @@
                 font-family: sans-serif;
             }
         }
+        @media screen and (max-width: 500px) {
+            .save-close-buttons {
+                right: 10px;
+            }
+        }
     }
 
     .timeZone{
@@ -74,6 +84,11 @@
             } 
           
         }  
+    }
+    @media screen and (max-width: 500px) {
+        .timeZone {
+            margin-left: 10px;
+        }
     }
 
     .timeZone:hover {
@@ -120,7 +135,7 @@
                     }
 
                     .tox-tinymce{
-                        height: 270px !important;
+                        height: 250px !important;
                         width: 100%;
 
                         .tox-statusbar{
@@ -154,9 +169,27 @@
                             margin-top: 12px;
                             margin-right: 20px;
                         }
+
+                        span{
+                            display: flex;
+                            align-items: center;
+                            font-size: 14px;
+                            width: 72%;
+                        }
                     }
                 }
             }
+            @media screen and (max-width: 500px) {
+                form{
+                    margin-left: 10px;
+                    width: 94%;
+                }
+            }
         }
+    }
+}
+@media screen and (max-width: 500px) {
+    .newMeeting{
+        height: 92%;
     }
 }
