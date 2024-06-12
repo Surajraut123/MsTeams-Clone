@@ -5,6 +5,7 @@ import TeamsActivity from './TeamsNavigation/TeamsActivity';
 import Chat from './chat/chat_main_page';
 import Activity from './activity/activity';
 import CalendarNavbar from './calender/navbar/CalendarNavbar';
+import UserAuthentication from './authentication/Authentication'
 import {
   BrowserRouter as Router,
   Route,
@@ -34,7 +35,6 @@ function App() {
         <Navbar/>
         <div className="userSection">
           <TeamsActivity/>
-          {/* <NewMeeting/> */}
           <Routes>
             <Route exact path='/' element={<Chat/>}></Route>
             <Route exact path='/community' element={<Community/>}></Route>
@@ -42,11 +42,10 @@ function App() {
             <Route exact path='/activity' element={<Activity/>}></Route>
           </Routes>  
         </div>
+        {/* <UserAuthentication/> */}
       </div>
      </Router>  
   );
 }
 
-{/* <Contacts/>
-<UserMassage/> */}
 export default App;
