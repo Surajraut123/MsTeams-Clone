@@ -20,5 +20,6 @@ export const fetchMessage = (conversationId, receiver) => async dispatch => {
     dispatch({
         type: 'FETCH_MESSAGES_SUCCESS',
         payload: messages,
+        receiverDetail : receiver
     });
 }

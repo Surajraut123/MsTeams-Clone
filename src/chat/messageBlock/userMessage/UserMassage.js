@@ -3,14 +3,28 @@ import './usermessage.scss'
 import UserInput from '../userInput/UserInput'
 import Messages from './Messages'
 import MessageNavigation from '../messageNavbar/MessageNavigation'
+import ChatHomePage from '../../ChatHomePage'
+import { useSelector } from 'react-redux'
 function UserMassage() {
-  return (
-    <div className='message'>
-      <MessageNavigation/>
-      <Messages/>
-      <UserInput/>
-    </div>
-  )
+
+    const data = useSelector(state => state.messages.messages.length);
+    console.log(data!=="0")
+
+    return (
+      <div className='message'>
+        {
+          data !== 0 ? (
+            <>
+              <MessageNavigation/>
+              <Messages/>
+              <UserInput/>
+            </>
+          ) : (
+          <ChatHomePage/> 
+          )
+        }
+      </div>
+    )
 }
 
 export default UserMassage

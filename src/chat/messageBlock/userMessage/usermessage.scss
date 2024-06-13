@@ -4,16 +4,16 @@
     box-shadow: 2px 0px 12px 0px #b7b7b7;
 }
 @media screen and (max-width: 500px)  {
-    .message{
-        // display: none;
+    .message {
+        display: none;
     }
 }
 
 // when message renders for a perticular user
-@media screen and (max-width: 500px)  {
-    .message{
-        width: 100%;
-        height: 92%;
-        position: relative;
-    }
-}
+// @media screen and (max-width: 500px)  {
+//     .message{
+//         width: 100%;
+//         height: 92%;
+//         position: relative;
+//     }
+// }

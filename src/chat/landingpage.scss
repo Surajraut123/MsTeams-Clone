@@ -1,0 +1,128 @@
+.landingPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 92%;
+
+    .content{
+        display: flex;
+        flex-direction: column;
+        gap: 43px;
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            .receiver{
+                display: flex;
+                width: 70%;
+                gap: 13px;
+                position: relative;
+                img{
+                    width: 7%;
+                }
+                .info1{
+                    background: #ffffff;
+                    width: 100%;
+                    padding: 3px;
+                    border-radius: 6px;
+
+                    .div1{
+                        height: 8px;
+                        width: 77%;
+                        background: #bbcad7;
+                        margin: 5px;
+                    }
+
+                    .div2{
+                        height: 8px;
+                        width: 45%;
+                        background: #cfcfcf;
+                        margin: 5px;
+                    }
+                }
+            }
+            .user{
+                // display: flex;
+                width: 70%;
+                .info1{
+                    background: #2c2b59;
+                    width: 60%;
+                    padding: 3px;
+                    border-radius: 2px;
+                    float: right;
+
+                    .div1{
+                        height: 8px;
+                        width: 77%;
+                        background: #bbcad7;
+                        margin: 3px;
+                        float: right;
+                    }
+
+                    .div2{
+                        height: 8px;
+                        width: 45%;
+                        background: #cfcfcf;
+                        margin: 2px;
+                        float: right;
+                    }
+                }
+            }
+            .sender{
+
+                display: flex;
+                width: 70%;
+                gap: 13px;
+                position: relative;
+                img{
+                    width: 7%;
+                }
+                .info1{
+                    background: #ffffff;
+                    width: 100%;
+                    padding: 3px;
+                    border-radius: 6px;
+
+                    .div1{
+                        height: 8px;
+                        width: 77%;
+                        background: #bbcad7;
+                        margin: 5px;
+                    }
+
+                    .div2{
+                        height: 8px;
+                        width: 45%;
+                        background: #cfcfcf;
+                        margin: 5px;
+                    }
+                }
+            }
+        }
+
+        .info {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 7px;
+
+            h1{
+                font-family: system-ui;
+                font-size: 23px;
+            }
+            p{
+                font-size: 17px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px)  {
+    .landingPage {
+        display: none;
+    }
+}

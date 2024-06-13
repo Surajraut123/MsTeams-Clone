@@ -32,40 +32,37 @@ function List() {
   const userMessages = () => {
     setDisplayContact(false);
   }
-
+  const getIcon = () => {
+    const userName = conversations[0].user.fullName.split(" ");
+    return userName[0].charAt(0) + userName[1].charAt(0);
+  }
 
   return (
     <div className='teamMates'>
-      {/* { */}
-        {/* conversations.length > 0 ?
-          conversations.map(({conversationId, user}) => { */}
-            {/* return( */}
-              <div className='user' onClick={() => {
-                // disPatch(fetchMessage(conversationId))
-                userMessages()
-              }}>
-              {/* <div key={conversationId} className='user' onClick={() => disPatch(fetchMessage(conversationId))}> */}
+      {
+        conversations.length > 0 ?
+          conversations.map(({conversationId, user}) => {
+            return(
+              <div key={conversationId} className='user' onClick={() => disPatch(fetchMessage(conversationId, user.fullName))}>
                 <div className="user-profile">
-                  <span>RS</span>
+                  <span>{getIcon()}</span>
                 </div>
                 <div className="user-details">
                   <div className="name-date">
-                    <h3 className='text-lg'>Suraj Raut</h3>
-                    {/* <h3 className='text-lg'>{user?.fullName}</h3> */}
+                    <h3 className='text-lg'>{user?.fullName}</h3>
                   </div>
                   <div className="latest-message">
                   <p>
-                    {/* {myState.messages.length > 0 && 
-                      myState.messages[myState.messages.length - 1].message} */}
-                      Good Morning
+                    {myState.messages.length > 0 && 
+                      myState.messages[myState.messages.length - 1].message}
                   </p>
 
                   </div>
                 </div>
               </div>
-            {/* ) */}
-          {/* }) : <div className="text-center text-lg font-semibold mt-24"> No Conversations</div> */}
-      {/* // } */}
+            )
+          }) : <div className="text-center text-lg font-semibold mt-24"> No Conversations</div>
+      }
     </div>
   )
 }

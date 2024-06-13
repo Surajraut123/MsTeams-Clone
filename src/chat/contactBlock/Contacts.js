@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './contacts.scss'
 import List from './contactList/List'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useSelector } from 'react-redux'
 import { faVideo, faPenToSquare, faCaretDown, faCaretRight, faGear } from '@fortawesome/free-solid-svg-icons';
 function Contacts(props) {
 
@@ -9,8 +10,9 @@ function Contacts(props) {
   const handleRecent = () => {
     select ? setSelect(false) : setSelect(true);
   }
+  const data = useSelector(state => state.messages.messages.length);
   return (
-    <div className='userContact'>
+    <div className={data === 0 ? 'userContact' : 'userContact contactVisibility' }>
       <div className="header">
         <h1>{props.title==="Feed" ? "Feed" : "Chat"}</h1>
 
