@@ -32,7 +32,7 @@ function App() {
   return (
     <Router>
       <div className="App"> 
-        <Navbar/>
+        {/* <Navbar/>
         <div className="userSection">
           <TeamsActivity/>
           <Routes>
@@ -41,8 +41,8 @@ function App() {
             <Route exact path='/calendar' element={<CalendarNavbar/>}></Route>
             <Route exact path='/activity' element={<Activity/>}></Route>
           </Routes>  
-        </div>
-        {/* <UserAuthentication/> */}
+        </div> */}
+        <UserAuthentication/>
       </div>
      </Router>  
   );
