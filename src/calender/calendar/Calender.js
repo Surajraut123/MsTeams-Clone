@@ -3,14 +3,14 @@ import FullCalendar from '@fullcalendar/react'
 import interactionPlugin from "@fullcalendar/interaction" // needed for dayClick
 import timegridplugin from '@fullcalendar/timegrid'
 import "./Calendar.scss"
-import { INITIAL_EVENTS } from './Calendar-event-utils'
+// import { INITIAL_EVENTS } from './Calendar-event-utils'
 function Calender({getNewMeetingStatus, setMeetingEvent}) {
 
   let tempMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   let perMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   const[isrender, setrender] = useState(true);
-  const [events, setEvents] = useState(INITIAL_EVENTS);
+  // const [events, setEvents] = useState(INITIAL_EVENTS);
 
   var todayDate = "";
   const getTodayDate = () => {
@@ -170,9 +170,9 @@ function Calender({getNewMeetingStatus, setMeetingEvent}) {
     setrender(false);
   }
   // console.log(INITIAL_EVENTS);
-  useEffect(() => {
-    setEvents(INITIAL_EVENTS);
-  }, [setMeetingEvent]);
+  // useEffect(() => {
+  //   setEvents(INITIAL_EVENTS);
+  // }, [setMeetingEvent]);
   return (
     <div className='mycalender'>
       <FullCalendar

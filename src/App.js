@@ -5,7 +5,7 @@ import TeamsActivity from './TeamsNavigation/TeamsActivity';
 import Chat from './chat/chat_main_page';
 import Activity from './activity/activity';
 import CalendarNavbar from './calender/navbar/CalendarNavbar';
-import UserAuthentication from './authentication/Authentication'
+// import UserAuthentication from './authentication/Authentication'
 import {
   BrowserRouter as Router,
   Route,

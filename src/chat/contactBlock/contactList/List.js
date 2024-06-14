@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import "./list.scss"
 import {fetchMessage} from '../../action/index'
+import myContext from '../../MyContext';
+
 function List() {
   const myState = useSelector((state) => state.messages)
-  console.log("From list :", myState.messages.length);
   const disPatch = useDispatch();
   const [conversations, setConversations] = useState([]);
-  const [messages, setMessages] = useState({});
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')))
+  // const [messages, setMessages] = useState({});
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')))
+  const {updateUserClickEvent} = useContext(myContext);
 
-  const[displayContact, setDisplayContact] = useState(true);
+  // const[displayContact, setDisplayContact] = useState(true);
     useEffect(() =>{
       const loggedinUser = JSON.parse(localStorage.getItem('user:detail'))
       console.log(loggedinUser)
@@ -29,12 +31,17 @@ function List() {
       fetchConversations();
   }, [])
 
-  const userMessages = () => {
-    setDisplayContact(false);
-  }
+  // const userMessages = () => {
+  //   setDisplayContact(false);
+  // }
   const getIcon = () => {
     const userName = conversations[0].user.fullName.split(" ");
     return userName[0].charAt(0) + userName[1].charAt(0);
+  }
+  const handleClickEvent = (conversationId, user) => {
+    disPatch(fetchMessage(conversationId, user.fullName))
+    updateUserClickEvent()
+
   }
 
   return (
@@ -43,7 +50,7 @@ function List() {
         conversations.length > 0 ?
           conversations.map(({conversationId, user}) => {
             return(
-              <div key={conversationId} className='user' onClick={() => disPatch(fetchMessage(conversationId, user.fullName))}>
+              <div key={conversationId} className='user' onClick={handleClickEvent(conversationId, user)}>
                 <div className="user-profile">
                   <span>{getIcon()}</span>
                 </div>
