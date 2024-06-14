@@ -10,13 +10,13 @@ function NewMeeting(props) {
         date: '',
         time: ''
     });
-
+    console.log(dateTime);
 
     const meetingSlot = new Date(props.scheduleMeeting);
     const startDate = meetingSlot.getDate();
-    const meetingDay = meetingSlot.getDay();
+    // const meetingDay = meetingSlot.getDay();
     const year = meetingSlot.getFullYear();
-    const endDate = meetingSlot.getDate();
+    // const endDate = meetingSlot.getDate();
     const startTime = meetingSlot.getHours();
     const startMinute = meetingSlot.getMinutes();
     const month = meetingSlot.getMonth();
@@ -123,6 +123,7 @@ function NewMeeting(props) {
             let timeDuration = getDuration(formData.lastTime, formData.startTime);
             setDuration(timeDuration);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formData]); 
 
     

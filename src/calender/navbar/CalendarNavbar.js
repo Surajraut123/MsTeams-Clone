@@ -27,7 +27,7 @@ function CalendarNavbar() {
     setNewMeetingEvent(event)
   }
   useEffect(() => {
-  }, newMeetingEvent)
+  }, [newMeetingEvent])
   return (
     <>
       <div className={meeting ? 'hiddenCalendar' : 'calendarNavbar'}>

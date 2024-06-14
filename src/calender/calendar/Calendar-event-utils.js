@@ -26,8 +26,8 @@ export const INITIAL_EVENTS = [
     {
       id: createEventId(),
       title: 'Feedback',
-      start: '2024-05-16' + 'T07:00:00',
-      end: '2024-05-16' + 'T08:30:00',
+      start: '2024-05-16T07:00:00',
+      end: '2024-05-16T08:30:00',
       color: "",
       extendedProps: {
         department: 'BioChemistry',

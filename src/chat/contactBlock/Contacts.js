@@ -1,16 +1,21 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './contacts.scss'
 import List from './contactList/List'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { useSelector } from 'react-redux'
 import { faVideo, faPenToSquare, faCaretDown, faCaretRight, faGear } from '@fortawesome/free-solid-svg-icons';
+import myContext from '../MyContext'
 function Contacts(props) {
 
   const [select, setSelect] = useState(false);
   const handleRecent = () => {
     select ? setSelect(false) : setSelect(true);
   }
+
+  const value = useContext(myContext)
+
   return (
-    <div className='userContact'>
+    <div className={!value.isClick ? 'userContact' : 'userContact userMobile'}>
       <div className="header">
         <h1>{props.title==="Feed" ? "Feed" : "Chat"}</h1>
 
