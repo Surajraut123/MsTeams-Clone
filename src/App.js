@@ -2,7 +2,7 @@
 import './App.css';
 import Navbar from './Navbar/Navbar';
 import TeamsActivity from './TeamsNavigation/TeamsActivity';
-import Chat from './chat/chat_main_page';
+import Chat from './chat/ChatMainPage';
 import Activity from './activity/activity';
 import CalendarNavbar from './calender/navbar/CalendarNavbar';
 // import UserAuthentication from './authentication/Authentication'

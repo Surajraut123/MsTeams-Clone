@@ -13,9 +13,9 @@ function Contacts(props) {
   }
 
   const value = useContext(myContext)
-
+  console.log("Clicked value in Contacts : ", value.isClicked)
   return (
-    <div className={!value.isClick ? 'userContact' : 'userContact userMobile'}>
+    <div className={!value.isClicked ? 'userContact' : 'userContact userMobile'}>
       <div className="header">
         <h1>{props.title==="Feed" ? "Feed" : "Chat"}</h1>
 

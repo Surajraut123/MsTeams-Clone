@@ -1,4 +1,4 @@
-import {React, useContext} from 'react'
+import {React, useContext, useEffect, useState} from 'react'
 import './usermessage.scss'
 import UserInput from '../userInput/UserInput'
 import Messages from './Messages'
@@ -15,7 +15,7 @@ function UserMassage() {
     console.log(data!=="0")
 
     return (
-      <div className={!value.isClick ? 'message' : 'mobileMessage'}>
+      <div className={!value.isClicked? 'message' : 'mobileMessage'}>
         {
           data !== 0 ? (
             <>

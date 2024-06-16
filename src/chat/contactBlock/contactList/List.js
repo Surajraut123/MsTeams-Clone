@@ -50,7 +50,7 @@ function List() {
         conversations.length > 0 ?
           conversations.map(({conversationId, user}) => {
             return(
-              <div key={conversationId} className='user' onClick={handleClickEvent(conversationId, user)}>
+              <div key={conversationId} className='user' onClick={() => handleClickEvent(conversationId, user)}>
                 <div className="user-profile">
                   <span>{getIcon()}</span>
                 </div>
