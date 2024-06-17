@@ -146,6 +146,7 @@
 
                     .time{
                         display: flex;
+                        align-items: center;
                         .start {
                             display: flex;
 
@@ -170,6 +171,10 @@
                             #rightArrow{
                                 margin-top: 12px;
                                 margin-right: 20px;
+                            }
+
+                            @media screen and (max-width: 500px) {
+                                margin-bottom: 7px;
                             }
                         }
                         .end{
@@ -206,6 +211,12 @@
                             width: 72%;
                         }
                     }
+                    @media screen and (max-width: 500px)  {
+                        .time {
+                            display: block;
+                        }
+                    }
+
                 }
             }
             @media screen and (max-width: 500px) {

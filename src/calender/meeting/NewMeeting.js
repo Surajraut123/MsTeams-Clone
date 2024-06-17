@@ -255,8 +255,8 @@ function NewMeeting(props) {
                                 <select name="startTime" id="timeSelect" value={formData.startTime} onChange={handleChange}>
                                     {generateTimeOptions()}
                                 </select>
+                                <FontAwesomeIcon icon={faArrowRight} id='rightArrow'/>
                             </div>
-                            <FontAwesomeIcon icon={faArrowRight} id='rightArrow'/>
                             <div className='end'>
                                 <input type="date" id="dateInput" name="lastDate" value={formData.lastDate} onChange={handleChange}/>
                                 <select name="lastTime" id="timeSelect" value={formData.lastTime} onChange={handleChange}>

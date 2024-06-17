@@ -3,7 +3,7 @@ import './contacts.scss'
 import List from './contactList/List'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { useSelector } from 'react-redux'
-import { faVideo, faPenToSquare, faCaretDown, faCaretRight, faGear } from '@fortawesome/free-solid-svg-icons';
+import { faVideo, faPenToSquare, faCaretDown, faCaretRight, faGear, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import myContext from '../MyContext'
 function Contacts(props) {
 
@@ -43,6 +43,13 @@ function Contacts(props) {
         <span>Recent</span>
       </div>
       <List/>
+
+      <div className='add-member'>
+        <div className='btn'>
+          <FontAwesomeIcon id="plus-people" icon={faUserPlus} />
+          <p>invite people</p>
+        </div>
+      </div>
     </div>
   )
 }

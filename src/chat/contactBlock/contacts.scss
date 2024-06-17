@@ -2,7 +2,8 @@
     width: 25%;
     background-color: #f0f0f0;
     box-shadow: 2px 0px 12px 0px #b7b7b7;
-
+    position: relative;
+    
     .header{
         display: flex;
         position: relative;
@@ -109,6 +110,38 @@
         span {
             color: black;
         }
+    }
+
+    .add-member{
+        position: absolute;
+        bottom: 0px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        .btn{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            width: 90%;
+            padding: 10px 4px;
+            border-top: 1px solid #b9b9b9;
+            cursor: pointer;
+
+            #plus-people {
+                font-size: 14px;
+                color: #6b6b6b;
+            }
+
+            p{
+                font-family: system-ui;
+                color: #454545;
+            }
+        }
+    }
+
+    .add-member:hover{
+        background: #e3e3e3;
     }
     
 }

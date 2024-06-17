@@ -28,7 +28,7 @@ function TeamsActivity() {
         </div>
         </Link>
       <Link to="/" >
-        <div className={`activity ${selected === '/chat' ? 'selected' : ''}`} onClick={()=>combinedEvent(["chat", "/chat"])}>
+        <div className={`activity ${(selected === '/chat' || selected === '/') ? 'selected' : ''}`} onClick={()=>combinedEvent(["chat", "/chat"])}>
           <FontAwesomeIcon id="icons" className="chat" icon={faCommentDots} />
           <p>Chat</p>
         </div>
