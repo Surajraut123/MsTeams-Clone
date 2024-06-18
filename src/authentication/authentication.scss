@@ -9,7 +9,7 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
-        width: 28%;
+        width: 25%;
 
 
         .logo {
@@ -19,12 +19,16 @@
 
             img{
                 width: 8%;
+                @media screen and (max-width: 500px) {
+                    width: 10%;
+                }
             }
             h2{
                 font-family: sans-serif;
                 color: #898989;
                 font-size: 21px;
                 font-weight: 700;
+                user-select: none;
             }
         }
 
@@ -52,6 +56,7 @@
             h2{
                 font-size: 25px;
                 font-family: system-ui;
+                user-select: none;
             }
 
             .visible{
@@ -63,13 +68,16 @@
             }
         }
 
-        input{
-            border: none;
-            border-bottom: 1px solid #4cacef;
-            padding: 6px 0px;
-            font-size: 14px;
-            font-family: sans-serif;
-            outline-style: none;
+        .input{
+            input {
+                border: none;
+                border-bottom: 1px solid #4cacef;
+                padding: 6px 0px;
+                font-size: 14px;
+                font-family: sans-serif;
+                outline-style: none;
+                width: 100%;
+            }
         }
 
         .detail {
@@ -78,6 +86,9 @@
         }
 
         .btn {
+            @media screen and (max-width: 500px) {
+                margin-top: 30px;
+            }
             button {
                 float: right;
                 padding: 7px 40px;
@@ -117,6 +128,10 @@
 
         .disable {
             display: none
+        }
+
+        @media screen and (max-width: 500px) {
+            width: 80%;
         }
     }
 }

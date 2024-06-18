@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+// import Loader from '../../../Loader.gif'
 import "./list.scss"
 import {fetchMessage} from '../../action/index'
 import myContext from '../../MyContext';
@@ -18,18 +19,23 @@ function List() {
       const loggedinUser = JSON.parse(localStorage.getItem('user:detail'))
       console.log(loggedinUser)
       const fetchConversations = async() =>{
+        try{
           const res = await fetch(`http://localhost:8000/api/conversation/${loggedinUser?.id}`, {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json'
-              }
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
           })
           const resData = await res.json();
           console.log("Conersation : ", resData);
           setConversations(resData)
+        } catch(error) {
+          console.error(error)
+        }
       }
+
       fetchConversations();
-  }, [])
+    }, [])
 
   // const userMessages = () => {
   //   setDisplayContact(false);
@@ -46,6 +52,7 @@ function List() {
 
   return (
     <div className='teamMates'>
+      {/* <img src={Loader} alt='loading...'/> */}
       {
         conversations.length > 0 ?
           conversations.map(({conversationId, user}) => {
