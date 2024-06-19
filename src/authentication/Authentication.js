@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState, useContext } from 'react';
 import logo from './mslogo.png';
 import './authentication.scss';
 import Input from '../chat/components/Input/Input'
 import Loader from '../Loader.gif'
+import myContext from '../chat/MyContext';
 
 const Authentication = () => {
+    const setLandingPageVisibility = useContext(myContext);
     const [signIn, setSignIn] = useState(false);
+    const [clicked, setClickEvent] = useState(false);
+    const [valid, setValidity] = useState(true);
 
     const [data, setFormData] = useState({
         ...(!signIn && {fullname: ''}),
@@ -16,9 +20,15 @@ const Authentication = () => {
     const handleForm = (event) => {
         if(event === "register") {
             setSignIn(false);
+            setClickEvent(false)
         } 
         if(event === "login") {
             setSignIn(true);
+            setClickEvent(false)
+        }
+        if(event === "next") {
+            setClickEvent(true)
+            setLandingPageVisibility();
         }
 
         const handleEventUser = async (event) => {
@@ -37,7 +47,10 @@ const Authentication = () => {
     
                 const eventData = await response.json();
                 console.log(eventData);
+                setClickEvent(false)
             } catch (error) {
+                setClickEvent(false)
+                setValidity(false)
                 console.log(error);
             }
         }
@@ -48,7 +61,7 @@ const Authentication = () => {
 
     return (
         <div className='container'>
-            {/* <img src={Loader} alt='loading...'/> */}
+            
             <div className='form'>
                 <div className='logo'>  
                     <img src={logo} alt='loading' />
@@ -65,6 +78,7 @@ const Authentication = () => {
 
                 <Input name='password' type="password" placeholder='*******' className='input' value={data.password} onChange={(e) => setFormData({...data, password: e.target.value})}/>
 
+                {signIn && <p id={!valid ? 'invalid' : 'valid'}>Invalid username or password</p>}
                 {signIn && <span>Forgot my password</span>}
                 <p className='signin'>
                     {!signIn ? 'Already have an account?' : 'No account?'} 
@@ -73,7 +87,8 @@ const Authentication = () => {
                 </p>
 
                 <div className='btn'>
-                    <button onClick={() => handleForm("next")}>Next</button>
+                    <button className={!clicked ? "active" : "unactive"} onClick={() => handleForm("next")}>Next</button>
+                    <button className={clicked ? "loader": "unactive"}><img src={Loader} alt='loading...'/></button>
                 </div>
             </div>
             <p></p>

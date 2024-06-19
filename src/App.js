@@ -9,6 +9,7 @@ import UserAuthentication from './authentication/Authentication'
 import Logo from "./logoteams.png"
 import logo from './authentication/mslogo.png';
 import Community from './community/Community';
+import myContext from './chat/MyContext';
 import {
   BrowserRouter as Router,
   Route,
@@ -35,25 +36,34 @@ import { useEffect , useState} from 'react';
 function App() {
 
   const [visibility, setVisibility] = useState(false);
+  const [appVisibility, setAppVisibility] = useState(false);
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const welcomeElement = document.getElementById('welcome');
-      if (welcomeElement) {
-        welcomeElement.style.display = "none";
-        setVisibility(true)
-      }
-    }, 5000);
-  
+    let timer;
+    if (visibility) {
+      timer = setTimeout(() => {
+        setAppVisibility(true);
+        const welcomeElement = document.getElementById('welcome');
+        if (welcomeElement) {
+          welcomeElement.style.display = "none";
+        }
+      }, 5000);
+    }
+
     return () => clearTimeout(timer);
-  }, []);
+  }, [visibility]);
+
+
+  const setLandingPageVisibility = () => {
+    setVisibility(true)
+  }
   
 
 
   return (
     <Router>
       <div className="App"> 
-        {/* {visibility && <Navbar/>}
-        {visibility && <div className="userSection">
+        {visibility && <Navbar/>}
+        {appVisibility && <div className="userSection">
           <TeamsActivity/>
           <Routes>
             <Route exact path='/' element={<Chat/>}></Route>
@@ -61,15 +71,17 @@ function App() {
             <Route exact path='/calendar' element={<CalendarNavbar/>}></Route>
             <Route exact path='/activity' element={<Activity/>}></Route>
           </Routes>  
-        </div>} */}
-        <UserAuthentication/>
-        {/* <div id='welcome'>
-          <img src={Logo} alt='loading'/>
-          <div className='logo'>  
-            <img src={logo} alt='loading' />
-            <h2>Microsoft</h2>
-          </div>
-        </div> */}
+        </div>}
+        <myContext.Provider value={setLandingPageVisibility}>
+          {!visibility && <UserAuthentication/>}
+          {visibility && <div id='welcome'>
+            <img src={Logo} alt='loading'/>
+            <div className='logo'>  
+              <img src={logo} alt='loading' />
+              <h2>Microsoft</h2>
+            </div>
+          </div>}
+        </myContext.Provider>
       </div>
      </Router>  
   );

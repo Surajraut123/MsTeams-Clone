@@ -25,9 +25,17 @@
   gap: 14px;
   user-select: none;
 
+  @media screen and (max-width: 500px) {
+    position: relative;
+  }
+
 
   img{
     width: 13%;
+
+    @media screen and (max-width: 500px) {
+      width: 60%;
+    }
   }
   .logo {
     display: flex;
@@ -35,10 +43,15 @@
     gap: 7px;
     justify-content: center;
 
+    @media screen and (max-width: 500px) {
+      position: absolute;
+      bottom: 15px;
+    }
+
     img{
       width: 6%;
       @media screen and (max-width: 500px) {
-        width: 10%;
+        width: 7%;
       }
     }
     h2{
