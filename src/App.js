@@ -17,9 +17,6 @@ import {
 } from "react-router-dom";
 import { useEffect , useState} from 'react';
 
-// import UserMassage from './chat/messageBlock/userMessage/UserMassage';
-// import Contacts from './chat/contactBlock/Contacts';
-// import NewMeeting from './calender/meeting/NewMeeting';
 
 // const ProtectedRoute = ({ children, auth= false}) =>{
 //   const isLoggedIn = localStorage.getItem('user:token') !== null || false

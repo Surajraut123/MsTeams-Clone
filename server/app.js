@@ -29,11 +29,11 @@ app.post('/api/register', async (req, res, next) =>{
         const {fullName, email, password} = req.body
 
         if(!fullName || !email || !password) {
-            res.status(400).send("Please fill all required fields")
+            res.status(500).json({message: "Please fill all required fields"})
         }else{
             const isAlreadyExist = await Users.findOne({email});
             if(isAlreadyExist) {
-                res.status(400).send("User Already Exist")
+                res.status(500).json({message: "User Already Exist"})
             } else{
                 const newUser = new Users({fullName, email});
                 bcryptjs.hash(password, 10, (err, hashedPassword) =>{
@@ -41,7 +41,10 @@ app.post('/api/register', async (req, res, next) =>{
                     newUser.save();
                     next();
                 })
-                return res.status(200).send('User registered successully');
+                return res.status(200).json({message: 'User registered successully'});
+
+                //To send the data in json so will not need to use send 
+                // return res.status(200).json({message : 'User registered successully'});
             }
         }
 
@@ -55,15 +58,15 @@ app.post('/api/login', async (req, res, next) =>{
     try{
         const {email, password} = req.body;
         if(!email || !password) {
-            res.status(400).send("Please fill all required fields")
+            res.status(400).json({message: "Please fill all required fields"})
         } else{
             const user = await Users.findOne({email});
             if(!user) {
-                res.status(400).send("User email or password is invalid");
+                res.status(400).json({message: "Invalid username or password"});
             } else{
                 const vallidateUser = await bcryptjs.compare(password, user.password);
                 if(!vallidateUser) {
-                    res.status(400).send("User email or password is invalid");
+                    res.status(400).json({message: "Invalid username or password"});
                 } else{
                     const payLoad = {
                         userId: user._id,
@@ -191,6 +194,19 @@ app.get('/api/users/:userId', async (req, res) =>{
         res.status(200).json(await usersData);
     }catch(e) {
         console.log(e)
+    }
+})
+
+app.get('/api/users', async (req, res) =>{
+    try{
+        const users = await Users.find({});
+        const userArray = [];
+        const allUser = Promise.all(users.map(async (user) => {
+            userArray.push({userid: user._id, fullname: user.fullName, token: user.token}); 
+        }))
+        res.status(200).json({userData : userArray})
+    } catch(e) {
+        console.log(e);
     }
 })
 

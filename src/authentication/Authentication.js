@@ -9,7 +9,7 @@ const Authentication = () => {
     const setLandingPageVisibility = useContext(myContext);
     const [signIn, setSignIn] = useState(false);
     const [clicked, setClickEvent] = useState(false);
-    const [valid, setValidity] = useState(true);
+    const [loginDataValidity, setLoginDataValidity] = useState({valid: true, text: ''});
 
     const [data, setFormData] = useState({
         ...(!signIn && {fullname: ''}),
@@ -17,21 +17,29 @@ const Authentication = () => {
         password: ''
     })
 
-    const handleForm = (event) => {
-        if(event === "register") {
+    const selectAuth = (auth) => {
+        if(auth === "register") {
+            setFormData({
+                ...(!signIn && {fullname: ''}),
+                email: '',
+                password: ''
+            })
             setSignIn(false);
-            setClickEvent(false)
         } 
-        if(event === "login") {
+        if(auth === "login") {
+            setFormData({
+                ...(!signIn && {fullname: ''}),
+                email: '',
+                password: ''
+            })
             setSignIn(true);
-            setClickEvent(false)
         }
-        if(event === "next") {
-            setClickEvent(true)
-            setLandingPageVisibility();
-        }
+    }
+
+    const handleForm = (event) => {
 
         const handleEventUser = async (event) => {
+            setClickEvent(true)
             try {
                 const response = await fetch(`http://localhost:8000/api/${event}`, {
                     method: "POST",
@@ -44,14 +52,27 @@ const Authentication = () => {
                         "Content-type": "application/json"
                     }
                 })
-    
                 const eventData = await response.json();
-                console.log(eventData);
-                setClickEvent(false)
+                if(!response.ok) {
+                    if(response.status === 500) {
+                        alert(eventData.message)
+                    } else{
+                        setLoginDataValidity({valid: false, text: eventData.message})
+                    }
+                    setTimeout(()=>{
+                        setClickEvent(false)
+                    }, 1000)
+                } else{
+                    console.log("Registration : ", eventData);
+                    setTimeout(()=>{
+                        setClickEvent(false)
+                        setLandingPageVisibility();
+                    }, 3000)
+                }
             } catch (error) {
                 setClickEvent(false)
-                setValidity(false)
-                console.log(error);
+                console.error(error);
+                // alert(error)
             }
         }
         handleEventUser(event)
@@ -78,16 +99,16 @@ const Authentication = () => {
 
                 <Input name='password' type="password" placeholder='*******' className='input' value={data.password} onChange={(e) => setFormData({...data, password: e.target.value})}/>
 
-                {signIn && <p id={!valid ? 'invalid' : 'valid'}>Invalid username or password</p>}
+                {!loginDataValidity.valid && <p id={!loginDataValidity.valid ? 'invalid' : 'valid'}>{loginDataValidity.text}</p>}
                 {signIn && <span>Forgot my password</span>}
                 <p className='signin'>
                     {!signIn ? 'Already have an account?' : 'No account?'} 
-                    <span onClick={() => handleForm(signIn ? "register" : "login")}>
+                    <span onClick={() => selectAuth(signIn ? "register" : "login")}>
                         {!signIn ? ' Sign in' : ' Create one!'}</span>
                 </p>
 
                 <div className='btn'>
-                    <button className={!clicked ? "active" : "unactive"} onClick={() => handleForm("next")}>Next</button>
+                    <button className={!clicked ? "active" : "unactive"} onClick={() => handleForm(signIn ? "login" : "register")}>Next</button>
                     <button className={clicked ? "loader": "unactive"}><img src={Loader} alt='loading...'/></button>
                 </div>
             </div>
