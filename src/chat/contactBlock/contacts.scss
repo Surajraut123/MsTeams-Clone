@@ -124,24 +124,27 @@
             gap: 10px;
             align-items: center;
             width: 90%;
-            padding: 10px 4px;
-            border-top: 1px solid #b9b9b9;
+            margin: 10px 4px;
             cursor: pointer;
+            justify-content: center;
+            background: #4845c9;
+            border-radius: 5px;
 
             #plus-people {
                 font-size: 14px;
-                color: #6b6b6b;
+                color: #ffffff;
             }
 
             p{
                 font-family: system-ui;
-                color: #454545;
+                color: #ffffff;
+                padding: 5px;
             }
         }
     }
 
-    .add-member:hover{
-        background: #e3e3e3;
+    .btn:hover{
+        background: #3532b1; 
     }
     
 }

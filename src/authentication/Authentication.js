@@ -37,7 +37,6 @@ const Authentication = () => {
     }
 
     const handleForm = (event) => {
-
         const handleEventUser = async (event) => {
             setClickEvent(true)
             try {
@@ -52,9 +51,11 @@ const Authentication = () => {
                         "Content-type": "application/json"
                     }
                 })
+                
                 const eventData = await response.json();
                 if(!response.ok) {
-                    if(response.status === 500) {
+                
+                    if(response.status === 500 || response.status === 400) {
                         alert(eventData.message)
                     } else{
                         setLoginDataValidity({valid: false, text: eventData.message})
@@ -72,7 +73,7 @@ const Authentication = () => {
             } catch (error) {
                 setClickEvent(false)
                 console.error(error);
-                // alert(error)
+                alert("Something went wrong!")
             }
         }
         handleEventUser(event)

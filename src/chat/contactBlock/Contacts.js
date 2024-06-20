@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { useSelector } from 'react-redux'
 import { faVideo, faPenToSquare, faCaretDown, faCaretRight, faGear, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import myContext from '../MyContext'
+import peopleContext from '../AddPeopleContext';
 function Contacts(props) {
 
   const [select, setSelect] = useState(false);
@@ -13,6 +14,9 @@ function Contacts(props) {
   }
 
   const value = useContext(myContext)
+  const newPeopleConverstion = useContext(peopleContext);
+
+  console.log(value)
   console.log("Clicked value in Contacts : ", value?.isClicked)
   return (
     <div className={!value?.isClicked ? 'userContact' : 'userContact userMobile'}>
@@ -45,7 +49,7 @@ function Contacts(props) {
       <List/>
 
       <div className='add-member'>
-        <div className='btn'>
+        <div className='btn' onClick={() => {newPeopleConverstion()}}>
           <FontAwesomeIcon id="plus-people" icon={faUserPlus} />
           <p>invite people</p>
         </div>

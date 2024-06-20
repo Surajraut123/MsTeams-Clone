@@ -44,7 +44,7 @@ function ChatMainPage() {
       <myContext.Provider value={{isClicked, updateUserClickEvent}}>
         <Contacts/>
         <UserMassage/>
-        </myContext.Provider>
+      </myContext.Provider>
       </Provider>
     </div>
   )
