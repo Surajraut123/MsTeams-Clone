@@ -4,6 +4,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url('./bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 
     .form {
         display: flex;
@@ -11,6 +14,9 @@
         gap: 15px;
         width: 25%;
         height: 50%;
+        padding: 64px 25px;
+        border: 1px solid #bdbdbd;
+        background: white;
 
 
         .logo {
@@ -149,6 +155,7 @@
 
         @media screen and (max-width: 500px) {
             width: 80%;
+            height: 35%;
         }
 
         #invalid{

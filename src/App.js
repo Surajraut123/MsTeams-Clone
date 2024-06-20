@@ -37,6 +37,7 @@ function App() {
   const [visibility, setVisibility] = useState(false);
   const [appVisibility, setAppVisibility] = useState(false);
   const [converstion, setConverstion] = useState(false);
+  const [loggedInUserId, setloggedInUserId] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -54,8 +55,9 @@ function App() {
   }, [visibility]);
 
 
-  const setLandingPageVisibility = () => {
+  const setLandingPageVisibility = (data) => {
     setVisibility(true)
+    setloggedInUserId(data)
   }
 
   const handleConversionVisibility = () => {
@@ -74,7 +76,7 @@ function App() {
       <div className="App"> 
         {visibility && <Navbar/>}
           {appVisibility && <div className="userSection" onClick={handleOutsideClick}>
-            {converstion && <AddPeople/>}
+            {converstion && <AddPeople active={true} loggedInUserId={loggedInUserId}/>}
             <TeamsActivity/>
             <peopleContext.Provider value={handleConversionVisibility}>
               <Routes>

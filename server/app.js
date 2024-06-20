@@ -95,7 +95,7 @@ app.post('/api/conversation', async (req, res) =>{
         const {senderId, receiverId} = req.body;
         const newConversation = new Conversation({members : [senderId, receiverId]});
         await newConversation.save();
-        res.status(200).send("Conversation Created ")
+        res.status(200).json({message: "Conversation Created"})
     } catch(e){
         console.log(e)
     }

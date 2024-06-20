@@ -67,7 +67,7 @@ const Authentication = () => {
                     console.log("Registration : ", eventData);
                     setTimeout(()=>{
                         setClickEvent(false)
-                        setLandingPageVisibility();
+                        setLandingPageVisibility(eventData.user.id);
                     }, 3000)
                 }
             } catch (error) {
