@@ -14,7 +14,7 @@ function Contacts(props) {
   }
 
   const value = useContext(myContext)
-  const newPeopleConverstion = useContext(peopleContext);
+  const peopleContextValue = useContext(peopleContext);
 
   console.log(value)
   console.log("Clicked value in Contacts : ", value?.isClicked)
@@ -49,7 +49,7 @@ function Contacts(props) {
       <List/>
 
       <div className='add-member'>
-        <div className='btn' onClick={() => {newPeopleConverstion()}}>
+        <div className='btn' onClick={() => {peopleContextValue.handleConversionVisibility(true)}}>
           <FontAwesomeIcon id="plus-people" icon={faUserPlus} />
           <p>invite people</p>
         </div>

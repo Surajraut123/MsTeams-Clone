@@ -1,11 +1,18 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef, useState, useContext} from 'react'
 import './addpeople.scss';
 import GIF from './msgif.gif'
+import correct from './correct.gif';
+import peopleContext from './AddPeopleContext';
 const AddPeople = ({active, loggedInUserId}) => {
 
     const inputRef = useRef(null);
     const[members, getUserMembers] = useState()
-
+    const[correctGifVisibility, setGifVisibility] = useState({
+        id:'',
+        visiblity: false
+    });
+    const peopleContextValue = useContext(peopleContext);
+    console.log("People context", peopleContextValue.fetchConversation)
     const handleCopy = () => {
         inputRef.current.select();
         navigator.clipboard.writeText(inputRef.current.value)
@@ -16,6 +23,8 @@ const AddPeople = ({active, loggedInUserId}) => {
         document.getElementById('copy-btn').style.backgroundColor = "#4845c9";
         document.getElementById('copy-btn').style.color = "white";
     };
+
+    console.log("LoggedinUseriD", loggedInUserId);
 
     useEffect(() => {
         if(!active) return;
@@ -47,22 +56,32 @@ const AddPeople = ({active, loggedInUserId}) => {
     }
 
     const createNewConversation = async (senderId, receiverId) => {
-        try {
-            const response = await fetch("http://localhost:8000/api/conversation", {
-                method: "POST",
-                body: JSON.stringify({
-                    senderId: senderId,
-                    receiverId: receiverId
-                }),
-                headers: {
-                    "Content-type" : "application/json"
-                }
-            })
-            const data = await response.json();
-            console.log(data)
-        } catch (error) {
-            console.log("While Creating new Conversion : ", error)
-        }
+        // try {
+        //     const response = await fetch("http://localhost:8000/api/conversation", {
+        //         method: "POST",
+        //         body: JSON.stringify({
+        //             senderId: senderId,
+        //             receiverId: receiverId
+        //         }),
+        //         headers: {
+        //             "Content-type" : "application/json"
+        //         }
+        //     })
+        //     const data = await response.json();
+        //     console.log("New Conversation ", data)
+        //     console.log("ReceiverId ", receiverId)
+        // } catch (error) {
+        //     console.log("While Creating new Conversion : ", error)
+        // }
+
+        console.log("New Conversations CLicked")
+        setTimeout(() => {
+            setGifVisibility({id: receiverId, visiblity: false});
+            setTimeout(() => {
+                peopleContextValue.handleConversionVisibility(false);
+            }, 1000)
+        }, 1300)
+        setGifVisibility({id: receiverId, visiblity: true});
     }
 
     const handleInsideClick = (event) => {
@@ -92,6 +111,8 @@ const AddPeople = ({active, loggedInUserId}) => {
                                     <div className="name-date">
                                         <h3 className='text-lg'>{data.fullname}</h3>
                                     </div>
+                                    {(correctGifVisibility.id === data.userid) && correctGifVisibility.visiblity && <img src={correct} alt="loading" />}
+
                                 </div>
                             </div>)
                         )

@@ -69,6 +69,11 @@ const Authentication = () => {
                         setClickEvent(false)
                         setLandingPageVisibility(eventData.user.id);
                     }, 3000)
+
+                    if(event === "login") {
+                        localStorage.setItem("user:token", eventData.token)
+                        localStorage.setItem("loggedUser:detail", JSON.stringify(eventData.user))
+                    }
                 }
             } catch (error) {
                 setClickEvent(false)

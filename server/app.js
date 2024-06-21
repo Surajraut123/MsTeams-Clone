@@ -41,7 +41,7 @@ app.post('/api/register', async (req, res, next) =>{
                     newUser.save();
                     next();
                 })
-                return res.status(200).json({message: 'User registered successully'});
+                return res.status(200).json({message: 'User registered successully', user:{id: newUser._id}});
 
                 //To send the data in json so will not need to use send 
                 // return res.status(200).json({message : 'User registered successully'});
@@ -101,6 +101,8 @@ app.post('/api/conversation', async (req, res) =>{
     }
 })
 
+
+//It chekcing in the conversation field that, if loggedinUserid is exist in a particular conversation object then the rest of id will the received id. so to showcase the conversations on the chat list which is beging happened.
 app.get('/api/conversation/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;

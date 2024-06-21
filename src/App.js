@@ -34,10 +34,11 @@ import AddPeople from './chat/AddPeople';
 
 function App() {
 
-  const [visibility, setVisibility] = useState(true);
-  const [appVisibility, setAppVisibility] = useState(true);
+  const [visibility, setVisibility] = useState(false);
+  const [appVisibility, setAppVisibility] = useState(false);
   const [converstion, setConverstion] = useState(false);
   const [loggedInUserId, setloggedInUserId] = useState(false);
+  const [fetchConversation, setNewConversation] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -60,8 +61,10 @@ function App() {
     setloggedInUserId(data)
   }
 
-  const handleConversionVisibility = () => {
-    setConverstion(true);
+  const handleConversionVisibility = (visible) => {
+    setConverstion(visible);
+    setNewConversation(!true)
+    console.log("clicked on add people", converstion)
   }
   const handleOutsideClick = () => {
     if (converstion) {
@@ -70,24 +73,23 @@ function App() {
   };
   
 
-
   return (
     <Router>
       <div className="App"> 
         {visibility && <Navbar/>}
           {appVisibility && <div className="userSection" onClick={handleOutsideClick}>
-            {converstion && <AddPeople active={true} loggedInUserId={loggedInUserId}/>}
-            <TeamsActivity/>
-            <peopleContext.Provider value={handleConversionVisibility}>
-              <Routes>
-                  <Route exact path='/' element={<Chat/>}></Route>
-                <Route exact path='/community' element={<Community/>}></Route>
-                <Route exact path='/calendar' element={<CalendarNavbar/>}></Route>
-                <Route exact path='/activity' element={<Activity/>}></Route>
-              </Routes>  
+            <peopleContext.Provider value={{fetchConversation, handleConversionVisibility}}>
+              {converstion && <AddPeople active={true} loggedInUserId={loggedInUserId}/>}
+              <TeamsActivity/>
+                <Routes>
+                    <Route exact path='/' element={<Chat/>}></Route>
+                  <Route exact path='/community' element={<Community/>}></Route>
+                  <Route exact path='/calendar' element={<CalendarNavbar/>}></Route>
+                  <Route exact path='/activity' element={<Activity/>}></Route>
+                </Routes>  
             </peopleContext.Provider>
           </div>}
-        {/* <myContext.Provider value={setLandingPageVisibility}>
+        <myContext.Provider value={setLandingPageVisibility}>
           {!visibility && <UserAuthentication/>}
           {visibility && <div id='welcome'>
             <img src={Logo} alt='loading'/>
@@ -96,7 +98,7 @@ function App() {
               <h2>Microsoft</h2>
             </div>
           </div>}
-        </myContext.Provider> */}
+        </myContext.Provider>
       </div>
      </Router>  
   );

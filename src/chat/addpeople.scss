@@ -74,12 +74,13 @@
 
                 .user{
                     display: flex;
-                    padding: 5px;
+                    padding: 0px;
                     border: 1px solid #dfdfdf;
                     margin: 8px;
                     cursor: pointer;
                     border-radius: 8px;
                     align-items: center;
+                    height: 11%;
             
                     .user-profile{
                         display: flex;
@@ -103,6 +104,7 @@
                         margin-right: 10px;
                         display: flex;
                         align-items: center;
+                        justify-content: space-between;
             
                         .name-date{
                             display: flex;
@@ -112,6 +114,10 @@
                                 font-size: 15px;
                                 color: #32363a;
                             }
+                        }
+
+                        img{
+                            width: 12%;
                         }
                     }
                 }

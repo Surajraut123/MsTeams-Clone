@@ -5,19 +5,28 @@ import { useDispatch } from 'react-redux';
 import "./list.scss"
 import {fetchMessage} from '../../action/index'
 import myContext from '../../MyContext';
+import peopleContext from '../../AddPeopleContext';
 
 function List() {
   const myState = useSelector((state) => state.messages)
   const disPatch = useDispatch();
   const [conversations, setConversations] = useState([]);
+  const [newCall, setCall] = useState(false)
   // const [messages, setMessages] = useState({});
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')))
   const {updateUserClickEvent} = useContext(myContext);
+  const peopleContextValue = useContext(peopleContext);
+  useEffect(() => {
+    setCall(peopleContextValue.fetchConversation);
+    console.log('In the list : ', peopleContextValue.fetchConversation);
+  }, [peopleContextValue.fetchConversation]);
 
   // const[displayContact, setDisplayContact] = useState(true);
     useEffect(() =>{
-      const loggedinUser = JSON.parse(localStorage.getItem('user:detail'))
-      console.log(loggedinUser)
+      const loggedinUser = JSON.parse(localStorage.getItem('loggedUser:detail'))
+      console.log("Logged user : ", loggedinUser)
+
+      let isMounted = true
       const fetchConversations = async() =>{
         try{
           const res = await fetch(`http://localhost:8000/api/conversation/${loggedinUser?.id}`, {
@@ -28,25 +37,36 @@ function List() {
           })
           const resData = await res.json();
           console.log("Conersation : ", resData);
-          setConversations(resData)
+          if(isMounted) {
+            setConversations(resData)
+          }
         } catch(error) {
           console.error(error)
         }
       }
-
       fetchConversations();
-    }, [])
+      console.log("New Call")
+      return () => {
+        isMounted = false;
+      }
+
+  
+
+    }, [newCall])
 
   // const userMessages = () => {
   //   setDisplayContact(false);
   // }
-  const getIcon = () => {
-    const userName = conversations[0].user.fullName.split(" ");
-    return userName[0].charAt(0) + userName[1].charAt(0);
+  const getIcon = (data) => {
+    const userName = data.split(" ");
+    if(userName[1]) {
+        return userName[0]?.charAt(0).toUpperCase() + userName[1]?.charAt(0).toUpperCase();
+    }
+    return userName[0]?.charAt(0).toUpperCase() + "N";
   }
   const handleClickEvent = (conversationId, user) => {
-    disPatch(fetchMessage(conversationId, user.fullName))
-    updateUserClickEvent()
+    // disPatch(fetchMessage(conversationId, user.fullName))
+    // updateUserClickEvent()
 
   }
 
@@ -59,7 +79,7 @@ function List() {
             return(
               <div key={conversationId} className='user' onClick={() => handleClickEvent(conversationId, user)}>
                 <div className="user-profile">
-                  <span>{getIcon()}</span>
+                  <span>{getIcon(user.fullName)}</span>
                 </div>
                 <div className="user-details">
                   <div className="name-date">
