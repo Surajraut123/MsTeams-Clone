@@ -9,6 +9,7 @@
     height: 87%;
     left: 36%;
     top: 3%;
+    box-shadow:  0px 0px 37px 10px #ababab;
 
     @media screen and (max-width: 500px) {
         width: 90%;
@@ -117,6 +118,15 @@
 
                 .user:hover{
                     background-color: rgb(240, 240, 240);
+                }
+
+                img{
+                    width: 100%;
+                }
+
+                p{
+                    text-align: center;
+                    font-family: system-ui;
                 }
 
             }

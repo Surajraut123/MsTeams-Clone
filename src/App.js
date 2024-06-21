@@ -34,8 +34,8 @@ import AddPeople from './chat/AddPeople';
 
 function App() {
 
-  const [visibility, setVisibility] = useState(false);
-  const [appVisibility, setAppVisibility] = useState(false);
+  const [visibility, setVisibility] = useState(true);
+  const [appVisibility, setAppVisibility] = useState(true);
   const [converstion, setConverstion] = useState(false);
   const [loggedInUserId, setloggedInUserId] = useState(false);
 
@@ -63,7 +63,7 @@ function App() {
   const handleConversionVisibility = () => {
     setConverstion(true);
   }
-    const handleOutsideClick = () => {
+  const handleOutsideClick = () => {
     if (converstion) {
       setConverstion(false);
     }
@@ -87,7 +87,7 @@ function App() {
               </Routes>  
             </peopleContext.Provider>
           </div>}
-        <myContext.Provider value={setLandingPageVisibility}>
+        {/* <myContext.Provider value={setLandingPageVisibility}>
           {!visibility && <UserAuthentication/>}
           {visibility && <div id='welcome'>
             <img src={Logo} alt='loading'/>
@@ -96,7 +96,7 @@ function App() {
               <h2>Microsoft</h2>
             </div>
           </div>}
-        </myContext.Provider>
+        </myContext.Provider> */}
       </div>
      </Router>  
   );
