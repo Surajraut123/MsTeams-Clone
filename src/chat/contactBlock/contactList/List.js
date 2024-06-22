@@ -1,30 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 // import Loader from '../../../Loader.gif'
 import "./list.scss"
-import {fetchMessage} from '../../action/index'
-import myContext from '../../MyContext';
-import peopleContext from '../../AddPeopleContext';
+// import {fetchMessage} from '../../action/index'
+// import myContext from '../../MyContext';
 
-function List() {
+function List(props) {
   const myState = useSelector((state) => state.messages)
-  const disPatch = useDispatch();
+  // const disPatch = useDispatch();
   const [conversations, setConversations] = useState([]);
-  const [newCall, setCall] = useState(false)
-  // const [messages, setMessages] = useState({});
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')))
-  const {updateUserClickEvent} = useContext(myContext);
-  const peopleContextValue = useContext(peopleContext);
-  useEffect(() => {
-    setCall(peopleContextValue.fetchConversation);
-    console.log('In the list : ', peopleContextValue.fetchConversation);
-  }, [peopleContextValue.fetchConversation]);
 
-  // const[displayContact, setDisplayContact] = useState(true);
+  // const {updateUserClickEvent} = useContext(myContext);
+
     useEffect(() =>{
       const loggedinUser = JSON.parse(localStorage.getItem('loggedUser:detail'))
-      console.log("Logged user : ", loggedinUser)
 
       let isMounted = true
       const fetchConversations = async() =>{
@@ -36,7 +26,6 @@ function List() {
             }
           })
           const resData = await res.json();
-          console.log("Conersation : ", resData);
           if(isMounted) {
             setConversations(resData)
           }
@@ -45,18 +34,15 @@ function List() {
         }
       }
       fetchConversations();
-      console.log("New Call")
       return () => {
         isMounted = false;
       }
 
   
 
-    }, [newCall])
+    }, [props.fetchConversation])
 
-  // const userMessages = () => {
-  //   setDisplayContact(false);
-  // }
+
   const getIcon = (data) => {
     const userName = data.split(" ");
     if(userName[1]) {

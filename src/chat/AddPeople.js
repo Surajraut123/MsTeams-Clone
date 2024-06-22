@@ -12,7 +12,7 @@ const AddPeople = ({active, loggedInUserId}) => {
         visiblity: false
     });
     const peopleContextValue = useContext(peopleContext);
-    console.log("People context", peopleContextValue.fetchConversation)
+
     const handleCopy = () => {
         inputRef.current.select();
         navigator.clipboard.writeText(inputRef.current.value)
@@ -23,29 +23,28 @@ const AddPeople = ({active, loggedInUserId}) => {
         document.getElementById('copy-btn').style.backgroundColor = "#4845c9";
         document.getElementById('copy-btn').style.color = "white";
     };
-
-    console.log("LoggedinUseriD", loggedInUserId);
-
+    const loggedUserId = JSON.parse(localStorage.getItem("loggedUser:detail"));
+    console.log(loggedUserId.id)
     useEffect(() => {
         if(!active) return;
         const getMembers = async () => {
             try {
-                const response = await fetch("http://localhost:8000/api/users", {
+                const response = await fetch(`http://localhost:8000/api/newconversation/${loggedUserId.id}`, {
                     method: "GET",
                     headers: {
                         "Content-type" : "application/json"
                     }
                 })
-                const data = await response.json();
-                console.log(data)
-                getUserMembers(data)
+                const allusers = await response.json();
+                console.log(allusers)
+                getUserMembers(allusers)
             } catch (error) {
                 console.log("While Fetching members : ", error)
             }
         }
 
         getMembers()
-    },[active])
+    },[active, loggedInUserId])
 
     const getIcon = (data) => {
         const userName = data.split(" ");
@@ -54,27 +53,25 @@ const AddPeople = ({active, loggedInUserId}) => {
         }
         return userName[0]?.charAt(0).toUpperCase() + "N";
     }
-
+    
     const createNewConversation = async (senderId, receiverId) => {
-        // try {
-        //     const response = await fetch("http://localhost:8000/api/conversation", {
-        //         method: "POST",
-        //         body: JSON.stringify({
-        //             senderId: senderId,
-        //             receiverId: receiverId
-        //         }),
-        //         headers: {
-        //             "Content-type" : "application/json"
-        //         }
-        //     })
-        //     const data = await response.json();
-        //     console.log("New Conversation ", data)
-        //     console.log("ReceiverId ", receiverId)
-        // } catch (error) {
-        //     console.log("While Creating new Conversion : ", error)
-        // }
+        try {
+            const response = await fetch("http://localhost:8000/api/conversation", {
+                method: "POST",
+                body: JSON.stringify({
+                    senderId: senderId,
+                    receiverId: receiverId
+                }),
+                headers: {
+                    "Content-type" : "application/json"
+                }
+            })
+            const data = await response.json();
+            console.data("In CreateNewConverstion : ", data)
+        } catch (error) {
+            console.log("While Creating new Conversion : ", error)
+        }
 
-        console.log("New Conversations CLicked")
         setTimeout(() => {
             setGifVisibility({id: receiverId, visiblity: false});
             setTimeout(() => {
@@ -103,15 +100,15 @@ const AddPeople = ({active, loggedInUserId}) => {
                 <div className='peoples'>
                     {members?.userData ? members?.userData.map((data) => {
                         return (
-                            data.userid !== loggedInUserId && (<div className='user' key={data.userid} onClick={() => createNewConversation(loggedInUserId, data.userid)}>
+                            data._id !== loggedInUserId && (<div className='user' key={data._id} onClick={() => createNewConversation(loggedInUserId, data._id)}>
                                 <div className="user-profile">
-                                    <span>{getIcon(data.fullname)}</span>
+                                    <span>{getIcon(data.fullName)}</span>
                                 </div>
                                 <div className="user-details">
                                     <div className="name-date">
-                                        <h3 className='text-lg'>{data.fullname}</h3>
+                                        <h3 className='text-lg'>{data.fullName}</h3>
                                     </div>
-                                    {(correctGifVisibility.id === data.userid) && correctGifVisibility.visiblity && <img src={correct} alt="loading" />}
+                                    {(correctGifVisibility.id === data._id) && correctGifVisibility.visiblity && <img src={correct} alt="loading" />}
 
                                 </div>
                             </div>)

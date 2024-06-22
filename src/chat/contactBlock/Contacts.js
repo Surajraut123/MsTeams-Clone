@@ -16,8 +16,6 @@ function Contacts(props) {
   const value = useContext(myContext)
   const peopleContextValue = useContext(peopleContext);
 
-  console.log(value)
-  console.log("Clicked value in Contacts : ", value?.isClicked)
   return (
     <div className={!value?.isClicked ? 'userContact' : 'userContact userMobile'}>
       <div className="header">
@@ -46,7 +44,7 @@ function Contacts(props) {
         <FontAwesomeIcon icon={faCaretRight} id='recent-icons' style={{display : select ? 'block' : 'none'}}/>
         <span>Recent</span>
       </div>
-      <List/>
+      <List fetchConversation={props.fetchConversation}/>
 
       <div className='add-member'>
         <div className='btn' onClick={() => {peopleContextValue.handleConversionVisibility(true)}}>

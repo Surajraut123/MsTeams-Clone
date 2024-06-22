@@ -114,7 +114,8 @@ app.get('/api/conversation/:userId', async (req, res) => {
                 return {
                     user: {
                         email: user.email, 
-                        fullName: user.fullName
+                        fullName: user.fullName,
+                        userid: user._id
                     }, 
                     conversationId: conversation._id
                 };
@@ -211,6 +212,32 @@ app.get('/api/users', async (req, res) =>{
         console.log(e);
     }
 })
+
+app.get('/api/newconversation/:userId', async (req, res) => {
+    try {
+        const loggedUser = req.params.userId;
+        const users = await Users.find({});
+        const conversations = await Conversation.find({ members: { $in: [loggedUser] } });
+
+        const userArray = [];
+        for (const user of users) {
+            let isAvailable = false;
+            for (const conversation of conversations) {
+                const receiverId = conversation.members.find(member => member !== loggedUser);
+                if (user._id.toString() === receiverId) {
+                    isAvailable = true;
+                }
+            }
+            if (!isAvailable) {
+                userArray.push(user);
+            }
+        }
+        res.status(200).json({ userData: userArray });
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 app.listen(port, () => {
     console.log('listening on port ' + port);

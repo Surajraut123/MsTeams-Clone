@@ -8,7 +8,7 @@ import myContext from './MyContext';
 
 messageStorage.subscribe(() => console.log(messageStorage.getState()))
 
-function ChatMainPage() {
+function ChatMainPage(props) {
 
   let isClick = false;
   const[isClicked, setClicked] = useState(isClick);
@@ -42,7 +42,7 @@ function ChatMainPage() {
     <div className='chat-main'>
       <Provider store={messageStorage}>
       <myContext.Provider value={{isClicked, updateUserClickEvent}}>
-        <Contacts/>
+        <Contacts fetchConversation={props.fetchConversation}/>
         <UserMassage/>
       </myContext.Provider>
       </Provider>

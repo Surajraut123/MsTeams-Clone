@@ -63,8 +63,7 @@ function App() {
 
   const handleConversionVisibility = (visible) => {
     setConverstion(visible);
-    setNewConversation(!true)
-    console.log("clicked on add people", converstion)
+    setNewConversation(prev => !prev)
   }
   const handleOutsideClick = () => {
     if (converstion) {
@@ -82,7 +81,7 @@ function App() {
               {converstion && <AddPeople active={true} loggedInUserId={loggedInUserId}/>}
               <TeamsActivity/>
                 <Routes>
-                    <Route exact path='/' element={<Chat/>}></Route>
+                    <Route exact path='/' element={<Chat fetchConversation={fetchConversation}/>}></Route>
                   <Route exact path='/community' element={<Community/>}></Route>
                   <Route exact path='/calendar' element={<CalendarNavbar/>}></Route>
                   <Route exact path='/activity' element={<Activity/>}></Route>
