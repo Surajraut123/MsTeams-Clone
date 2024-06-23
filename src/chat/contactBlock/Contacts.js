@@ -15,7 +15,6 @@ function Contacts(props) {
 
   const value = useContext(myContext)
   const peopleContextValue = useContext(peopleContext);
-
   return (
     <div className={!value?.isClicked ? 'userContact' : 'userContact userMobile'}>
       <div className="header">

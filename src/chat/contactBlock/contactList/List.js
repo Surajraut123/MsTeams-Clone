@@ -11,10 +11,9 @@ function List(props) {
   // const disPatch = useDispatch();
   const [conversations, setConversations] = useState([]);
 
+  const loggedinUser = JSON.parse(localStorage.getItem('loggedUser:detail'))
   // const {updateUserClickEvent} = useContext(myContext);
-
     useEffect(() =>{
-      const loggedinUser = JSON.parse(localStorage.getItem('loggedUser:detail'))
 
       let isMounted = true
       const fetchConversations = async() =>{
@@ -40,7 +39,7 @@ function List(props) {
 
   
 
-    }, [props.fetchConversation])
+    }, [props.fetchConversation, loggedinUser.id])
 
 
   const getIcon = (data) => {

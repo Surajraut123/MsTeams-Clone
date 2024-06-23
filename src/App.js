@@ -37,7 +37,6 @@ function App() {
   const [visibility, setVisibility] = useState(false);
   const [appVisibility, setAppVisibility] = useState(false);
   const [converstion, setConverstion] = useState(false);
-  const [loggedInUserId, setloggedInUserId] = useState(false);
   const [fetchConversation, setNewConversation] = useState(false);
 
   useEffect(() => {
@@ -58,7 +57,6 @@ function App() {
 
   const setLandingPageVisibility = (data) => {
     setVisibility(true)
-    setloggedInUserId(data)
   }
 
   const handleConversionVisibility = (visible) => {
@@ -78,7 +76,7 @@ function App() {
         {visibility && <Navbar/>}
           {appVisibility && <div className="userSection" onClick={handleOutsideClick}>
             <peopleContext.Provider value={{fetchConversation, handleConversionVisibility}}>
-              {converstion && <AddPeople active={true} loggedInUserId={loggedInUserId}/>}
+              {converstion && <AddPeople active={true}/>}
               <TeamsActivity/>
                 <Routes>
                     <Route exact path='/' element={<Chat fetchConversation={fetchConversation}/>}></Route>

@@ -3,7 +3,7 @@ import './addpeople.scss';
 import GIF from './msgif.gif'
 import correct from './correct.gif';
 import peopleContext from './AddPeopleContext';
-const AddPeople = ({active, loggedInUserId}) => {
+const AddPeople = ({active}) => {
 
     const inputRef = useRef(null);
     const[members, getUserMembers] = useState()
@@ -36,7 +36,6 @@ const AddPeople = ({active, loggedInUserId}) => {
                     }
                 })
                 const allusers = await response.json();
-                console.log(allusers)
                 getUserMembers(allusers)
             } catch (error) {
                 console.log("While Fetching members : ", error)
@@ -44,7 +43,7 @@ const AddPeople = ({active, loggedInUserId}) => {
         }
 
         getMembers()
-    },[active, loggedInUserId])
+    },[active, loggedUserId.id])
 
     const getIcon = (data) => {
         const userName = data.split(" ");
@@ -71,7 +70,6 @@ const AddPeople = ({active, loggedInUserId}) => {
         } catch (error) {
             console.log("While Creating new Conversion : ", error)
         }
-
         setTimeout(() => {
             setGifVisibility({id: receiverId, visiblity: false});
             setTimeout(() => {
@@ -91,7 +89,7 @@ const AddPeople = ({active, loggedInUserId}) => {
             <div className='invite-link'>
                 <h3>Invite to Microsoft Teams</h3>
                 <div className='link'>
-                    <input type='text' value={`http://localhost:8000/invite/${loggedInUserId}`} ref={inputRef} readOnly />
+                    <input type='text' value={`http://localhost:8000/invite/${loggedUserId.id}`} ref={inputRef} readOnly />
                     <button onClick={handleCopy} id='copy-btn'>Copy</button>
                 </div>
             </div>
@@ -100,7 +98,7 @@ const AddPeople = ({active, loggedInUserId}) => {
                 <div className='peoples'>
                     {members?.userData ? members?.userData.map((data) => {
                         return (
-                            data._id !== loggedInUserId && (<div className='user' key={data._id} onClick={() => createNewConversation(loggedInUserId, data._id)}>
+                            data._id !== loggedUserId.id && (<div className='user' key={data._id} onClick={() => createNewConversation(loggedUserId.id, data._id)}>
                                 <div className="user-profile">
                                     <span>{getIcon(data.fullName)}</span>
                                 </div>
