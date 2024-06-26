@@ -29,11 +29,11 @@ app.post('/api/register', async (req, res, next) =>{
         const {fullName, email, password} = req.body
 
         if(!fullName || !email || !password) {
-            res.status(400).send("Please fill all required fields")
+            res.status(500).json({message: "Please fill all required fields"})
         }else{
             const isAlreadyExist = await Users.findOne({email});
             if(isAlreadyExist) {
-                res.status(400).send("User Already Exist")
+                res.status(500).json({message: "User Already Exist"})
             } else{
                 const newUser = new Users({fullName, email});
                 bcryptjs.hash(password, 10, (err, hashedPassword) =>{
@@ -41,7 +41,10 @@ app.post('/api/register', async (req, res, next) =>{
                     newUser.save();
                     next();
                 })
-                return res.status(200).send('User registered successully');
+                return res.status(200).json({message: 'User registered successully', user:{id: newUser._id}});
+
+                //To send the data in json so will not need to use send 
+                // return res.status(200).json({message : 'User registered successully'});
             }
         }
 
@@ -55,15 +58,15 @@ app.post('/api/login', async (req, res, next) =>{
     try{
         const {email, password} = req.body;
         if(!email || !password) {
-            res.status(400).send("Please fill all required fields")
+            res.status(400).json({message: "Please fill all required fields"})
         } else{
             const user = await Users.findOne({email});
             if(!user) {
-                res.status(400).send("User email or password is invalid");
+                res.status(400).json({message: "Invalid username or password"});
             } else{
                 const vallidateUser = await bcryptjs.compare(password, user.password);
                 if(!vallidateUser) {
-                    res.status(400).send("User email or password is invalid");
+                    res.status(400).json({message: "Invalid username or password"});
                 } else{
                     const payLoad = {
                         userId: user._id,
@@ -92,12 +95,14 @@ app.post('/api/conversation', async (req, res) =>{
         const {senderId, receiverId} = req.body;
         const newConversation = new Conversation({members : [senderId, receiverId]});
         await newConversation.save();
-        res.status(200).send("Conversation Created ")
+        res.status(200).json({message: "Conversation Created"})
     } catch(e){
         console.log(e)
     }
 })
 
+
+//It chekcing in the conversation field that, if loggedinUserid is exist in a particular conversation object then the rest of id will the received id. so to showcase the conversations on the chat list which is beging happened.
 app.get('/api/conversation/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;
@@ -109,7 +114,8 @@ app.get('/api/conversation/:userId', async (req, res) => {
                 return {
                     user: {
                         email: user.email, 
-                        fullName: user.fullName
+                        fullName: user.fullName,
+                        userid: user._id
                     }, 
                     conversationId: conversation._id
                 };
@@ -131,6 +137,16 @@ app.get('/api/conversation/:userId', async (req, res) => {
     }
 });
 
+app.post('/api/checkconversation', async (req, res)=> {
+    try {
+        const {senderId, receiverId} = req.body;
+        const isPresent = await Conversation.find({members: {$all: [senderId, receiverId]}})
+        res.status(200).json(isPresent);
+    } catch (error) {
+        res.status(500).json({"error":error})
+    }
+
+})
 
 app.post('/api/message', async (req, res) =>{
     try{
@@ -193,6 +209,45 @@ app.get('/api/users/:userId', async (req, res) =>{
         console.log(e)
     }
 })
+
+app.get('/api/users', async (req, res) =>{
+    try{
+        const users = await Users.find({});
+        const userArray = [];
+        const allUser = Promise.all(users.map(async (user) => {
+            userArray.push({userid: user._id, fullname: user.fullName, token: user.token}); 
+        }))
+        res.status(200).json({userData : userArray})
+    } catch(e) {
+        console.log(e);
+    }
+})
+
+app.get('/api/newconversation/:userId', async (req, res) => {
+    try {
+        const loggedUser = req.params.userId;
+        const users = await Users.find({});
+        const conversations = await Conversation.find({ members: { $in: [loggedUser] } });
+
+        const userArray = [];
+        for (const user of users) {
+            let isAvailable = false;
+            for (const conversation of conversations) {
+                const receiverId = conversation.members.find(member => member !== loggedUser);
+                if (user._id.toString() === receiverId) {
+                    isAvailable = true;
+                }
+            }
+            if (!isAvailable) {
+                userArray.push(user);
+            }
+        }
+        res.status(200).json({ userData: userArray });
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 app.listen(port, () => {
     console.log('listening on port ' + port);

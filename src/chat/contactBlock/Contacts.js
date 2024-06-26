@@ -3,8 +3,9 @@ import './contacts.scss'
 import List from './contactList/List'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { useSelector } from 'react-redux'
-import { faVideo, faPenToSquare, faCaretDown, faCaretRight, faGear } from '@fortawesome/free-solid-svg-icons';
+import { faVideo, faPenToSquare, faCaretDown, faCaretRight, faGear, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import myContext from '../MyContext'
+import peopleContext from '../AddPeopleContext';
 function Contacts(props) {
 
   const [select, setSelect] = useState(false);
@@ -13,9 +14,9 @@ function Contacts(props) {
   }
 
   const value = useContext(myContext)
-
+  const peopleContextValue = useContext(peopleContext);
   return (
-    <div className={!value.isClick ? 'userContact' : 'userContact userMobile'}>
+    <div className={!value?.isClicked ? 'userContact' : 'userContact userMobile'}>
       <div className="header">
         <h1>{props.title==="Feed" ? "Feed" : "Chat"}</h1>
 
@@ -42,7 +43,14 @@ function Contacts(props) {
         <FontAwesomeIcon icon={faCaretRight} id='recent-icons' style={{display : select ? 'block' : 'none'}}/>
         <span>Recent</span>
       </div>
-      <List/>
+      <List fetchConversation={props.fetchConversation}/>
+
+      <div className='add-member'>
+        <div className='btn' onClick={() => {peopleContextValue.handleConversionVisibility(true)}}>
+          <FontAwesomeIcon id="plus-people" icon={faUserPlus} />
+          <p>invite people</p>
+        </div>
+      </div>
     </div>
   )
 }

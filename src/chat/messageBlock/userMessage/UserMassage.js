@@ -15,7 +15,7 @@ function UserMassage() {
     console.log(data!=="0")
 
     return (
-      <div className={!value.isClick ? 'message' : 'mobileMessage'}>
+      <div className={!value.isClicked? 'message' : 'mobileMessage'}>
         {
           data !== 0 ? (
             <>

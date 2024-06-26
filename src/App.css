@@ -14,6 +14,56 @@
   display: flex;
 }
 
+#welcome {
+
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 14px;
+  user-select: none;
+
+  @media screen and (max-width: 500px) {
+    position: relative;
+  }
+
+
+  img{
+    width: 13%;
+
+    @media screen and (max-width: 500px) {
+      width: 60%;
+    }
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    justify-content: center;
+
+    @media screen and (max-width: 500px) {
+      position: absolute;
+      bottom: 15px;
+    }
+
+    img{
+      width: 6%;
+      @media screen and (max-width: 500px) {
+        width: 7%;
+      }
+    }
+    h2{
+      font-family: sans-serif;
+      color: #898989;
+      font-size: 17px;
+      font-weight: 700;
+      user-select: none;
+    }
+  }
+}
+
 @media screen and (max-width: 500px) {
   .userSection {
     flex-direction: column;

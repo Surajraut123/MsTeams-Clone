@@ -40,8 +40,11 @@ function CalendarNavbar() {
 
           <div className="userMeetings">
               <p id="my-meeting" ><FontAwesomeIcon icon={faHashtag}/> Join with an ID</p>
+              <p id="my-meeting-m" ><FontAwesomeIcon icon={faHashtag}/></p>
               <p id="my-meeting" ><FontAwesomeIcon icon={faVideo}/> Meet Now</p>
+              <p id="my-meeting-m" ><FontAwesomeIcon icon={faVideo}/></p>
               <p id="new-meeting"><FontAwesomeIcon icon={faPlus}/> New Meeting</p>
+              <p id="new-meeting-m"><FontAwesomeIcon icon={faPlus}/></p>
           </div>
 
         </div>

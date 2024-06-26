@@ -1,58 +1,70 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
+// import Loader from '../../../Loader.gif'
 import "./list.scss"
-import {fetchMessage} from '../../action/index'
-import myContext from '../../MyContext';
+// import {fetchMessage} from '../../action/index'
+// import myContext from '../../MyContext';
 
-function List() {
+function List(props) {
   const myState = useSelector((state) => state.messages)
-  const disPatch = useDispatch();
+  // const disPatch = useDispatch();
   const [conversations, setConversations] = useState([]);
-  // const [messages, setMessages] = useState({});
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')))
-  const {updateUserClickEvent} = useContext(myContext);
 
-  // const[displayContact, setDisplayContact] = useState(true);
+  const loggedinUser = JSON.parse(localStorage.getItem('loggedUser:detail'))
+  // const {updateUserClickEvent} = useContext(myContext);
     useEffect(() =>{
-      const loggedinUser = JSON.parse(localStorage.getItem('user:detail'))
-      console.log(loggedinUser)
+
+      let isMounted = true
       const fetchConversations = async() =>{
+        try{
           const res = await fetch(`http://localhost:8000/api/conversation/${loggedinUser?.id}`, {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json'
-              }
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
           })
           const resData = await res.json();
-          console.log("Conersation : ", resData);
-          setConversations(resData)
+          if(isMounted) {
+            setConversations(resData)
+          }
+        } catch(error) {
+          console.error(error)
+        }
       }
       fetchConversations();
-  }, [])
+      return () => {
+        isMounted = false;
+      }
 
-  // const userMessages = () => {
-  //   setDisplayContact(false);
-  // }
-  const getIcon = () => {
-    const userName = conversations[0].user.fullName.split(" ");
-    return userName[0].charAt(0) + userName[1].charAt(0);
+  
+
+    }, [props.fetchConversation, loggedinUser.id])
+
+
+  const getIcon = (data) => {
+    const userName = data.split(" ");
+    if(userName[1]) {
+        return userName[0]?.charAt(0).toUpperCase() + userName[1]?.charAt(0).toUpperCase();
+    }
+    return userName[0]?.charAt(0).toUpperCase() + "N";
   }
   const handleClickEvent = (conversationId, user) => {
-    disPatch(fetchMessage(conversationId, user.fullName))
-    updateUserClickEvent()
+    // disPatch(fetchMessage(conversationId, user.fullName))
+    // updateUserClickEvent()
 
   }
 
   return (
     <div className='teamMates'>
+      {/* <img src={Loader} alt='loading...'/> */}
       {
         conversations.length > 0 ?
           conversations.map(({conversationId, user}) => {
             return(
-              <div key={conversationId} className='user' onClick={handleClickEvent(conversationId, user)}>
+              <div key={conversationId} className='user' onClick={() => handleClickEvent(conversationId, user)}>
                 <div className="user-profile">
-                  <span>{getIcon()}</span>
+                  <span>{getIcon(user.fullName)}</span>
                 </div>
                 <div className="user-details">
                   <div className="name-date">
