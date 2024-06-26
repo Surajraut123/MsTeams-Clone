@@ -14,7 +14,7 @@ import peopleContext from './chat/AddPeopleContext';
 import {
   BrowserRouter as Router,
   Route,
-  Routes,
+  Routes
 } from "react-router-dom";
 import { useEffect , useState} from 'react';
 import AddPeople from './chat/AddPeople';
@@ -69,7 +69,12 @@ function App() {
     }
   };
   
-
+  const path = window.location.pathname;
+  let receiverId = '';
+  if(path.includes('invite')) {
+    receiverId = path.slice(8);
+    console.log(receiverId)
+  }
   return (
     <Router>
       <div className="App"> 
@@ -87,7 +92,7 @@ function App() {
             </peopleContext.Provider>
           </div>}
         <myContext.Provider value={setLandingPageVisibility}>
-          {!visibility && <UserAuthentication/>}
+          {!visibility && <UserAuthentication receiverId={receiverId}/>}
           {visibility && <div id='welcome'>
             <img src={Logo} alt='loading'/>
             <div className='logo'>  

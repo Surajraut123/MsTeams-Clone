@@ -4,8 +4,9 @@ import './authentication.scss';
 import Input from '../chat/components/Input/Input'
 import Loader from '../Loader.gif'
 import myContext from '../chat/MyContext';
+import { useLocation } from 'react-router-dom';
 
-const Authentication = () => {
+const Authentication = (props) => {
     const setLandingPageVisibility = useContext(myContext);
     const [signIn, setSignIn] = useState(false);
     const [clicked, setClickEvent] = useState(false);
@@ -33,6 +34,54 @@ const Authentication = () => {
                 password: ''
             })
             setSignIn(true);
+        }
+    }
+
+    const checkConversationAlreadyExist = async (senderId, receiverId) => {
+        try {
+            const response = await fetch('/api/checkconversation', {
+                method: "POST",
+                body: JSON.stringify({
+                    senderId: senderId,
+                    receiverId: receiverId
+                }),
+                headers: {
+                    "Content-type" : "application/json"
+                }
+            })
+
+            const data = await response.json();
+            console.log("In check conversation")
+            if(data.length === 0) {
+                return false;
+            }
+            return true;
+        } catch (error) {
+            console.log("In checkconversation : ",  error)
+        }
+    }
+    const createLinkConversation = async (senderId, receiverId, event) => {
+        let isExist = false;
+        if(event === 'login') {
+            isExist = await checkConversationAlreadyExist(senderId, receiverId);
+        }
+        if(!isExist) {
+            try {
+                const response = await fetch("http://localhost:8000/api/conversation", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        senderId: senderId,
+                        receiverId: receiverId
+                    }),
+                    headers: {
+                        "Content-type" : "application/json"
+                    }
+                })
+                const data = await response.json();
+                console.data("New Conversation through link: ", data)
+            } catch (error) {
+                console.log("Through Link Convrsation : ", error)
+            }
         }
     }
 
@@ -74,6 +123,9 @@ const Authentication = () => {
                         localStorage.setItem("user:token", eventData.token)
                         localStorage.setItem("loggedUser:detail", JSON.stringify(eventData.user))
                     }
+                    if(props.receiverId !== '') {
+                        createLinkConversation(eventData.user.id, props.receiverId, event);
+                    }
                 }
             } catch (error) {
                 setClickEvent(false)
@@ -103,7 +155,7 @@ const Authentication = () => {
 
                 <Input name='email' type="email" placeholder='someone@gmail.com' className='input' value={data.email} onChange={(e) => setFormData({...data, email: e.target.value})}/>
 
-                <Input name='password' type="password" placeholder='*******' className='input' value={data.password} onChange={(e) => setFormData({...data, password: e.target.value})}/>
+                <Input name='password' type="password" placeholder='*******' className='input' id='inputs' value={data.password} onChange={(e) => setFormData({...data, password: e.target.value})}/>
 
                 {!loginDataValidity.valid && <p id={!loginDataValidity.valid ? 'invalid' : 'valid'}>{loginDataValidity.text}</p>}
                 {signIn && <span>Forgot my password</span>}

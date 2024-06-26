@@ -137,6 +137,16 @@ app.get('/api/conversation/:userId', async (req, res) => {
     }
 });
 
+app.post('/api/checkconversation', async (req, res)=> {
+    try {
+        const {senderId, receiverId} = req.body;
+        const isPresent = await Conversation.find({members: {$all: [senderId, receiverId]}})
+        res.status(200).json(isPresent);
+    } catch (error) {
+        res.status(500).json({"error":error})
+    }
+
+})
 
 app.post('/api/message', async (req, res) =>{
     try{
