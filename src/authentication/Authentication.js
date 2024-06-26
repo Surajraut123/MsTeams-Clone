@@ -60,6 +60,7 @@ const Authentication = (props) => {
             console.log("In checkconversation : ",  error)
         }
     }
+
     const createLinkConversation = async (senderId, receiverId, event) => {
         let isExist = false;
         if(event === 'login') {
@@ -123,7 +124,7 @@ const Authentication = (props) => {
                         localStorage.setItem("user:token", eventData.token)
                         localStorage.setItem("loggedUser:detail", JSON.stringify(eventData.user))
                     }
-                    if(props.receiverId !== '') {
+                    if(props.receiverId !== '' && eventData.user.id !== props.receiverId) {
                         createLinkConversation(eventData.user.id, props.receiverId, event);
                     }
                 }
