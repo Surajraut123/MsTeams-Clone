@@ -57,6 +57,21 @@
         background-color: white;
         cursor: pointer;
     }
+
+    .contactimg{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        img{
+            width: 82%;
+        }
+        p{
+            font-family: system-ui;
+        }
+    }
 }
 
 .teamMates:hover{

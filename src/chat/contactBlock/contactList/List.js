@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 // import Loader from '../../../Loader.gif'
+import contactimg from './cimg.png';
 import "./list.scss"
 // import {fetchMessage} from '../../action/index'
 // import myContext from '../../MyContext';
@@ -39,7 +40,7 @@ function List(props) {
 
   
 
-    }, [props.fetchConversation, loggedinUser.id])
+    }, [props.fetchConversation, loggedinUser?.id])
 
 
   const getIcon = (data) => {
@@ -57,7 +58,6 @@ function List(props) {
 
   return (
     <div className='teamMates'>
-      {/* <img src={Loader} alt='loading...'/> */}
       {
         conversations.length > 0 ?
           conversations.map(({conversationId, user}) => {
@@ -80,7 +80,10 @@ function List(props) {
                 </div>
               </div>
             )
-          }) : <div className="text-center text-lg font-semibold mt-24"> No Conversations</div>
+          }) : <div className="contactimg"> 
+            <img src={contactimg} alt='loading... '/>
+            <p>Have a private chat</p>
+          </div>
       }
     </div>
   )

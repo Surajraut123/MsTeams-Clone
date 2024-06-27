@@ -5,12 +5,14 @@ import Input from '../chat/components/Input/Input'
 import Loader from '../Loader.gif'
 import myContext from '../chat/MyContext';
 import { useLocation } from 'react-router-dom';
+import Offline from './Offline';
 
 const Authentication = (props) => {
     const setLandingPageVisibility = useContext(myContext);
     const [signIn, setSignIn] = useState(false);
     const [clicked, setClickEvent] = useState(false);
     const [loginDataValidity, setLoginDataValidity] = useState({valid: true, text: ''});
+    const [isOnline, setIsOnline] = useState(navigator.onLine);
 
     const [data, setFormData] = useState({
         ...(!signIn && {fullname: ''}),
@@ -139,7 +141,8 @@ const Authentication = (props) => {
 
 
     return (
-        <div className='container'>
+        !isOnline ? 
+        (<div className='container'>
             
             <div className='form'>
                 <div className='logo'>  
@@ -172,7 +175,7 @@ const Authentication = (props) => {
             </div>
             <p></p>
 
-        </div>
+        </div>) : <Offline />
     );
 };
 
