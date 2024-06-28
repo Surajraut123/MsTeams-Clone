@@ -1,10 +1,9 @@
-import React, {useState, useContext } from 'react';
+import React, {useState, useContext, useEffect } from 'react';
 import logo from './mslogo.png';
 import './authentication.scss';
 import Input from '../chat/components/Input/Input'
 import Loader from '../Loader.gif'
 import myContext from '../chat/MyContext';
-import { useLocation } from 'react-router-dom';
 import Offline from './Offline';
 
 const Authentication = (props) => {
@@ -13,6 +12,10 @@ const Authentication = (props) => {
     const [clicked, setClickEvent] = useState(false);
     const [loginDataValidity, setLoginDataValidity] = useState({valid: true, text: ''});
     const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+    useEffect(() => {
+        setIsOnline(navigator.onLine)
+    }, [])
 
     const [data, setFormData] = useState({
         ...(!signIn && {fullname: ''}),
@@ -125,7 +128,7 @@ const Authentication = (props) => {
                         localStorage.setItem("user:token", eventData.token)
                         localStorage.setItem("loggedUser:detail", JSON.stringify(eventData.user))
                     }
-                    if(props.receiverId !== '') {
+                    if(props.receiverId !== '' && eventData.user.id !== props.receiverId) {
                         createLinkConversation(eventData.user.id, props.receiverId, event);
                     }
                 }
@@ -141,7 +144,7 @@ const Authentication = (props) => {
 
 
     return (
-        !isOnline ? 
+        isOnline ? 
         (<div className='container'>
             
             <div className='form'>

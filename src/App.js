@@ -38,6 +38,7 @@ function App() {
   const [appVisibility, setAppVisibility] = useState(false);
   const [converstion, setConverstion] = useState(false);
   const [fetchConversation, setNewConversation] = useState(false);
+  const [receiverId, setReceiverId] = useState('')
 
   useEffect(() => {
     let timer;
@@ -56,6 +57,10 @@ function App() {
 
 
   const setLandingPageVisibility = (data) => {
+    if(receiverId !== '') {
+      alert("Please Sign in again");
+      window.location.href = '/';
+    }
     setVisibility(true)
   }
 
@@ -70,11 +75,12 @@ function App() {
   };
   
   const path = window.location.pathname;
-  let receiverId = '';
-  if(path.includes('invite')) {
-    receiverId = path.slice(8);
-    console.log(receiverId)
-  }
+  useEffect(() => {
+    if(path.includes('invite')) {
+      setReceiverId(path.slice(8))
+      console.log(receiverId)
+    }
+  }, [path, receiverId])
   return (
     <Router>
       <div className="App"> 

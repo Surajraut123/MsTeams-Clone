@@ -79,6 +79,7 @@ app.post('/api/login', async (req, res, next) =>{
                             $set: {token}
                         })
                         user.save();
+                        res.cookie('token', token, {httpOnly: true, secure: true, sameSite: 'none'})
                         return res.status(200).json({user: {id: user._id, email: user.email, fullName: user.fullName }, token: user.token})
                     })
                 }
