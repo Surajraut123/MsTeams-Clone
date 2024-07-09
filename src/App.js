@@ -14,10 +14,12 @@ import peopleContext from './chat/AddPeopleContext';
 import {
   BrowserRouter as Router,
   Route,
-  Routes
+  Routes,
+  useNavigate 
 } from "react-router-dom";
 import { useEffect , useState} from 'react';
 import AddPeople from './chat/AddPeople';
+import { checkAuthToken } from './authentication/CheckAuthToken';
 
 
 // const ProtectedRoute = ({ children, auth= false}) =>{
@@ -40,6 +42,8 @@ function App() {
   const [fetchConversation, setNewConversation] = useState(false);
   const [receiverId, setReceiverId] = useState('')
 
+  // const navigate = useNavigate();
+
   useEffect(() => {
     let timer;
     if (visibility) {
@@ -54,6 +58,21 @@ function App() {
 
     return () => clearTimeout(timer);
   }, [visibility]);
+
+  useEffect(() => {
+    const verifyUser = async () => {
+        const isValid = await checkAuthToken();
+        if (isValid) {
+            setVisibility(true);
+            // navigate('/');
+        } else {
+            setVisibility(false);
+            // navigate('/login');
+        }
+    };
+
+    verifyUser();
+}, []);
 
 
   const setLandingPageVisibility = (data) => {

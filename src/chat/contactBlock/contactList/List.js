@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import Loader from '../../../Loader.gif'
 import contactimg from './cimg.png';
 import "./list.scss"
-// import {fetchMessage} from '../../action/index'
-// import myContext from '../../MyContext';
+import {fetchMessage} from '../../action/index'
+import myContext from '../../MyContext';
 
 function List(props) {
   const myState = useSelector((state) => state.messages)
-  // const disPatch = useDispatch();
+  const disPatch = useDispatch();
   const [conversations, setConversations] = useState([]);
 
   const loggedinUser = JSON.parse(localStorage.getItem('loggedUser:detail'))
-  // const {updateUserClickEvent} = useContext(myContext);
+  const {updateUserClickEvent} = useContext(myContext);
     useEffect(() =>{
 
       let isMounted = true
@@ -51,8 +51,9 @@ function List(props) {
     return userName[0]?.charAt(0).toUpperCase() + "N";
   }
   const handleClickEvent = (conversationId, user) => {
-    // disPatch(fetchMessage(conversationId, user.fullName))
-    // updateUserClickEvent()
+    console.log(conversationId, " ", user);
+    disPatch(fetchMessage(conversationId, user))
+    updateUserClickEvent()
 
   }
 

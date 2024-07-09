@@ -54,22 +54,22 @@ const AddPeople = ({active}) => {
     }
     
     const createNewConversation = async (senderId, receiverId) => {
-        // try {
-        //     const response = await fetch("http://localhost:8000/api/conversation", {
-        //         method: "POST",
-        //         body: JSON.stringify({
-        //             senderId: senderId,
-        //             receiverId: receiverId
-        //         }),
-        //         headers: {
-        //             "Content-type" : "application/json"
-        //         }
-        //     })
-        //     const data = await response.json();
-        //     console.data("In CreateNewConverstion : ", data)
-        // } catch (error) {
-        //     console.log("While Creating new Conversion : ", error)
-        // }
+        try {
+            const response = await fetch("http://localhost:8000/api/conversation", {
+                method: "POST",
+                body: JSON.stringify({
+                    senderId: senderId,
+                    receiverId: receiverId
+                }),
+                headers: {
+                    "Content-type" : "application/json"
+                }
+            })
+            const data = await response.json();
+            console.data("In CreateNewConverstion : ", data)
+        } catch (error) {
+            console.log("While Creating new Conversion : ", error)
+        }
         setTimeout(() => {
             setGifVisibility({id: receiverId, visiblity: false});
             setTimeout(() => {

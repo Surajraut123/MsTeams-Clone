@@ -1,7 +1,7 @@
 
 export const fetchMessage = (conversationId, receiver) => async dispatch => {
-    const user = JSON.parse(localStorage.getItem('user:detail'));
-    const response = await fetch(`http://localhost:8000/api/message/${conversationId}?senderId=${user?.id}&&receiverId=${receiver?.receiverId}`, {
+    const loggedUserId = JSON.parse(localStorage.getItem("loggedUser:detail"));
+    const response = await fetch(`http://localhost:8000/api/message/${conversationId}?senderId=${loggedUserId?.id}&&receiverId=${receiver?.userid}`, {
         method: 'GET',
         headers : {
             'Content-Type' : 'application/json' 
@@ -15,11 +15,11 @@ export const fetchMessage = (conversationId, receiver) => async dispatch => {
     //     resData: "click"
     // }
     const messages = await response.json();
-
+    console.log(messages);
     // Dispatch an action with the fetched messages
     dispatch({
         type: 'FETCH_MESSAGES_SUCCESS',
         payload: messages,
-        receiverDetail : receiver
+        receiverDetail : receiver.fullName
     });
 }

@@ -5,6 +5,7 @@ import { faArrowUpFromBracket, faPhone, faPlus, faSquareArrowUpRight, faUserPlus
 import { useSelector } from 'react-redux';
 function MessageNavigation() {
     const messageReceiverName = useSelector(state => state.messages.receiverDetails);
+    console.log("Name: ", messageReceiverName)
     const [select, setSelected] = useState("chat");
     const handleSelection = (event) =>{
         setSelected(event)
