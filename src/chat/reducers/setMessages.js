@@ -7,7 +7,9 @@ const messagesReducer = (state = { messages: [], receiverDetails : "" }, action)
             return {
                 ...state,
                 messages: action.payload,
-                receiverDetails : action.receiverDetail
+                receiverDetails : action.receiverDetail,
+                conversationId: action.conversationId,
+                receiveruser: action.user
             };
         default:
             return state;

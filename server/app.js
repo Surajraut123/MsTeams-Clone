@@ -161,20 +161,20 @@ app.post('/api/message', async (req, res) =>{
     try{
         const {conversationId, senderId, message, receiverId = ''} = req.body
         console.log(conversationId, senderId, message, receiverId);
-        if( !senderId || !message) return res.status(400).send('Please fill all required fields from post api message')
-        if(conversationId === 'new' && receiverId) {
-            const newConversation = new Conversation({member: [senderId, receiverId]});
-            await newConversation.save();
-            const newMessage = new Messages({conversationId: newConversation._id, senderId, message})
-            await newMessage.save();
-            return res.status(200).send('Message Sent Successfully');
+        if( !senderId || !message) return res.status(400).json({message: 'Please fill all required fields from post api message', action: false})
+        // if(conversationId === 'new' && receiverId) {
+        //     const newConversation = new Conversation({member: [senderId, receiverId]});
+        //     await newConversation.save();
+        //     const newMessage = new Messages({conversationId: newConversation._id, senderId, message})
+        //     await newMessage.save();
+        //     return res.status(200).send('Message Sent Successfully');
 
-        } else if(!conversationId && !receiverId){
-            return res.status(400).send('Please fill all required fields');
-        }
-        const newMessage = new Messages({conversationId, senderId, message});
-        await newMessage.save();
-        res.status(200).send('Message Sent Successfully');
+        // } else if(!conversationId && !receiverId){
+            // return res.status(400).send('Please fill all required fields');
+        // }
+        // const newMessage = new Messages({conversationId, senderId, message});
+        // await newMessage.save();
+        res.status(200).json({message: 'Message Sent Successfully', action: true});
     } catch(e) {
         console.log(e)
     }
