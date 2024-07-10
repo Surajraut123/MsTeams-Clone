@@ -10,7 +10,17 @@ function NewMeeting(props) {
         date: '',
         time: ''
     });
-    console.log(dateTime);
+    const [formData, setFormData] = useState({
+        title: '',
+        attendees: '',
+        startDate: '',
+        startTime: '',
+        lastDate: '',
+        lastTime: '',
+        duration: '',
+        location: ''
+    })
+    
 
     const meetingSlot = new Date(props.scheduleMeeting);
     const startDate = meetingSlot.getDate();
@@ -50,16 +60,6 @@ function NewMeeting(props) {
         return `${formattedHours}:${minute} ${suffix}`;
     }
 
-    const [formData, setFormData] = useState({
-        title: '',
-        attendees: '',
-        startDate: '',
-        startTime: '',
-        lastDate: '',
-        lastTime: '',
-        duration: '',
-        location: ''
-    })
     const editorRef = useRef(null);
     const handleFocus = () => {
         var clicked = document.querySelectorAll(".inputItem")
@@ -82,7 +82,7 @@ function NewMeeting(props) {
     const handleSaveButton = () => {
         props.saveCalendarNavbar(false);
         let eventid = Number(INITIAL_EVENTS[INITIAL_EVENTS.length - 1].id);
-    
+        console.log("Form data : ", formData);
         const updatedEvents = [
             ...INITIAL_EVENTS,
             {
@@ -93,7 +93,7 @@ function NewMeeting(props) {
                 color: "",
             }
         ];
-    
+        console.log("Update Events : ", updatedEvents)
         props.setMeetingEvent(updatedEvents);   
     };
     

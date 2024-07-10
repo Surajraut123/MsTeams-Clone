@@ -23,7 +23,13 @@ function UserInput() {
     setFocused(false)
   };
 
+  const handleChange = (event) => {
+    setMessage(event.target.value);
+  };
+
   const sendMessage = async () => {
+
+    console.log(conversationId, " ", loggedinUser.id, " ", msg);
       const response = await fetch('http://localhost:8000/api/message', {
         method: "POST",
         body: JSON.stringify({
@@ -50,8 +56,8 @@ function UserInput() {
   return (
     <div className='userInput'>
       <div className="input-box">
-        <input type="text" placeholder='Type a message...' onFocus={handleFocus} onBlur={handleBlur} onChange={setMessage(this.value)} className={inputClassName} value={msg}/>
-        <FontAwesomeIcon id="eicons" icon={faPaperPlane} />
+        <input type="text" placeholder='Type a message...' onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange} className={inputClassName} value={msg}/>
+        <FontAwesomeIcon id="eicons" icon={faPaperPlane} onClick={sendMessage}/>
       </div>
 
       <div className="icons">

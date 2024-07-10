@@ -24,6 +24,7 @@ function CalendarNavbar() {
   }
 
   const handleMeetingEvent = (event) => {
+    console.log("Event : ", event)
     setNewMeetingEvent(event)
   }
   useEffect(() => {

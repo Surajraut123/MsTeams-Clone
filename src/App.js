@@ -14,8 +14,7 @@ import peopleContext from './chat/AddPeopleContext';
 import {
   BrowserRouter as Router,
   Route,
-  Routes,
-  useNavigate 
+  Routes
 } from "react-router-dom";
 import { useEffect , useState} from 'react';
 import AddPeople from './chat/AddPeople';

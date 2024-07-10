@@ -87,7 +87,7 @@ app.post('/api/login', async (req, res, next) =>{
                         })
                         user.save();
                         res.cookie('token', token, {httpOnly: false, secure: true, sameSite: 'none'})
-                        console.log(req.cookies)
+                        // console.log(req.cookies)
                         return res.status(200).json({user: {id: user._id, email: user.email, fullName: user.fullName }, token: user.token})
                     })
                 }
@@ -172,8 +172,9 @@ app.post('/api/message', async (req, res) =>{
         // } else if(!conversationId && !receiverId){
             // return res.status(400).send('Please fill all required fields');
         // }
-        // const newMessage = new Messages({conversationId, senderId, message});
-        // await newMessage.save();
+        const newMessage = new Messages({conversationId, senderId, message});
+        await newMessage.save();
+        // console.log(newMessage);
         res.status(200).json({message: 'Message Sent Successfully', action: true});
     } catch(e) {
         console.log(e)

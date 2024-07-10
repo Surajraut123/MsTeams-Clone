@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import FullCalendar from '@fullcalendar/react'
 import interactionPlugin from "@fullcalendar/interaction" // needed for dayClick
 import timegridplugin from '@fullcalendar/timegrid'
+import { INITIAL_EVENTS } from '../calendar/Calendar-event-utils'
 import "./Calendar.scss"
 // import { INITIAL_EVENTS } from './Calendar-event-utils'
 function Calender({getNewMeetingStatus, setMeetingEvent}) {
@@ -11,7 +12,8 @@ function Calender({getNewMeetingStatus, setMeetingEvent}) {
 
   const[isrender, setrender] = useState(true);
   // const [events, setEvents] = useState(INITIAL_EVENTS);
-
+  console.log("From Calender : ", setMeetingEvent)
+  console.log("Initial Event : ", INITIAL_EVENTS)
   var todayDate = "";
   const getTodayDate = () => {
     var title = document.querySelector(".fc-toolbar-title")

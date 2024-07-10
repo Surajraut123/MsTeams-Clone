@@ -25,11 +25,17 @@
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
-
+  
   &:last-child {
     margin-bottom: 0; 
   }
 
+  @media screen and (max-width: 500px)  {
+    margin-bottom: 9px; 
+    padding: 10px;
+    right: 20px;
+  }
+  
   span {
     font-size: 11px;
     color: #7f8c8d;
@@ -43,7 +49,11 @@
     font-size: 14px;
     margin: 0; 
     color: #535353;
+    @media screen and (max-width: 500px)  {
+      font-size: 15px;
+    }
   }
+
 }
 
 ::-webkit-scrollbar {
