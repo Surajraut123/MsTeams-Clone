@@ -12,8 +12,6 @@ function Calender({getNewMeetingStatus, setMeetingEvent}) {
 
   const[isrender, setrender] = useState(true);
   // const [events, setEvents] = useState(INITIAL_EVENTS);
-  console.log("From Calender : ", setMeetingEvent)
-  console.log("Initial Event : ", INITIAL_EVENTS)
   var todayDate = "";
   const getTodayDate = () => {
     var title = document.querySelector(".fc-toolbar-title")
@@ -24,11 +22,13 @@ function Calender({getNewMeetingStatus, setMeetingEvent}) {
       todayDate = perMonth[tempMonth.indexOf(month)];
       todayDate = todayDate + " " + year;
     }
+    console.log(todayDate)
     return todayDate;
   }
     
   useEffect(() => {
     var title = document.querySelector(".fc-toolbar-title");
+    console.log(title)
     if (title) {
       title.textContent = getTodayDate();
       handleWeekDays();
@@ -117,31 +117,41 @@ function Calender({getNewMeetingStatus, setMeetingEvent}) {
   let perWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
   const handleWeekDays = () => {
+    let dayindex=0;
     const day = document.querySelectorAll(".fc-col-header-cell-cushion")
+
     day.forEach((element) => {
       var givenDay = element.textContent;
-      const dayName = document.createElement("p");
-      dayName.textContent = getDayName(givenDay);
-
       const dayDate = document.createElement("span")
       dayDate.textContent = getDayDate(givenDay);
       
-
-      element.innerHTML = "";
-      element.appendChild(dayDate)
-      element.appendChild(dayName)
+      const dayName = document.createElement("p");
+      dayName.textContent = perWeek[dayindex++];
+      // dayName.textContent = getDayName(givenDay);
+      
+      if(!givenDay.includes("day")) {
+        element.textContent = "";
+      }
+        element.innerHTML = "";
+        element.appendChild(dayDate)
+        element.appendChild(dayName);
     });
   }
+
 
   const getDayName = (name) => {
     const index = tmpWeek.indexOf(name.slice(0, 3));
     return perWeek[index];
   }
   const getDayDate = (name) => {
-    const index = name.indexOf("/");
-    return name.slice(index+1)
+    if(name.includes("day")) {
+      const index = name.slice(0,2);
+      return index;
+    } else{
+      const index = name.indexOf("/");
+      return name.slice(index+1)
+    }
   }
-
 
   useEffect(()=>{
     if(isrender) {
