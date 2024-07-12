@@ -1,7 +1,5 @@
 // In your reducers file
 const messagesReducer = (state = { messages: [], receiverDetails : "" }, action) => {
-    console.log("Inside Message Reducer : " + action);
-    console.log(action)
     switch (action.type) {
         case 'FETCH_MESSAGES_SUCCESS':
             return {

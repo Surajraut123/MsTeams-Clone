@@ -82,9 +82,7 @@ function NewMeeting(props) {
     const handleSaveButton = () => {
         props.saveCalendarNavbar(false);
         let eventid = Number(INITIAL_EVENTS[INITIAL_EVENTS.length - 1].id);
-        console.log("Form data : ", formData);
         const updatedEvents = [
-            ...INITIAL_EVENTS,
             {
                 id: String(++eventid),
                 title: formData.title,
@@ -92,8 +90,7 @@ function NewMeeting(props) {
                 end: formData.lastDate + formatNewMeetingTime(formData.lastTime),
                 color: "",
             }
-        ];
-        console.log("Update Events : ", updatedEvents)
+        ]
         props.setMeetingEvent(updatedEvents);   
     };
     

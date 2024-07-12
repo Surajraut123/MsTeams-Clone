@@ -24,11 +24,11 @@ function CalendarNavbar() {
   }
 
   const handleMeetingEvent = (event) => {
-    console.log("Event : ", event)
+    console.log("From Navbar", event);
     setNewMeetingEvent(event)
   }
-  useEffect(() => {
-  }, [newMeetingEvent])
+  // useEffect(() => {
+  // }, [newMeetingEvent])
   return (
     <>
       <div className={meeting ? 'hiddenCalendar' : 'calendarNavbar'}>
