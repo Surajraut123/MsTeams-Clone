@@ -2,85 +2,19 @@ import React, {useEffect, useState} from 'react'
 import FullCalendar from '@fullcalendar/react'
 import interactionPlugin from "@fullcalendar/interaction" // needed for dayClick
 import timegridplugin from '@fullcalendar/timegrid'
-// import { INITIAL_EVENTS } from '../calendar/Calendar-event-utils'
+import { INITIAL_EVENTS } from '../calendar/Calendar-event-utils'
+import { getInitialEvents } from '../calendar/Calendar-event-utils';
 import "./Calendar.scss"
 
-function Calender({getNewMeetingStatus, setMeetingEvent}) {
+function Calender({getNewMeetingStatus}) {
 
-
-  let todayStr = new Date().toISOString().replace(/T.*$/, '');
-  const [events, setEvents] = useState('');
+  const [events, setEvents] = useState(getInitialEvents());
 
   useEffect(() => {
-    setEvents(setMeetingEvent);
-  }, [setMeetingEvent]);
-  let eventGuid = 0;
-  function createEventId() {
-    return String(eventGuid++);
-  }
+    setEvents(getInitialEvents());
+  }, []);
 
-  console.log("Events : ", events)
-  console.log("SetMeetingEvent : ", setMeetingEvent)
-  const INITIAL_EVENTS = [
-
-    {
-      id: createEventId(),
-      title: 'Free Time',
-      start: todayStr + 'T08:00:00',
-      end: todayStr + 'T11:00:00',
-      color: "",
-  
-    },
-    {
-      id: createEventId(),
-      title: 'LT Review',
-      start: todayStr + 'T00:00:00',
-      end: todayStr + 'T07:00:00',
-      color: "",
-      extendedProps: {
-        department: 'BioChemistry',
-        description: 'Lecture'
-      }
-
-    },
-    {
-      id: createEventId(),
-      title: 'new Review',
-      start: todayStr + 'T13:00:00',
-      end: todayStr + 'T13:30:00',
-      color: "",
-      extendedProps: {
-        department: 'BioChemistry',
-        description: 'Lecture'
-      }
-
-    },
-    {
-      id: createEventId(),
-      title: 'Feedback',
-      start: todayStr + 'T07:00:00',
-      end: todayStr + 'T08:30:00',
-      color: "",
-      extendedProps: {
-        department: 'BioChemistry',
-        description: 'Lecture'
-      }
-
-    },
-
-    ...events
-  ];
-
-  console.log( "Initial Events : " , INITIAL_EVENTS); 
-  console.log( "Initial Events sssssssssssssssss: " , INITIAL_EVENTS); 
-  useEffect(() => {
-    // Update events state when setMeetingEvent prop changes
-    if (setMeetingEvent && setMeetingEvent.length > 0) {
-      setEvents(setMeetingEvent);
-    }
-  }, [setMeetingEvent]);
-
-
+  console.log("Evennts from Calender : ", events)
   let tempMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   let perMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -244,13 +178,19 @@ function Calender({getNewMeetingStatus, setMeetingEvent}) {
     todayButton.textContent = "Today"
   }, [getTodayDate])
 
-  // let tmpWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-
   const handleDateClick = (arg) => { 
     getNewMeetingStatus(true, arg);
   }
-  console.log(events)
+
   console.log(INITIAL_EVENTS)
+
+  const handleEventClick = (clickInfo) => {
+    var curr = window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)
+    if(curr) {
+      clickInfo.event.remove();
+    }
+  };
+
   return (
     <div className='mycalender'>
       <FullCalendar
@@ -258,8 +198,13 @@ function Calender({getNewMeetingStatus, setMeetingEvent}) {
         dateClick={handleDateClick}
         initialView="timeGridWeek"
         initialEvents={events} 
-        weekends={false}
+        weekends={true}
         nowIndicator={true}
+        editable={true}
+        selectable={true}
+        selectMirror={true}
+        dayMaxEvents={true}
+        eventClick={handleEventClick}
       />
 
     </div>

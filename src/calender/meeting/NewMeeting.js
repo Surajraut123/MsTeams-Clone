@@ -1,9 +1,16 @@
+
+
 import React, {useRef, useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowRight, faBars, faCalendarDays, faClock, faLocationDot, faPen, faRepeat, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { Editor } from '@tinymce/tinymce-react';
-import { INITIAL_EVENTS } from '../calendar/Calendar-event-utils'
+// import { INITIAL_EVENTS } from '../calendar/Calendar-event-utils'
 import './newmeeting.scss';
+
+import { addEvent } from "../calendar/Calendar-event-utils";
+
+export const newEventData = [];
+
 function NewMeeting(props) {
 
     const[dateTime, setDateTime] = useState({
@@ -24,9 +31,7 @@ function NewMeeting(props) {
 
     const meetingSlot = new Date(props.scheduleMeeting);
     const startDate = meetingSlot.getDate();
-    // const meetingDay = meetingSlot.getDay();
     const year = meetingSlot.getFullYear();
-    // const endDate = meetingSlot.getDate();
     const startTime = meetingSlot.getHours();
     const startMinute = meetingSlot.getMinutes();
     const month = meetingSlot.getMonth();
@@ -80,18 +85,19 @@ function NewMeeting(props) {
         }   
     }
     const handleSaveButton = () => {
+        console.log("Save Clicked")
         props.saveCalendarNavbar(false);
-        let eventid = Number(INITIAL_EVENTS[INITIAL_EVENTS.length - 1].id);
-        const updatedEvents = [
-            {
-                id: String(++eventid),
-                title: formData.title,
-                start: formData.startDate + formatNewMeetingTime(formData.startTime),
-                end: formData.lastDate + formatNewMeetingTime(formData.lastTime),
-                color: "",
-            }
-        ]
-        props.setMeetingEvent(updatedEvents);   
+
+        const newEvent = {
+            id:"3",
+            title: formData.title,
+            start: formData.startDate + formatNewMeetingTime(formData.startTime),
+            end: formData.lastDate + formatNewMeetingTime(formData.lastTime),
+            color: "",
+          };
+          console.log("After Save new Event : ", newEvent);
+        addEvent(newEvent);
+        props.handleEventAdd(newEvent);   
     };
     
 
@@ -312,3 +318,7 @@ function NewMeeting(props) {
 }
 
 export default NewMeeting
+
+export function getNewEventArray() {
+    return newEventData;
+}
