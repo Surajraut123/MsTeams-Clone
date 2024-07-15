@@ -2,14 +2,18 @@ import React, { useEffect } from 'react'
 import "./calenderNavbar.scss"
 import Calender from "../calendar/Calender"
 import NewMeeting from "../meeting/NewMeeting"
-import { INITIAL_EVENTS } from '../calendar/Calendar-event-utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCalendarDays, faHashtag, faPlus, faVideo } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
+import { getInitialEvents } from '../calendar/Calendar-event-utils';
+
 function CalendarNavbar() {
   const [meeting, setMeeting] = useState(false)
   const [meetingTime, setMeetingTime] = useState(null)
-  const [newMeetingEvent, setNewMeetingEvent] = useState(INITIAL_EVENTS)
+
+  const [events, setEvents] = useState(getInitialEvents());
+  console.log("From Calendar Navbar : ", events);
+
   const handleNewMeetingStatus = (event, arg) =>{
     setMeeting(event);
     setMeetingTime(arg.date);
@@ -24,11 +28,20 @@ function CalendarNavbar() {
   }
 
   const handleMeetingEvent = (event) => {
-    console.log("Event : ", event)
-    setNewMeetingEvent(event)
+    console.log("From Navbar", event);
+    setEvents([...events, event]);
   }
   useEffect(() => {
-  }, [newMeetingEvent])
+    console.log("Inside Navbar useEffect : ", getInitialEvents());
+    setEvents(getInitialEvents());
+  }, [events]);
+
+  const handleEventAdd = (newEvent) => {
+    console.log("Handle Event add called : ", newEvent)
+    setEvents([...events, newEvent]);
+  };
+
+
   return (
     <>
       <div className={meeting ? 'hiddenCalendar' : 'calendarNavbar'}>
@@ -49,9 +62,15 @@ function CalendarNavbar() {
           </div>
 
         </div>
-          <Calender getNewMeetingStatus={handleNewMeetingStatus} setMeetingEvent={newMeetingEvent}/>
+          <Calender getNewMeetingStatus={handleNewMeetingStatus}/>
       </div>
-      <NewMeeting meetingStatus={meeting} saveCalendarNavbar={handleSaveMeeting} closeCalendarNavbar={handleCloseMeeting} scheduleMeeting={meetingTime} setMeetingEvent={handleMeetingEvent}/>
+      <NewMeeting 
+        meetingStatus={meeting} 
+        saveCalendarNavbar={handleSaveMeeting} 
+        closeCalendarNavbar={handleCloseMeeting} 
+        scheduleMeeting={meetingTime} 
+        setMeetingEvent={handleMeetingEvent}
+        handleEventAdd={handleEventAdd}/>
     </>
   )
 }
