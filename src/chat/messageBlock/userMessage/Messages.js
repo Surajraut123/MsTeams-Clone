@@ -2,8 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import './messages.scss';
 function Messages() {
-  const myState = useSelector((state) => state.messages)
+  const myState = useSelector((state) => state);
+  const messageList = myState.messages;
   // console.log("From Messages: ", myState.messages);
+  console.log("My State : ", myState)
+  const loggedUserId = JSON.parse(localStorage.getItem("loggedUser:detail"));
   function getCurrentDateTime() {
     let now = new Date();
     
@@ -26,10 +29,10 @@ function Messages() {
     <div className='messages'>
       <div className='p-14'>
         {
-            myState?.messages?.length > 0 ?
-            myState?.messages?.map(({key, message}) =>{
+            messageList?.messages?.length > 0 ?
+            messageList?.messages?.map(({key, message, user}) =>{
                 return (
-                    <div className="userMessage" key={key}>
+                    <div className={user.id === loggedUserId.id ?  "userMessage" : "receiverMessage"} key={key}>
                         <span>{getCurrentDateTime()}</span>
                         <p>{message}</p>
                     </div>

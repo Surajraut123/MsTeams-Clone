@@ -55,6 +55,50 @@
   }
 
 }
+.receiverMessage {
+  background: #e7ebfa;
+  margin-bottom: 5px; 
+  padding: 13px;
+  border-radius: 5px;
+  clear: both; 
+  float: left; 
+  max-width: 70%; 
+  left: 50px;    
+  position: relative;
+  font-family: "Open Sans";
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  
+  &:last-child {
+    margin-bottom: 0; 
+  }
+
+  @media screen and (max-width: 500px)  {
+    margin-bottom: 9px; 
+    padding: 10px;
+    right: 20px;
+  }
+  
+  span {
+    font-size: 11px;
+    color: #7f8c8d;
+    font-family: sans-serif;
+    display: block; 
+    margin-bottom: 6px; 
+  }
+
+  p {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 0; 
+    color: #535353;
+    @media screen and (max-width: 500px)  {
+      font-size: 15px;
+    }
+  }
+
+}
 
 ::-webkit-scrollbar {
   width: 4px;
