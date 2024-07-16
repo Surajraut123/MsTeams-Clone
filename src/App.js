@@ -35,8 +35,8 @@ import { checkAuthToken } from './authentication/CheckAuthToken';
 
 function App() {
 
-  const [visibility, setVisibility] = useState(true);
-  const [appVisibility, setAppVisibility] = useState(true);
+  const [visibility, setVisibility] = useState(false);
+  const [appVisibility, setAppVisibility] = useState(false);
   const [converstion, setConverstion] = useState(false);
   const [fetchConversation, setNewConversation] = useState(false);
   const [receiverId, setReceiverId] = useState('')
