@@ -1,20 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "./Navbar.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight, faEllipsis, faMinus, faUser, faWindowRestore, faXmark } from '@fortawesome/free-solid-svg-icons'
+import Switch from "react-switch";
 
 function Navbar() {
   const [searchTitle, setsearchTitle] = useState(" Search ")
+  const [enableinfo, setInfo] = useState(false);
+  const [mode, setMode] = useState("Dark");
+  const userAccountRef = useRef(null);
 
   const handleFocus = () => {
     setsearchTitle("Search for people, chats and communities");
   };
+  const loggedinUser = JSON.parse(localStorage.getItem('loggedUser:detail'));
+  console.log(loggedinUser)
 
   const handleBlur = () => {
+    console.log("called")
     setsearchTitle(" Search");
+    setInfo(false)
   };
 
+  const enableUserDetails = () => {
+    setInfo(!enableinfo);
+  }
+
+  const handleChange = () => {
+    setMode((prevMode) => {
+      const newMode = prevMode === "dark" ? "light" : "dark";
+      document.documentElement.className = newMode + "-mode";
+      return newMode;
+    });
+  }
+
+  const getIcon = (data) => {
+    const userName = data.split(" ");
+    if(userName[1]) {
+        return userName[0]?.charAt(0).toUpperCase() + userName[1]?.charAt(0).toUpperCase();
+    }
+    return userName[0]?.charAt(0).toUpperCase() + "N";
+}
+
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (userAccountRef.current && !userAccountRef.current.contains(event.target)) {
+      setInfo(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
+
   return (
+    <>
     <div className='navbar'>
       <div className="nav-content">
         <div className="navigation">
@@ -33,7 +77,7 @@ function Navbar() {
           <div className="info">
             <FontAwesomeIcon id="icons" icon={faEllipsis}/>
           </div>
-          <div className="profile-section">
+          <div className="profile-section" onClick={enableUserDetails}>
             <FontAwesomeIcon id="icons" icon={faUser}/>
           </div>
 
@@ -45,6 +89,29 @@ function Navbar() {
         </div>
       </div>  
     </div>
+
+    {enableinfo && (<div className="user-account" ref={userAccountRef}>
+      <div className="info">
+        <div className="logo">
+          <span>{getIcon(loggedinUser.fullName)}</span>
+        </div>
+
+        <div className="user-info">
+          <p>{loggedinUser.fullName}</p>
+          <span>{loggedinUser.email}</span>
+        </div>
+      </div>
+
+      <div className="manage">
+        <span>{mode} Mode </span>
+        <Switch onChange={handleChange} checked={mode === "Light" ? true : false} checkedIcon={false} uncheckedIcon={false} onColor='black' width={40} height={20} handleDiameter={15}/>
+      </div>
+      <div className="signout">
+        <p>Sign out</p>
+      </div>
+    </div>)
+    }
+    </>
   );
 }
 

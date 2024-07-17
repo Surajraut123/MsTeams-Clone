@@ -1,0 +1,33 @@
+.dark-mode{
+
+    --navbar: #0c0c0c;
+    --navigation: #141414;
+    --navigation-font: white;
+    --navigation-icon: rgb(231, 231, 231);
+    --main: #4845c9;
+    --contact-list: #141414;
+    --contact-list-heading: #393939;
+    --contact-list-name: #4b4b4b;
+    --contact-list-message: rgb(235, 235, 235);
+    --message-block: #1f1f1f;
+    --sendermessage: #2e2f4a;
+    --receivermessage: #292929;
+    --main-buttons: #4445c8;
+    --border: black;
+}
+.light-mode{
+    --navbar: #414790;
+    --navigation: #ebebeb;
+    --navigation-font: #575252;
+    --navigation-icon: #878787;
+    --main: #4845c9;
+    --contact-list: #f0f0f0;
+    --contact-list-heading: #393939;
+    --contact-list-name: #595959;
+    --contact-list-message: #535353;
+    --message-block: #f5f5f5;
+    --sendermessage: #e7ebfa;
+    --receivermessage: white;
+    --main-buttons: #4445c8;
+    --border: black;
+}

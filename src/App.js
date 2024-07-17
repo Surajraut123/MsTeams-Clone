@@ -19,6 +19,7 @@ import {
 import { useEffect , useState} from 'react';
 import AddPeople from './chat/AddPeople';
 import { checkAuthToken } from './authentication/CheckAuthToken';
+import "./modecolors.scss";
 
 
 // const ProtectedRoute = ({ children, auth= false}) =>{
