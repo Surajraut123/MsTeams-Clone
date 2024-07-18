@@ -38,6 +38,7 @@
                 .fc-toolbar-title{
                     font-size: 15px;
                     font-family: sans-serif;
+                    color: var(--calendar-heading);
                 }
                 .fc-toolbar-title:hover{
                     color: #4845c9;
@@ -46,7 +47,7 @@
 
                 .fc-today-button{
                     background: none;
-                    color: black;
+                    color: var(--calendar-heading);
                     padding: 0;
                     border: none;
                     font-size: 15px;
@@ -81,6 +82,10 @@
                     .fc-icon:hover{
                         color: #4845c9;
                     }
+                }
+
+                .workMode{
+                    color: var(--calendar-heading);
                 }
             }
         }
@@ -229,6 +234,14 @@
             }
             .description {
                 color: white;
+            }
+        }
+
+        .fc-view-harness{
+            .fc-view{
+                .fc-scroll-grid{
+                    border: 1px solid var(--border);
+                }
             }
         }
     }

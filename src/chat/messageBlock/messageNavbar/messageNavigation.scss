@@ -1,5 +1,5 @@
 .messageNav{
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid var(--border-bottom);
     height: 61px;
     .navbar{
         justify-content: space-between;
@@ -33,6 +33,7 @@
                 font-size: 21px;
                 font-family: sans-serif;
                 cursor: pointer;
+                color: var(--receiver-name);
             }
 
             .data{
@@ -42,6 +43,7 @@
                 font-family: system-ui;
                 font-size: 14px;
                 padding: 20px 0px;
+                color: var(--receiver-name);
             }
             @media screen and (max-width: 500px) {
                 .data {
@@ -116,7 +118,7 @@
             
 
             #user-oper{
-                color: #494949;
+                color: var(--receiver-icons);
             }
 
             #user-oper:hover{

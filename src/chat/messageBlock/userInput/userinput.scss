@@ -12,7 +12,7 @@
         width: 80%;
         height: 40px;
         border-radius: 5px;
-        border: 1px solid #d5d5d5;
+        border: 1px solid var(--message-input-border);
         
         input{
             outline: none;
@@ -22,6 +22,7 @@
             padding-left: 15px;
             padding-right: 15px;
             border-radius: 5px;
+            background-color: var(--message-input);
         }
 
         @media screen and (max-width: 500px) {
@@ -69,7 +70,7 @@
             left: 2px;
 
             #eicons{
-                color: #494949;
+                color: var(--receiver-icons);
                 padding: 6px;
                 padding-right: 13px;
             }
@@ -85,7 +86,7 @@
             right: 2px;
 
             #eicons{
-                color: #494949;
+                color: var(--receiver-icons);
                 padding: 6px;
                 padding-right: 13px;
             }

@@ -3,8 +3,8 @@
     // Navbar
     --navbar: #0c0c0c;
     --navigation: #141414;
-    --navigation-font: white;
-    --navigation-icon: rgb(255, 255, 255);
+    --navigation-font: rgb(219, 219, 219);
+    --navigation-icon: rgb(219, 219, 219);
     --navigation-hover: #6f87ff;
     --navigation-activity-hover: #0c0c0c;
     --navigationleftBorder: #141414;
@@ -16,30 +16,38 @@
     --contact-list: #141414;
     --contact-list-shadow: #000000;
     --border-bottom: black;
-    --contact-list-heading: white;
+    --contact-list-heading: rgb(219, 219, 219);
     --contact-list-name: #4b4b4b;
+    --contact-name: rgb(219, 219, 219);
+    --contact-latest-message: rgb(151, 151, 151);
+    --contact-hover: #252525;
 
     //message
     --contact-list-message: rgb(235, 235, 235);
     --message-block: #1f1f1f;
     --message-shadow: #000000;
-    --sendermessage: #2e2f4a;
-    --receivermessage: #292929;
+    --sendermessage: #313285;
+    --receivermessage: #353535;
     --main-buttons: #4445c8;
     --border: black;
+    --message: #e9e9e9;
+    --receiver-name: rgb(219, 219, 219);
+    --receiver-icons: rgb(219, 219, 219);
+    --message-input: #1f1f1f;
+    --message-input-border: #515151;
     
     //landing page
-    --font: white;
+    --font: rgb(219, 219, 219);
     --landingPage-send: #5f5db9;
     --landingPage-receiver: #5b5b5b;
 
     //Calendar
     --calendar-home: #1f1f1f;
-    --calendar-heading: white;
+    --calendar-heading: rgb(219, 219, 219);
     --calendar-google: #6c83f8;
     --calendar-mymeeting: #424242;
     --calendar-mymeeting-hover: #5e5e5e;
-    --calendar-mymeeting-font:#ffffff;
+    --calendar-mymeeting-font:rgb(219, 219, 219);
     --calendar-mymeeting-border: #1f1f1f;
 }
 .light-mode{
@@ -62,6 +70,9 @@
     --border-bottom: #e3e3e3;
     --contact-list-heading: #393939;
     --contact-list-name: #595959;
+    --contact-name: #595959;
+    --contact-latest-message: #535353;
+    --contact-hover: white;
 
     //message
     --contact-list-message: #535353;
@@ -70,6 +81,11 @@
     --receivermessage: white;
     --main-buttons: #4445c8;
     --border: black;
+    --message: #535353;
+    --receiver-name: black;
+    --receiver-icons: #494949;
+    --message-input: white;
+    --message-input-border: #d5d5d5;
 
     --font: black;
     --landingPage-send: #2c2b59;
