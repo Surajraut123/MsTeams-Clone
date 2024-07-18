@@ -1,33 +1,102 @@
 .dark-mode{
 
+    // Navbar
     --navbar: #0c0c0c;
     --navigation: #141414;
     --navigation-font: white;
-    --navigation-icon: rgb(231, 231, 231);
+    --navigation-icon: rgb(255, 255, 255);
+    --navigation-hover: #6f87ff;
+    --navigation-activity-hover: #0c0c0c;
+    --navigationleftBorder: #141414;
+
+    //Main color
     --main: #4845c9;
+
+    // contact list 
     --contact-list: #141414;
-    --contact-list-heading: #393939;
+    --contact-list-shadow: #000000;
+    --border-bottom: black;
+    --contact-list-heading: white;
     --contact-list-name: #4b4b4b;
+
+    //message
     --contact-list-message: rgb(235, 235, 235);
     --message-block: #1f1f1f;
+    --message-shadow: #000000;
     --sendermessage: #2e2f4a;
     --receivermessage: #292929;
     --main-buttons: #4445c8;
     --border: black;
+    
+    //landing page
+    --font: white;
+    --landingPage-send: #5f5db9;
+    --landingPage-receiver: #5b5b5b;
+
+    //Calendar
+    --calendar-home: #1f1f1f;
+    --calendar-heading: white;
+    --calendar-google: #6c83f8;
+    --calendar-mymeeting: #424242;
+    --calendar-mymeeting-hover: #5e5e5e;
+    --calendar-mymeeting-font:#ffffff;
+    --calendar-mymeeting-border: #1f1f1f;
 }
 .light-mode{
+
+    // Navbar
     --navbar: #414790;
     --navigation: #ebebeb;
     --navigation-font: #575252;
     --navigation-icon: #878787;
+    --navigationleftBorder: #ebebeb;
+    --navigation-hover: #4845c9;
+    --navigation-activity-hover: #f5f5f5;
+
+    // Main color
     --main: #4845c9;
+
+    // contact list 
     --contact-list: #f0f0f0;
+    --contact-list-shadow: #b7b7b7;
+    --border-bottom: #e3e3e3;
     --contact-list-heading: #393939;
     --contact-list-name: #595959;
+
+    //message
     --contact-list-message: #535353;
     --message-block: #f5f5f5;
     --sendermessage: #e7ebfa;
     --receivermessage: white;
     --main-buttons: #4445c8;
     --border: black;
+
+    --font: black;
+    --landingPage-send: #2c2b59;
+    --landingPage-receiver: #ffffff;
+
+    //Calendar
+    --calendar-home: #f5f5f5;
+    --calendar-heading: black;
+    --calendar-google: #4445c8;
+    --calendar-mymeeting: white;
+    --calendar-mymeeting-hover: f5f5f5;
+    --calendar-mymeeting-font: #313131;
+    --calendar-mymeeting-border: #d3d3d3;
 }
+// :root{
+//     --navbar: #414790;
+//     --navigation: #ebebeb;
+//     --navigation-font: #575252;
+//     --navigation-icon: #878787;
+//     --main: #4845c9;
+//     --contact-list: #f0f0f0;
+//     --contact-list-heading: #393939;
+//     --contact-list-name: #595959;
+//     --contact-list-message: #535353;
+//     --message-block: #f5f5f5;
+//     --sendermessage: #e7ebfa;
+//     --receivermessage: white;
+//     --main-buttons: #4445c8;
+//     --border: black;
+// }

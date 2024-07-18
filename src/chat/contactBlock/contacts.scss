@@ -1,7 +1,7 @@
 .userContact {
     width: 25%;
-    background-color: #f0f0f0;
-    box-shadow: 0px 0px 3px 0px #b7b7b7;
+    background-color: var(--contact-list);
+    box-shadow: 0px 0px 3px 0px var(--contact-list-shadow);
     position: relative;
     
     .header{
@@ -10,12 +10,13 @@
         align-items: center;
         justify-content: flex-start;
         height: 10%;
-        border-bottom: 1px solid #e3e3e3;
+        border-bottom: 1px solid var(--border-bottom);
 
         h1{
             font-size: 21px;
             font-family: sans-serif;
             margin-left: 19px;
+            color: var(--contact-list-heading);
         }
 
         .chatIcons{
@@ -118,7 +119,7 @@
         display: flex;
         width: 100%;
         justify-content: center;
-        border-top: 1px solid #d9d9d9;
+        border-top: 1px solid var(--border-bottom);
 
         .btn{
             display: flex;

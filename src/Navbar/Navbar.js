@@ -93,18 +93,18 @@ useEffect(() => {
     {enableinfo && (<div className="user-account" ref={userAccountRef}>
       <div className="info">
         <div className="logo">
-          <span>{getIcon(loggedinUser.fullName)}</span>
+          <span>SR</span>
         </div>
 
         <div className="user-info">
-          <p>{loggedinUser.fullName}</p>
-          <span>{loggedinUser.email}</span>
+          <p>{loggedinUser?.fullName}</p>
+          <span>{loggedinUser?.email}</span>
         </div>
       </div>
 
       <div className="manage">
-        <span>{mode} Mode </span>
-        <Switch onChange={handleChange} checked={mode === "Light" ? true : false} checkedIcon={false} uncheckedIcon={false} onColor='black' width={40} height={20} handleDiameter={15}/>
+        <span>{mode === "dark" ? "Dark" : "Light"} Mode </span>
+        <Switch onChange={handleChange} checked={mode === "dark" ? true : false} checkedIcon={false} uncheckedIcon={false} onColor='black' width={40} height={20} handleDiameter={15}/>
       </div>
       <div className="signout">
         <p>Sign out</p>
