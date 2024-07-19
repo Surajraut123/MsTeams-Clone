@@ -52,10 +52,12 @@
     --calendar-font: rgb(219, 219, 219);
     --fc-border-color: black;
     --calendar-today-event: #313131;
+    --calendar-time: rgb(219, 219, 219);
 
     // Meeting
     --newmeeting-bg: #2d2d2d;
-    --newmeeting-icon: #5f5f5f;
+    --newmeeting-icon: rgb(219, 219, 219);
+    --newmeeting-input: #1f1f1f;
 }
 .light-mode{
 
@@ -109,9 +111,12 @@
     --calendar-font: #707070;
     --fc-border-color: #ddd;
     --calender-today-event: white;
+    --calendar-time: #313131;
 
     // New Meeting
     --newmeeting-bg: #f5f5f5;
+    --newmeeting-icon: #5f5f5f;
+    --newmeeting-input: white;
 }
 // :root{
 //     --navbar: #414790;
