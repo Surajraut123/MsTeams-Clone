@@ -112,7 +112,7 @@
         // }
 
         .fc-day-today{
-            background-color: white;
+            background-color: var(--calendar-today-event);
         }
 
         .fc-col-header{
@@ -138,13 +138,13 @@
 
                 p{
                     font-size: 13px;
-                    color: #707070;
+                    color: var(--calendar-font);
                     font-family: sans-serif;
                 }
                 span{
                     font-size: 25px;
                     font-weight: 400;
-                    color: #707070;
+                    color: var(--calendar-font);
                     font-family: system-ui;
                 }
                 @media screen and (max-width: 500px) {
@@ -241,6 +241,14 @@
             .fc-view{
                 .fc-scroll-grid{
                     border: 1px solid var(--border);
+                }
+            }
+        }
+
+        .fc-view-harness {
+            .fc-view{
+                .fc-scrollgrid{
+                    border: 1px solid var(--fc-border-color);
                 }
             }
         }

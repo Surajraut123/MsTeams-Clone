@@ -4,8 +4,8 @@
 
 .newMeeting{
     width: 100%;
-    background-color: #f5f5f5;
-    box-shadow: 2px 0px 12px 0px #b7b7b7;
+    background-color: var(--newmeeting-bg);
+    box-shadow: 2px 0px 12px 0px var(--newmeeting-bg);
     .headingContent{
         display: flex;
         padding: 12px 0px 12px 0px;
@@ -27,6 +27,7 @@
             h1{
                 font-size: 19px;
                 font-family: sans-serif;
+                color: var(--calendar-heading);
             }
         }
         @media screen and (max-width: 500px) {

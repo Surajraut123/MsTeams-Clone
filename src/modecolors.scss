@@ -24,7 +24,7 @@
 
     //message
     --contact-list-message: rgb(235, 235, 235);
-    --message-block: #1f1f1f;
+    --message-block: #;
     --message-shadow: #000000;
     --sendermessage: #313285;
     --receivermessage: #353535;
@@ -49,6 +49,13 @@
     --calendar-mymeeting-hover: #5e5e5e;
     --calendar-mymeeting-font:rgb(219, 219, 219);
     --calendar-mymeeting-border: #1f1f1f;
+    --calendar-font: rgb(219, 219, 219);
+    --fc-border-color: black;
+    --calendar-today-event: #313131;
+
+    // Meeting
+    --newmeeting-bg: #2d2d2d;
+    --newmeeting-icon: #5f5f5f;
 }
 .light-mode{
 
@@ -99,6 +106,12 @@
     --calendar-mymeeting-hover: f5f5f5;
     --calendar-mymeeting-font: #313131;
     --calendar-mymeeting-border: #d3d3d3;
+    --calendar-font: #707070;
+    --fc-border-color: #ddd;
+    --calender-today-event: white;
+
+    // New Meeting
+    --newmeeting-bg: #f5f5f5;
 }
 // :root{
 //     --navbar: #414790;
