@@ -37,7 +37,7 @@ import "./modecolors.scss";
 function App() {
 
   const [visibility, setVisibility] = useState(true);
-  const [appVisibility, setAppVisibility] = useState(true);
+  const [appVisibility, setAppVisibility] = useState(false);
   const [converstion, setConverstion] = useState(false);
   const [fetchConversation, setNewConversation] = useState(false);
   const [receiverId, setReceiverId] = useState('')
@@ -117,7 +117,7 @@ function App() {
                 </Routes>  
             </peopleContext.Provider>
           </div>}
-        {/* <myContext.Provider value={setLandingPageVisibility}>
+        <myContext.Provider value={setLandingPageVisibility}>
           {!visibility && <UserAuthentication receiverId={receiverId}/>}
           {visibility && <div id='welcome'>
             <img src={Logo} alt='loading'/>
@@ -126,7 +126,7 @@ function App() {
               <h2>Microsoft</h2>
             </div>
           </div>}
-        </myContext.Provider> */}
+        </myContext.Provider>
       </div>
      </Router>  
   );
