@@ -9,13 +9,14 @@ const Input = ({
     isRequired = true,
     placeholder = '',
     value = '',
-    onChange = () =>{}  
+    onChange = () =>{}  ,
+    onKeyDown
 }) => {
   return (
     <div className={`${className}`}>
       <label htmlFor={name} className='block mb-2 text-sm font-medium'> {label}</label>
 
-      <input type={type} id={name} className={`${inputclassName}` } placeholder={placeholder} required={isRequired} value={value} onChange={onChange}/>
+      <input type={type} id={name} className={`${inputclassName}` } placeholder={placeholder} required={isRequired} value={value} onChange={onChange} onKeyDown={onKeyDown}/>
     </div>
   )
 }

@@ -103,8 +103,8 @@ function App() {
   return (
     <Router>
       <div className="App"> 
-        {/* {visibility && <Navbar/>} */}
-         <Navbar/>
+         {visibility && <Navbar/>} 
+         {/*<Navbar/>*/}
           {appVisibility && <div className="userSection" onClick={handleOutsideClick}>
             <peopleContext.Provider value={{fetchConversation, handleConversionVisibility}}>
               {converstion && <AddPeople active={true}/>}

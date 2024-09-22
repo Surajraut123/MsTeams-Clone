@@ -7,8 +7,9 @@ import Switch from "react-switch";
 function Navbar() {
   const [searchTitle, setsearchTitle] = useState(" Search ")
   const [enableinfo, setInfo] = useState(false);
-  const [mode, setMode] = useState("Dark");
+  const [mode, setMode] = useState("dark");
   const userAccountRef = useRef(null);
+  const uiModeReference = useRef('light-mode');
 
   const handleFocus = () => {
     setsearchTitle("Search for people, chats and communities");
@@ -25,14 +26,16 @@ function Navbar() {
   const enableUserDetails = () => {
     setInfo(!enableinfo);
   }
-
   const handleChange = () => {
     setMode((prevMode) => {
       const newMode = prevMode === "dark" ? "light" : "dark";
-      document.documentElement.className = newMode + "-mode";
+      uiModeReference.current = newMode + "-mode";
       return newMode;
     });
   }
+  useEffect(() => {
+    document.documentElement.className = uiModeReference.current;
+  }, [mode]);
 
   const getIcon = (data) => {
     const userName = data.split(" ");
@@ -42,19 +45,23 @@ function Navbar() {
     return userName[0]?.charAt(0).toUpperCase() + "N";
 }
 
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (userAccountRef.current && !userAccountRef.current.contains(event.target)) {
-      setInfo(false);
-    }
-  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userAccountRef.current && !userAccountRef.current.contains(event.target)) {
+        setInfo(false);
+      }
+    };
 
-  document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, []);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const signOut = () => {
+    
+  }
 
 
   return (
@@ -93,7 +100,7 @@ useEffect(() => {
     {enableinfo && (<div className="user-account" ref={userAccountRef}>
       <div className="info">
         <div className="logo">
-          <span>SR</span>
+          <span>{getIcon(loggedinUser?.fullName)}</span>
         </div>
 
         <div className="user-info">
@@ -103,10 +110,19 @@ useEffect(() => {
       </div>
 
       <div className="manage">
-        <span>{mode === "dark" ? "Dark" : "Light"} Mode </span>
-        <Switch onChange={handleChange} checked={mode === "dark" ? true : false} checkedIcon={false} uncheckedIcon={false} onColor='black' width={40} height={20} handleDiameter={15}/>
+        <span>{mode === "dark" ? "Light" : "Dark"} Mode</span> {/* Adjusted label */}
+        <Switch
+          onChange={handleChange}
+          checked={mode === "dark"} 
+          checkedIcon={false}
+          uncheckedIcon={false}
+          onColor="black"
+          width={40}
+          height={20}
+          handleDiameter={15}
+        />
       </div>
-      <div className="signout">
+      <div className="signout" onClick={signOut}>
         <p>Sign out</p>
       </div>
     </div>)

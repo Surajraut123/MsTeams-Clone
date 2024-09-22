@@ -142,6 +142,13 @@ const Authentication = (props) => {
 
     }
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            console.log("ENTERED")
+            handleForm(signIn ? "login" : "register");
+        }
+    };
+
 
     return (
         isOnline ? 
@@ -157,11 +164,11 @@ const Authentication = (props) => {
                     <h2>{signIn ? "Sign in" : "Create account"}</h2>
                 </div>
 
-                {!signIn && <Input name='fullname' type="email" placeholder='Andrew Devis' className='input' value={data.fullname} onChange={(e) => setFormData({...data, fullname: e.target.value})}/>}
+                {!signIn && <Input name='fullname' type="email" placeholder='Andrew Devis' className='input' value={data.fullname} onChange={(e) => setFormData({...data, fullname: e.target.value})} onKeyDown={handleKeyPress}/>}
 
-                <Input name='email' type="email" placeholder='someone@gmail.com' className='input' value={data.email} onChange={(e) => setFormData({...data, email: e.target.value})}/>
+                <Input name='email' type="email" placeholder='someone@gmail.com' className='input' value={data.email} onChange={(e) => setFormData({...data, email: e.target.value})} onKeyDown={handleKeyPress}/>
 
-                <Input name='password' type="password" placeholder='*******' className='input' id='inputs' value={data.password} onChange={(e) => setFormData({...data, password: e.target.value})}/>
+                <Input name='password' type="password" placeholder='*******' className='input' id='inputs' value={data.password} onChange={(e) => setFormData({...data, password: e.target.value})} onKeyDown={handleKeyPress}/>
 
                 {!loginDataValidity.valid && <p id={!loginDataValidity.valid ? 'invalid' : 'valid'}>{loginDataValidity.text}</p>}
                 {signIn && <span>Forgot my password</span>}

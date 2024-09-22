@@ -1,8 +1,8 @@
 .communityMain{
-    width: 96%;
-    height: 92vh;
-    background-color: #f5f5f5;
-    .container{
+    width: 95%;
+    height: 93vh;
+    background-color: var(--community-background);
+    .container1{
         color: #1a1a1a;
         .heading{
             justify-content: center;
@@ -12,10 +12,12 @@
             gap: 7px;
             h2{
                 font-family: sans-serif;
+                color: var(--community-heading);
             }
             p{
                 font-size: 13px;
                 font-family: sans-serif;
+                color: var(--community-heading);
             }
         }
         @media screen and (max-width: 500px) {
@@ -27,7 +29,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 92vh;
+        height: 100%;
         gap: 25px;
         .content{
             display: flex;
@@ -69,12 +71,13 @@
                     font-family: sans-serif;
                     font-size: 13px;
                     font-weight: 800;
-                    color: #303030;
+                    color: var(--community-boxHead);
                 }
                 p{
                     font-size: 13px;
                     font-family: system-ui;
                     font-weight: 500;
+                    color: var(--community-boxPara);
                 }
             }
             @media screen and (max-width: 500px) {

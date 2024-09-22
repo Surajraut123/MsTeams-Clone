@@ -51,12 +51,25 @@ function UserInput() {
 
       setMessage('')
   }
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      sendMessage();
+    }
+  };
 
   const inputClassName = focused ? 'focused-input' : '';
   return (
     <div className='userInput'>
       <div className="input-box">
-        <input type="text" placeholder='Type a message...' onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange} className={inputClassName} value={msg}/>
+        <input type="text" 
+          placeholder='Type a message...' 
+          onFocus={handleFocus} 
+          onBlur={handleBlur} 
+          onChange={handleChange} 
+          className={inputClassName} 
+          onKeyDown={handleKeyPress}
+          value={msg}
+        />
         <FontAwesomeIcon id="eicons" icon={faPaperPlane} onClick={sendMessage}/>
       </div>
 

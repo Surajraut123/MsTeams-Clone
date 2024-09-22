@@ -98,6 +98,34 @@ app.post('/api/login', async (req, res, next) =>{
     }
 })
 
+app.post('/api/logout', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        if (!token) {
+            return res.status(400).json({ message: "No user is currently logged in" });
+        }
+
+        const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || 'THIS_IS_JWT_SECRET_KEY';
+        const decoded = jsonwebtoken.verify(token, JWT_SECRET_KEY);
+
+        if (!decoded) {
+            return res.status(400).json({ message: "Invalid token" });
+        }
+
+        // Invalidate the token in the database (optional)
+        await Users.updateOne({_id: decoded.userId}, { $unset: { token: "" } });
+
+        // Clear the cookie
+        res.clearCookie('token', { httpOnly: true, secure: true, sameSite: 'none' });
+
+        return res.status(200).json({ message: "Logout successful" });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Something went wrong" });
+    }
+});
+
+
 
 app.post('/api/conversation', async (req, res) =>{
     try{

@@ -49,6 +49,12 @@
     --calendar-mymeeting-hover: #5e5e5e;
     --calendar-mymeeting-font:rgb(219, 219, 219);
     --calendar-mymeeting-border: #1f1f1f;
+
+    // community
+    --community-background: #1f1f1f;
+    --community-heading: white;
+    --community-boxHead: #bfbfbf;
+    --community-boxPara: #747474;
 }
 .light-mode{
 
@@ -99,6 +105,13 @@
     --calendar-mymeeting-hover: f5f5f5;
     --calendar-mymeeting-font: #313131;
     --calendar-mymeeting-border: #d3d3d3;
+
+
+    // community
+    --community-background: #f5f5f5;
+    --community-heading: black;
+    --community-boxHead: #303030;
+    --community-boxPara: black;
 }
 // :root{
 //     --navbar: #414790;

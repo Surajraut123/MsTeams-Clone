@@ -6,7 +6,7 @@ import './community.scss';
 const Community = () => {
   return (
     <div className='communityMain'>
-      <div className='container'>
+      <div className='container1'>
         <div className='heading'>
           <h2>Communities you are a part of will show up here</h2>
           <p>Get started creating your own community by downloading the Teams mobile app</p>
