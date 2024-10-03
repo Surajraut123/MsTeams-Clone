@@ -123,9 +123,10 @@ const Authentication = (props) => {
                         setClickEvent(false)
                         setLandingPageVisibility(eventData.user.id);
                     }, 3000)
-
+                    localStorage.setItem('accessToken', eventData.token);
                     if(event === "login") {
                         localStorage.setItem("user:token", eventData.token)
+                        
                         localStorage.setItem("loggedUser:detail", JSON.stringify(eventData.user))
                     }
                     if(props.receiverId !== '' && eventData.user.id !== props.receiverId) {

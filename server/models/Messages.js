@@ -9,6 +9,9 @@ const messageSchema = mongoose.Schema({
     },
     message:{
         type: String
+    },
+    sentAt: {
+        type: Date
     }
 });
 

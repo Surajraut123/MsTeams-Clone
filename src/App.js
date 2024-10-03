@@ -22,17 +22,6 @@ import { checkAuthToken } from './authentication/CheckAuthToken';
 import "./modecolors.scss";
 
 
-// const ProtectedRoute = ({ children, auth= false}) =>{
-//   const isLoggedIn = localStorage.getItem('user:token') !== null || false
-//   if(!isLoggedIn && auth)  {
-//     return <Navigate to={'users/signin'}/>
-//   } else if(isLoggedIn && ['/users/signin', '/users/signup'].includes(window.location.pathname)) {
-//     return <Navigate to={'/'}/>
-//   }
-
-//   return children
-// }
-
 
 function App() {
 
@@ -60,18 +49,13 @@ function App() {
   }, [visibility]);
 
   useEffect(() => {
-    const verifyUser = async () => {
-        const isValid = await checkAuthToken();
-        if (isValid) {
-            setVisibility(true);
-            // navigate('/');
-        } else {
-            setVisibility(false);
-            // navigate('/login');
-        }
-    };
+    const refreshToken = localStorage.getItem('accessToken');
+    if(refreshToken) {
+      setVisibility(true);
+    } else{
+      setVisibility(false);
+    }
 
-    verifyUser();
 }, []);
 
 

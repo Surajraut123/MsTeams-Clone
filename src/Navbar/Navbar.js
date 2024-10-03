@@ -59,10 +59,10 @@ function Navbar() {
     };
   }, []);
 
-  const signOut = () => {
-    
-  }
-
+  const handleSignOut = () => {
+    localStorage.removeItem('accessToken');
+    window.location.href = '/';
+  };
 
   return (
     <>
@@ -122,7 +122,7 @@ function Navbar() {
           handleDiameter={15}
         />
       </div>
-      <div className="signout" onClick={signOut}>
+      <div className="signout" onClick={handleSignOut}>
         <p>Sign out</p>
       </div>
     </div>)
