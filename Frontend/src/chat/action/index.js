@@ -3,7 +3,7 @@ export const fetchMessage = (conversationId, receiver) => async dispatch => {
     try {
         
         const loggedUserId = JSON.parse(localStorage.getItem("loggedUser:detail"));
-        const response = await fetch(`http://localhost:8000/api/message/${conversationId}?senderId=${loggedUserId?.id}&&receiverId=${receiver?.userid}`, {
+        const response = await fetch(`https://msteams-clone.onrender.com/api/message/${conversationId}?senderId=${loggedUserId?.id}&&receiverId=${receiver?.userid}`, {
             method: 'GET',
             headers : {
                 'Content-Type' : 'application/json' 

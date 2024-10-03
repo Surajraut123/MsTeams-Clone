@@ -29,7 +29,7 @@ const AddPeople = ({active}) => {
         if(!active) return;
         const getMembers = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/newconversation/${loggedUserId.id}`, {
+                const response = await fetch(`https://msteams-clone.onrender.com/api/newconversation/${loggedUserId.id}`, {
                     method: "GET",
                     headers: {
                         "Content-type" : "application/json"
@@ -55,7 +55,7 @@ const AddPeople = ({active}) => {
     
     const createNewConversation = async (senderId, receiverId) => {
         try {
-            const response = await fetch("http://localhost:8000/api/conversation", {
+            const response = await fetch("https://msteams-clone.onrender.com/api/conversation", {
                 method: "POST",
                 body: JSON.stringify({
                     senderId: senderId,

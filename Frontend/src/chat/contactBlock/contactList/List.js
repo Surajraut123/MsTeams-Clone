@@ -19,7 +19,7 @@ function List(props) {
     let isMounted = true;
     const fetchConversations = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/conversation/${loggedinUser?.id}`, {
+        const res = await fetch(`https://msteams-clone.onrender.com/api/conversation/${loggedinUser?.id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ function List(props) {
       for (let convId of conversations) {
         const id = convId.conversationId;
         try {
-          const response = await fetch(`http://localhost:8000/api/message/${id}`, {
+          const response = await fetch(`https://msteams-clone.onrender.com/api/message/${id}`, {
             method: "GET",
             headers: {
               "Content-type": "application/json",

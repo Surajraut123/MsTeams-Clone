@@ -72,7 +72,7 @@ const Authentication = (props) => {
         }
         if(!isExist) {
             try {
-                const response = await fetch("http://localhost:8000/api/conversation", {
+                const response = await fetch("https://msteams-clone.onrender.com/api/conversation", {
                     method: "POST",
                     body: JSON.stringify({
                         senderId: senderId,
@@ -94,7 +94,7 @@ const Authentication = (props) => {
         const handleEventUser = async (event) => {
             setClickEvent(true)
             try {
-                const response = await fetch(`http://localhost:8000/api/${event}`, {
+                const response = await fetch(`https://msteams-clone.onrender.com/api/${event}`, {
                     method: "POST",
                     body: JSON.stringify({
                         ...(!signIn && {fullName: data.fullname}),

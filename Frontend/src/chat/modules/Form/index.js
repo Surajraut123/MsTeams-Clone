@@ -27,7 +27,7 @@ const Form = ({ isSigninPage = true }) => {
   const handleSubmit = async (e) =>{
     console.log(data);
     e.preventDefault();
-    const res  = await fetch(`http://localhost:8000/api/${isSigninPage ? 'login' : 'register'}`, {
+    const res  = await fetch(`https://msteams-clone.onrender.com/api/${isSigninPage ? 'login' : 'register'}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
