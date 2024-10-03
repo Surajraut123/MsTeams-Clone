@@ -198,7 +198,7 @@ function Calender({getNewMeetingStatus}) {
         dateClick={handleDateClick}
         initialView="timeGridWeek"
         initialEvents={events} 
-        weekends={true}
+        weekends={false}
         nowIndicator={true}
         editable={true}
         selectable={true}

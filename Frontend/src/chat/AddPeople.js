@@ -89,7 +89,7 @@ const AddPeople = ({active}) => {
             <div className='invite-link'>
                 <h3>Invite to Microsoft Teams</h3>
                 <div className='link'>
-                    <input type='text' value={`http://localhost:3000/invite/${loggedUserId.id}`} ref={inputRef} readOnly />
+                    <input type='text' value={`https://collabwithsuraj.42web.io/invite/${loggedUserId.id}`} ref={inputRef} readOnly />
                     <button onClick={handleCopy} id='copy-btn'>Copy</button>
                 </div>
             </div>
@@ -112,7 +112,7 @@ const AddPeople = ({active}) => {
                             </div>)
                         )
                     }) : 
-                    (<div><img src={GIF} alt='loading...'/> <p>Something Went Wrong!</p></div>)}
+                    (<div><img src={GIF} alt='loading...'/> <p>Please wait for a second!</p></div>)}
                 </div>
             </div>
         </div>

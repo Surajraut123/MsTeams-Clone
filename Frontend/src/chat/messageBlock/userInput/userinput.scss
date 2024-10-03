@@ -57,9 +57,10 @@
             display: flex;
             align-items: center;
             gap: 13px;
-            border: none;
+            border: 1px solid var(--message-input-border);
             border-radius: none;
-            height: 37px;
+            height: 35px;
+            width: 95%;
         }
     }
 

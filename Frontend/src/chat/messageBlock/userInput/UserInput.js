@@ -135,11 +135,10 @@ function UserInput() {
             position: 'relative',
             overflow: 'hidden',
             width: '100%',
-            height: '40px',
+            height: '30px',
             borderRadius: '6px',
             paddingTop: '10px',
             fontFamily: 'sans-serif',
-            border: 'none',
             outline: 'none',
             fontSize: '17px'
           }}

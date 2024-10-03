@@ -51,7 +51,7 @@ function Messages() {
       className='messages'
       ref={messagesContainerRef}
       onScroll={handleScroll}
-      style={{ overflowY: 'auto', maxHeight: '500px' }} 
+      style={{ overflowY: 'auto' }} 
     >
       <div className='p-14'>
         {messageList?.messages?.length > 0 ?
@@ -62,7 +62,7 @@ function Messages() {
                 key={key}
               >
                 <span>{formatDate(sentAt)}</span>
-                <p className="message" dangerouslySetInnerHTML={{ __html: message }} />
+                <p className="live-message" dangerouslySetInnerHTML={{ __html: message }} />
               </div>
             );
           })
