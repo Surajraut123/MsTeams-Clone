@@ -20,8 +20,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}));
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // React app domain
-    credentials: true // Enable sending of cookies
+    origin: 'http://collabwithsuraj.42web.io', // React app domain
+    credentials: true, // Enable sending of cookies
+    methods: ['POST', 'GET']
 };
 app.use(cors(corsOptions))
 app.use(cookieParser());
