@@ -18,26 +18,20 @@ import {
 } from "react-router-dom";
 import { useEffect , useState} from 'react';
 import AddPeople from './chat/AddPeople';
+import { checkAuthToken } from './authentication/CheckAuthToken';
+import "./modecolors.scss";
 
-
-// const ProtectedRoute = ({ children, auth= false}) =>{
-//   const isLoggedIn = localStorage.getItem('user:token') !== null || false
-//   if(!isLoggedIn && auth)  {
-//     return <Navigate to={'users/signin'}/>
-//   } else if(isLoggedIn && ['/users/signin', '/users/signup'].includes(window.location.pathname)) {
-//     return <Navigate to={'/'}/>
-//   }
-
-//   return children
-// }
 
 
 function App() {
 
-  const [visibility, setVisibility] = useState(false);
+  const [visibility, setVisibility] = useState(true);
   const [appVisibility, setAppVisibility] = useState(false);
   const [converstion, setConverstion] = useState(false);
   const [fetchConversation, setNewConversation] = useState(false);
+  const [receiverId, setReceiverId] = useState('')
+
+  // const navigate = useNavigate();
 
   useEffect(() => {
     let timer;
@@ -54,8 +48,22 @@ function App() {
     return () => clearTimeout(timer);
   }, [visibility]);
 
+  useEffect(() => {
+    const refreshToken = localStorage.getItem('accessToken');
+    if(refreshToken) {
+      setVisibility(true);
+    } else{
+      setVisibility(false);
+    }
+
+}, []);
+
 
   const setLandingPageVisibility = (data) => {
+    if(receiverId !== '') {
+      alert("Please Sign in again");
+      window.location.href = '/';
+    }
     setVisibility(true)
   }
 
@@ -70,15 +78,17 @@ function App() {
   };
   
   const path = window.location.pathname;
-  let receiverId = '';
-  if(path.includes('invite')) {
-    receiverId = path.slice(8);
-    console.log(receiverId)
-  }
+  useEffect(() => {
+    if(path.includes('invite')) {
+      setReceiverId(path.slice(8))
+      console.log(receiverId)
+    }
+  }, [path, receiverId])
   return (
     <Router>
       <div className="App"> 
-        {visibility && <Navbar/>}
+         {visibility && <Navbar/>} 
+         {/*<Navbar/>*/}
           {appVisibility && <div className="userSection" onClick={handleOutsideClick}>
             <peopleContext.Provider value={{fetchConversation, handleConversionVisibility}}>
               {converstion && <AddPeople active={true}/>}

@@ -5,7 +5,7 @@
     overflow: scroll;
     .user{
         display: flex;
-        padding: 7px;
+        padding: 8px 7px;
 
         .user-profile{
             display: flex;
@@ -38,13 +38,19 @@
                 h3{
                     font-family: sans-serif;
                     font-size: 15px;
-                    color: #32363a;
+                    color: var( --contact-name);
                 }
             }
 
             .latest-message{
                 font-size: 10px;
-                padding: 3px 0px;
+                // padding: 3px 0px;
+
+                p{
+                    font-size: 13px;
+                    font-family: system-ui;
+                    color: var(--contact-latest-message);
+                }
             }
         }
 
@@ -54,8 +60,24 @@
     }
 
     .user:hover{
-        background-color: white;
+        background-color: var(--contact-hover);
         cursor: pointer;
+    }
+
+    .contactimg{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        img{
+            width: 82%;
+        }
+        p{
+            font-family: system-ui;
+            color: var(--contact-list-heading);
+        }
     }
 }
 

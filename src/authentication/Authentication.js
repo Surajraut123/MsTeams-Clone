@@ -1,16 +1,21 @@
-import React, {useState, useContext } from 'react';
+import React, {useState, useContext, useEffect } from 'react';
 import logo from './mslogo.png';
 import './authentication.scss';
 import Input from '../chat/components/Input/Input'
 import Loader from '../Loader.gif'
 import myContext from '../chat/MyContext';
-import { useLocation } from 'react-router-dom';
+import Offline from './Offline';
 
 const Authentication = (props) => {
     const setLandingPageVisibility = useContext(myContext);
     const [signIn, setSignIn] = useState(false);
     const [clicked, setClickEvent] = useState(false);
     const [loginDataValidity, setLoginDataValidity] = useState({valid: true, text: ''});
+    const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+    useEffect(() => {
+        setIsOnline(navigator.onLine)
+    }, [])
 
     const [data, setFormData] = useState({
         ...(!signIn && {fullname: ''}),
@@ -118,12 +123,13 @@ const Authentication = (props) => {
                         setClickEvent(false)
                         setLandingPageVisibility(eventData.user.id);
                     }, 3000)
-
+                    localStorage.setItem('accessToken', eventData.token);
                     if(event === "login") {
                         localStorage.setItem("user:token", eventData.token)
+                        
                         localStorage.setItem("loggedUser:detail", JSON.stringify(eventData.user))
                     }
-                    if(props.receiverId !== '') {
+                    if(props.receiverId !== '' && eventData.user.id !== props.receiverId) {
                         createLinkConversation(eventData.user.id, props.receiverId, event);
                     }
                 }
@@ -137,9 +143,17 @@ const Authentication = (props) => {
 
     }
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            console.log("ENTERED")
+            handleForm(signIn ? "login" : "register");
+        }
+    };
+
 
     return (
-        <div className='container'>
+        isOnline ? 
+        (<div className='container'>
             
             <div className='form'>
                 <div className='logo'>  
@@ -151,11 +165,11 @@ const Authentication = (props) => {
                     <h2>{signIn ? "Sign in" : "Create account"}</h2>
                 </div>
 
-                {!signIn && <Input name='fullname' type="email" placeholder='Andrew Devis' className='input' value={data.fullname} onChange={(e) => setFormData({...data, fullname: e.target.value})}/>}
+                {!signIn && <Input name='fullname' type="email" placeholder='Andrew Devis' className='input' value={data.fullname} onChange={(e) => setFormData({...data, fullname: e.target.value})} onKeyDown={handleKeyPress}/>}
 
-                <Input name='email' type="email" placeholder='someone@gmail.com' className='input' value={data.email} onChange={(e) => setFormData({...data, email: e.target.value})}/>
+                <Input name='email' type="email" placeholder='someone@gmail.com' className='input' value={data.email} onChange={(e) => setFormData({...data, email: e.target.value})} onKeyDown={handleKeyPress}/>
 
-                <Input name='password' type="password" placeholder='*******' className='input' id='inputs' value={data.password} onChange={(e) => setFormData({...data, password: e.target.value})}/>
+                <Input name='password' type="password" placeholder='*******' className='input' id='inputs' value={data.password} onChange={(e) => setFormData({...data, password: e.target.value})} onKeyDown={handleKeyPress}/>
 
                 {!loginDataValidity.valid && <p id={!loginDataValidity.valid ? 'invalid' : 'valid'}>{loginDataValidity.text}</p>}
                 {signIn && <span>Forgot my password</span>}
@@ -172,7 +186,7 @@ const Authentication = (props) => {
             </div>
             <p></p>
 
-        </div>
+        </div>) : <Offline />
     );
 };
 

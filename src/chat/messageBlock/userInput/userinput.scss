@@ -7,12 +7,15 @@
     justify-content: center;
     align-items: center;
     padding: 40px 0px;
+    gap: 10px;
 
     .input-box {
         width: 80%;
         height: 40px;
         border-radius: 5px;
-        border: 1px solid #d5d5d5;
+        border: 1px solid var(--message-input-border);
+        padding: 0px 10px;
+        box-sizing: border-box;
         
         input{
             outline: none;
@@ -22,6 +25,7 @@
             padding-left: 15px;
             padding-right: 15px;
             border-radius: 5px;
+            background-color: var(--message-input);
         }
 
         @media screen and (max-width: 500px) {
@@ -69,7 +73,7 @@
             left: 2px;
 
             #eicons{
-                color: #494949;
+                color: var(--receiver-icons);
                 padding: 6px;
                 padding-right: 13px;
             }
@@ -78,6 +82,48 @@
                 color: #4845c9;
                 cursor: pointer;
             }
+
+            .formatEvent {
+                display: flex;
+                gap: 10px;
+                width: fit-content;
+                padding: 5px;
+                background: #ececec;
+                border-radius: 10px;
+                position: absolute;
+                top: -100px;
+                display: none;
+
+                .formatter {
+                    font-size: 18px;
+                    background: #aeaeae3b;
+                    border-radius: 7px;
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: #212121;
+                    font-family: serif;
+                }
+
+                .formatter:hover {
+                    background-color: #bbbbbb3b;
+                    cursor: pointer;
+                }
+
+                .bold{
+                    font-weight: bold;
+                }
+                .italic {
+                    font-style: italic;
+                }
+                .underline {
+                    font-style: underline;
+                }
+            }
+
+
         }
 
         .my-actions{
@@ -85,7 +131,7 @@
             right: 2px;
 
             #eicons{
-                color: #494949;
+                color: var(--receiver-icons);
                 padding: 6px;
                 padding-right: 13px;
             }
