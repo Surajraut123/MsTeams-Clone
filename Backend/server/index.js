@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}));
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // React app domain
+    //origin: 'http://localhost:3000', // React app domain
     credentials: true // Enable sending of cookies
 };
 app.use(cors(corsOptions))
