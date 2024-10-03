@@ -12,7 +12,7 @@ const Users = require('./models/Users');
 const Conversation = require('./models/Conversations');
 const Messages = require('./models/Messages');
 
-const port  = process.env.port || 3000;
+const port  = process.env.port || 4000;
 
 //App use
 const app = express();
@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}));
 
 const corsOptions = {
-    //origin: 'http://localhost:3000', // React app domain
+    origin: 'http://localhost:3000', // React app domain
     credentials: true // Enable sending of cookies
 };
 app.use(cors(corsOptions))
