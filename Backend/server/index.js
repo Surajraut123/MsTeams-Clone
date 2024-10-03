@@ -12,7 +12,7 @@ const Users = require('./models/Users');
 const Conversation = require('./models/Conversations');
 const Messages = require('./models/Messages');
 
-const port  = process.env.PORT || 8000;
+const port  =8000;
 
 //App use
 const app = express();
