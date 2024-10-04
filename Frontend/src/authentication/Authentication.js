@@ -105,7 +105,7 @@ const Authentication = (props) => {
                         "Content-type": "application/json"
                     }
                 })
-                
+                    
                 const eventData = await response.json();
                 if(!response.ok) {
                 
