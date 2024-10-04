@@ -127,7 +127,7 @@ function UserInput() {
           onKeyDown={handleKeyPress}
 
           style={{
-            border: '1px solid #ccc',
+            border: 'none',
             whiteSpace: 'nowrap',
             maxHeight: '200px',
             height: 'auto',
