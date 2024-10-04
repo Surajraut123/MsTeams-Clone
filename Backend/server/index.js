@@ -21,7 +21,7 @@ app.use(express.urlencoded({extended: false}));
 
 const corsOptions = {
 
-    origin: 'https://collabwithsuraj.42web.io', // React app domain
+    origin: 'https://ms-teams-clone-hixp-oqo13afhw-msteams-projects.vercel.app', // React app domain
     credentials: true, // Enable sending of cookies
     methods: ['POST', 'GET']
 };
