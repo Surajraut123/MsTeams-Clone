@@ -18,10 +18,10 @@ const port  = process.env.port || 4000;
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: false}));
-
+const allowedOrigins = ['https://ms-teams-clone-hixp-oqo13afhw-msteams-projects.vercel.app', 'https://collabwithsuraj.42web.io'];
 const corsOptions = {
 
-    origin: 'https://ms-teams-clone-hixp-oqo13afhw-msteams-projects.vercel.app', // React app domain
+    origin: allowedOrigins, // React app domain
     credentials: true, // Enable sending of cookies
     methods: ['POST', 'GET']
 };
