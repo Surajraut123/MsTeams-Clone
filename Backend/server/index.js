@@ -20,7 +20,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}));
 
 const corsOptions = {
-    origin: 'http://collabwithsuraj.42web.io', // React app domain
+// React app domain
+    origin: 'https://collabwithsuraj.42web.io', // React app domain
     credentials: true, // Enable sending of cookies
     methods: ['POST', 'GET']
 };
