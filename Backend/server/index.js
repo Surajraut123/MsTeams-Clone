@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs')
 const jsonwebtoken = require('jsonwebtoken');
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 //Connnect DB
 require('./db/connection')
 
