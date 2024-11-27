@@ -60,11 +60,12 @@ app.post('/api/register', async (req, res, next) =>{
 
 
     } catch(e){
-        console.log(e)
+        return res.status(400).json(e);
     }
 })
 
 app.post('/api/login', async (req, res, next) =>{
+    
     try{
         const {email, password} = req.body;
         if(!email || !password) {
